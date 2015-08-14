@@ -20,38 +20,38 @@ export default class extends React.Component {
     max: React.PropTypes.number,
   }
 
-  updatePosition(clientX, clientY) {
-    let rect = this.getDOMNode().getBoundingClientRect()
+  _updatePosition(clientX, clientY) {
+    let rect = React.findDOMNode(this).getBoundingClientRect()
     let x = (clientX - rect.left) / rect.width
     let y = (rect.bottom - clientY) / rect.height
 
-    x = this.getScaledValue(x)
-    y = this.getScaledValue(y)
+    x = this._getScaledValue(x)
+    y = this._getScaledValue(y)
 
     this.props.onChange(x, y)
   }
 
-  startUpdates(e) {
-    var coords = this.getPosition(e)
+  _startUpdates(e) {
+    var coords = this._getPosition(e)
     this.setState({ active: true })
-    this.updatePosition(coords.x, coords.y)
+    this._updatePosition(coords.x, coords.y)
   }
 
-  handleUpdate(e) {
+  _handleUpdate(e) {
     if (this.state.active) {
       e.preventDefault()
-      var coords = this.getPosition(e)
-      this.updatePosition(coords.x, coords.y)
+      var coords = this._getPosition(e)
+      this._updatePosition(coords.x, coords.y)
     }
   }
 
-  stopUpdates() {
+  _stopUpdates() {
     if (this.state.active) {
       this.setState({ active: false })
     }
   }
 
-  getPosition (e) {
+  _getPosition (e) {
     if (e.touches) {
       e = e.touches[0]
     }
@@ -62,12 +62,16 @@ export default class extends React.Component {
     }
   }
 
-  getPercentageValue(value) {
+  _getPercentageValue(value) {
     return (value / this.props.max) * 100 + "%"
   }
 
-  getScaledValue(value) {
-    return clamp(value, 0, 1) * this.props.max
+  _getScaledValue(value) {
+    return this._clamp(value, 0, 1) * this.props.max
+  }
+
+  _clamp(val, min, max) {
+    return val < min ? min : (val > max ? max : val)
   }
 
   _input() {
@@ -78,6 +82,8 @@ export default class extends React.Component {
             active: this.state.active,
           })
         ),
+        onMouseDown: this._startUpdates.bind(this),
+        onTouchStart: this._startUpdates.bind(this),
       },
       div({
         className: "background",
@@ -88,8 +94,8 @@ export default class extends React.Component {
       div({
         className: "pointer",
         style: {
-          left: this.getPercentageValue(this.props.x),
-          bottom: this.getPercentageValue(this.props.y),
+          left: this._getPercentageValue(this.props.x),
+          bottom: this._getPercentageValue(this.props.y),
         },
       })
     )

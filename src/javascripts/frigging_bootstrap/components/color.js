@@ -45,14 +45,15 @@ export default class extends React.Component {
   // replace current color with another one
   _loadColor(color) {
     this.setState(this._getStateFrom(color))
-    this.props.onChange(Colr.fromHex(color))
+    this.props.onChange(Colr.fromHex(color).bind(this))
   }
 
   // update the current color using the raw hsv values
   _update() {
     let color = Colr.fromHsvObject(this.state.hsv)
     this.setState({ color: color })
-    this.props.onChange(color)
+    console.log(color)
+    // this.props.onChange(color).bind(this)
   }
 
   // set the hue
@@ -97,7 +98,7 @@ export default class extends React.Component {
         dark: luminosity <= 128,
         light: luminosity > 128,
       }),
-      onChange: this._setSaturationAndValue,
+      onChange: this._setSaturationAndValue.bind(this),
     })
   }
 
