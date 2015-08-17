@@ -13,6 +13,12 @@ export default class extends React.Component {
     value: React.PropTypes.number.isRequired,
   }
 
+  _updatePosition(clientX, clientY) {
+    let rect = React.findDOMNode(this).getBoundingClientRect()
+    let value = this.getScaledValue((rect.bottom - clientY) / rect.height)
+    this.props.onChange(value)
+  }
+
   render() {
     return div({
         className: "slider vertical",
