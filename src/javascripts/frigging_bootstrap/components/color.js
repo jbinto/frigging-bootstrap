@@ -47,7 +47,7 @@ export default class extends React.Component {
   // replace current color with another one
   _loadColor(color) {
     this.setState(this._getStateFrom(color))
-    this.props.onChange(Colr.fromHex(color).bind(this))
+    this.props.onChange(Colr.fromHex(color))
   }
 
   // update the current color using the raw hsv values
