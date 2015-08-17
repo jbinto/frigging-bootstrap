@@ -1,23 +1,21 @@
 let React = require("react")
 let Colr = require('colr')
+let cx = require("classnames")
+let draggable = require('./higher_order_components/draggable')
 let {errorList, sizeClassNames, formGroupCx, label} = require("../../util.js")
 let {div, input, img} = React.DOM
-let cx = require("classnames")
 
+@draggable
 export default class extends React.Component {
-  static defaultProps = Object.assign(require("../../default_props.js"), {
-    max: 1,
-  })
 
-  state = {
-    active: false,
-  }
-
-  propTypes: {
+  static propTypes = {
     x: React.PropTypes.number.isRequired,
     y: React.PropTypes.number.isRequired,
     backgroundColor: React.PropTypes.string.isRequired,
-    max: React.PropTypes.number,
+  }
+
+  state = {
+    active: false,
   }
 
   _updatePosition(clientX, clientY) {
@@ -25,56 +23,14 @@ export default class extends React.Component {
     let x = (clientX - rect.left) / rect.width
     let y = (rect.bottom - clientY) / rect.height
 
-    x = this._getScaledValue(x)
-    y = this._getScaledValue(y)
+    x = this.getScaledValue(x)
+    y = this.getScaledValue(y)
 
     this.props.onChange(x, y)
   }
 
-  _startUpdates(e) {
-    var coords = this._getPosition(e)
-    this.setState({ active: true })
-    this._updatePosition(coords.x, coords.y)
-  }
-
-  _handleUpdate(e) {
-    if (this.state.active) {
-      e.preventDefault()
-      var coords = this._getPosition(e)
-      this._updatePosition(coords.x, coords.y)
-    }
-  }
-
-  _stopUpdates() {
-    if (this.state.active) {
-      this.setState({ active: false })
-    }
-  }
-
-  _getPosition (e) {
-    if (e.touches) {
-      e = e.touches[0]
-    }
-
-    return {
-      x : e.clientX,
-      y : e.clientY,
-    }
-  }
-
-  _getPercentageValue(value) {
-    return (value / this.props.max) * 100 + "%"
-  }
-
-  _getScaledValue(value) {
-    return this._clamp(value, 0, 1) * this.props.max
-  }
-
-  _clamp(val, min, max) {
-    return val < min ? min : (val > max ? max : val)
-  }
-
   render() {
+
     return div(
       {
         className: cx(Object.assign({}, this.props.className, {
@@ -82,8 +38,8 @@ export default class extends React.Component {
             active: this.state.active,
           })
         ),
-        onMouseDown: this._startUpdates.bind(this),
-        onTouchStart: this._startUpdates.bind(this),
+        onMouseDown: this.startUpdates.bind(this),
+        onTouchStart: this.startUpdates.bind(this),
       },
       div({
         className: "background",
@@ -94,8 +50,8 @@ export default class extends React.Component {
       div({
         className: "pointer",
         style: {
-          left: this._getPercentageValue(this.props.x),
-          bottom: this._getPercentageValue(this.props.y),
+          left: this.getPercentageValue(this.props.x),
+          bottom: this.getPercentageValue(this.props.y),
         },
       })
     )
