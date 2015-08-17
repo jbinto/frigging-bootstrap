@@ -4,7 +4,6 @@ let {clamp} = require("../clamp")
 export default function(componentClass) {
 
   return class extends React.Component {
-
     static propTypes = {
       max: React.PropTypes.number,
     }
@@ -13,44 +12,45 @@ export default function(componentClass) {
       max: 1,
     }
 
-    state = {
-      active: false,
+    state = { active: false }
+
+    _changeActive(newActive) {
+      this.setState({ active: newActive })
     }
 
     render() {
       Object.assign(componentClass.prototype, {
-
         componentDidMount() {
-          document.addEventListener('mousemove', this.handleUpdate)
-          document.addEventListener('touchmove', this.handleUpdate)
-          document.addEventListener('mouseup', this.stopUpdates)
-          document.addEventListener('touchend', this.stopUpdates)
+          document.addEventListener('mousemove', this.handleUpdate.bind(this))
+          document.addEventListener('touchmove', this.handleUpdate.bind(this))
+          document.addEventListener('mouseup', this.stopUpdates.bind(this))
+          document.addEventListener('touchend', this.stopUpdates.bind(this))
         },
 
         componentWillUnmount() {
-          document.removeEventListener('mousemove', this.handleUpdate)
-          document.removeEventListener('touchmove', this.handleUpdate)
-          document.removeEventListener('mouseup', this.stopUpdates)
-          document.removeEventListener('touchend', this.stopUpdates)
+          document.removeEventListener('mousemove', this.handleUpdate.bind(this))
+          document.removeEventListener('touchmove', this.handleUpdate.bind(this))
+          document.removeEventListener('mouseup', this.stopUpdates.bind(this))
+          document.removeEventListener('touchend', this.stopUpdates.bind(this))
         },
 
         startUpdates(e) {
           var coords = this.getPosition(e)
-          this.setState({ active: true })
-          this.updatePosition(coords.x, coords.y)
+          this.props.valueLink.requestChange(true)
+          this._updatePosition(coords.x, coords.y)
         },
 
         handleUpdate(e) {
-          if (this.state.active) {
+          if (this.props.valueLink.value) {
             e.preventDefault()
             var coords = this.getPosition(e)
-            this.updatePosition(coords.x, coords.y)
+            this._updatePosition(coords.x, coords.y)
           }
         },
 
         stopUpdates() {
-          if (this.state.active) {
-            this.setState({ active: false })
+          if (this.props.valueLink.value) {
+            this.props.valueLink.requestChange(false)
           }
         },
 
@@ -72,10 +72,16 @@ export default function(componentClass) {
         getScaledValue(value) {
           return clamp(value, 0, 1) * this.props.max
         },
-
       })
 
-      return React.createElement(componentClass, this.props)
+      let childProps = Object.assign({}, this.props, {
+        valueLink: {
+          value: this.state.active,
+          requestChange: this._changeActive.bind(this),
+        },
+      })
+
+      return React.createElement(componentClass, childProps)
     }
 
   }

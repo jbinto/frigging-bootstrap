@@ -7,15 +7,10 @@ let {div, input, img} = React.DOM
 
 @draggable
 export default class extends React.Component {
-
   static propTypes = {
     x: React.PropTypes.number.isRequired,
     y: React.PropTypes.number.isRequired,
     backgroundColor: React.PropTypes.string.isRequired,
-  }
-
-  state = {
-    active: false,
   }
 
   _updatePosition(clientX, clientY) {
@@ -30,12 +25,11 @@ export default class extends React.Component {
   }
 
   render() {
-
     return div(
       {
         className: cx(Object.assign({}, this.props.className, {
             map: true,
-            active: this.state.active,
+            active: this.props.valueLink.value,
           })
         ),
         onMouseDown: this.startUpdates.bind(this),
