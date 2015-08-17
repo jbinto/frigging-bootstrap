@@ -86,7 +86,7 @@ export default class extends React.Component {
     return Colr.fromHsv(this.state.hsv.h, 100, 100).toHex()
   }
 
-  _input() {
+  _inputMap() {
     let hue = this._getBackgroundHue()
     let luminosity = this.state.color.toGrayscale()
 
@@ -108,7 +108,7 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         label(this.props),
         div({className: "controls"},
-          this._input(),
+          this._inputMap(),
           sample({
             color: this.state.color.toHex(),
             origin: this.state.origin.toHex(),
