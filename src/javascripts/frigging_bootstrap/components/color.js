@@ -5,6 +5,7 @@ let {div, input, img} = React.DOM
 let cx = require("classnames")
 
 let colorMap = React.createFactory(require("./color/map"))
+let sample =  React.createFactory(require("./color/sample"))
 
 export default class extends React.Component {
 
@@ -108,6 +109,11 @@ export default class extends React.Component {
         label(this.props),
         div({className: "controls"},
           this._input(),
+          sample({
+            color: this.state.color.toHex(),
+            origin: this.state.origin.toHex(),
+            onChange: this._loadColor.bind(this),
+          })
         ),
         errorList(this.props.errors),
       ),
