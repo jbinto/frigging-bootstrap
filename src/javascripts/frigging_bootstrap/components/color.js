@@ -107,7 +107,7 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
-        div({className: "controls"},
+        div({className: "controls colorpicker"},
           this._inputMap(),
           sample({
             color: this.state.color.toHex(),

@@ -74,7 +74,7 @@ export default class extends React.Component {
     return val < min ? min : (val > max ? max : val)
   }
 
-  _input() {
+  render() {
     return div(
       {
         className: cx(Object.assign({}, this.props.className, {
@@ -98,12 +98,6 @@ export default class extends React.Component {
           bottom: this._getPercentageValue(this.props.y),
         },
       })
-    )
-  }
-
-  render() {
-    return div({className: "controls colorpicker"},
-      this._input(),
     )
   }
 
