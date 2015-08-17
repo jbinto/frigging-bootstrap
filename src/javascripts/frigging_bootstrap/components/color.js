@@ -6,6 +6,7 @@ let cx = require("classnames")
 
 let colorMap = React.createFactory(require("./color/map"))
 let sample =  React.createFactory(require("./color/sample"))
+let hue_slider =  React.createFactory(require("./color/hue_slider"))
 
 export default class extends React.Component {
 
@@ -108,12 +109,19 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         label(this.props),
         div({className: "controls colorpicker"},
+          div({ className: "hue-slider" },
+            hue_slider({
+              value: this.state.hsv.h,
+              max: 360,
+              onChange: this._setHue.bind(this),
+            })
+          ),
           this._inputMap(),
           sample({
             color: this.state.color.toHex(),
             origin: this.state.origin.toHex(),
             onChange: this._loadColor.bind(this),
-          })
+          }),
         ),
         errorList(this.props.errors),
       ),
