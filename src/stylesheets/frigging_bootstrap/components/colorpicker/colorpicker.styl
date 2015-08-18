@@ -23,8 +23,7 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
     abs(colorpicker-components-top, 1em, colorpicker-components-bottom, 2.3em)
     user-select: none
     overflow: hidden
-    &.active
-      cursor: none
+    cursor: pointer
     &.dark .pointer
       border-color: white
     &.light .pointer
@@ -64,7 +63,7 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
       bottom: 0
       left: 50%
       width: 10px
-      cursor: ns-resize
+      cursor: row-resize
       .track
         position: absolute
         top: 0
