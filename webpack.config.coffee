@@ -9,16 +9,17 @@ minimize = true
 module.exports =
   entry: "./src/javascripts/index.js"
   devtool: if isProduction then "source-map" else "inline-source-map"
-  output:
+  output: if isProduction
     path: path.join(__dirname, "dist")
     filename: "[name]#{if minimize then ".min.js" else ".js"}"
-    libraryTarget: "var" if isProduction
-    library: "[name]" if isProduction
+    libraryTarget: "var"
+    library: "[name]"
   externals: if isProduction
     "react": "React"
     "frig/higher_order_components/boolean": "Frig.higherOrderComponents.Boolean"
     "frig/components/input": "Frig.components.Input"
     "frig/util": "Frig.util"
+    "frig/components/value_linked_select": "Frig.value_linked_select"
     # "whatwg-fetch/fetch.js": "fetch"
   resolve:
     root: [

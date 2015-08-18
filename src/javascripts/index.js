@@ -1,4 +1,4 @@
-require("../../stylesheets/frigging_bootstrap/index.styl")
+require("../stylesheets/index.styl")
 
 module.exports = {
 
