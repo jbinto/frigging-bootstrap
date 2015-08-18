@@ -22,6 +22,10 @@ export default class extends React.Component {
 
   state = this._getStateFrom(this.props.color)
 
+  componentDidMount() {
+   this.setState({ showPopup: false })
+  }
+
   // compare props against state using hex strings
   // only use the new props if the color is different
   // this prevents data loss when converting between RGB and HSV
@@ -42,6 +46,12 @@ export default class extends React.Component {
       origin: color.clone(),
       hsv: color.toRawHsvObject(),
     }
+  }
+
+  _onInputClick() {
+    this.setState({
+      showPopup: !this.state.showPopup,
+    })
   }
 
   // replace current color with another one
@@ -102,6 +112,26 @@ export default class extends React.Component {
     })
   }
 
+  _displayColorMap(){
+    if (this.state.showPopup === false) return false
+    return div({className: "controls colorpicker"},
+      div({ className: "hue-slider" },
+        hue_slider({
+          value: this.state.hsv.h,
+          max: 360,
+          onChange: this._setHue.bind(this),
+        })
+      ),
+      this._inputMap(),
+      sample({
+        color: this.state.color.toHex(),
+        origin: this.state.origin.toHex(),
+        onChange: this._loadColor.bind(this),
+      }),
+    )
+  }
+
+
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
@@ -113,26 +143,13 @@ export default class extends React.Component {
                 requestChange: this._update.bind(this),
               },
               className: cx(this.props.inputHtml.className, "form-control"),
+              onClick: this._onInputClick.bind(this),
             }),
           )
         ),
-        div({className: "controls colorpicker"},
-          div({ className: "hue-slider" },
-            hue_slider({
-              value: this.state.hsv.h,
-              max: 360,
-              onChange: this._setHue.bind(this),
-            })
-          ),
-          this._inputMap(),
-          sample({
-            color: this.state.color.toHex(),
-            origin: this.state.origin.toHex(),
-            onChange: this._loadColor.bind(this),
-          }),
-        ),
-        errorList(this.props.errors),
-      ),
+      this._displayColorMap(),
+      errorList(this.props.errors),
+      )
     )
   }
 
