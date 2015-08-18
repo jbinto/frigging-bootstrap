@@ -31,7 +31,7 @@ export default class extends React.Component {
   // this prevents data loss when converting between RGB and HSV
   componentWillReceiveProps(nextProps) {
     let nextColor = nextProps.color.toLowerCase()
-    let currentColor = Colr.fromHsvObject(this.state.hsv).toHex()
+    let currentColor = this._getCurrentHex()
 
     if(nextColor !== currentColor) {
       this.setState(this._getStateFrom(nextProps.color))
@@ -125,6 +125,9 @@ export default class extends React.Component {
     )
   }
 
+  _getCurrentHex() {
+    return Colr.fromHsvObject(this.state.hsv).toHex()
+  }
 
   render() {
     return div({className: cx(sizeClassNames(this.props))},
@@ -132,14 +135,14 @@ export default class extends React.Component {
         label(this.props),
         input(Object.assign({}, this.props.inputHtml, {
             valueLink: {
-              value: Colr.fromHsvObject(this.state.hsv).toHex(),
+              value: this._getCurrentHex(),
               requestChange: this._update.bind(this),
             },
-            className: cx(this.props.inputHtml.className, "form-control"),
             disabled: true,
+            className: cx(this.props.inputHtml.className, "form-control"),
             onClick: this._onInputClick.bind(this),
             style: {
-               backgroundColor: Colr.fromHsvObject(this.state.hsv).toHex(),
+               backgroundColor: this._getCurrentHex(),
             },
           }),
         ),
