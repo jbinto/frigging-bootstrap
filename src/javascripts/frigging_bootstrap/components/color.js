@@ -122,10 +122,6 @@ export default class extends React.Component {
         })
       ),
       this._inputMap(),
-      sample({
-        color: this.state.color.toHex(),
-        onChange: this._loadColor.bind(this),
-      }),
     )
   }
 
@@ -140,8 +136,11 @@ export default class extends React.Component {
                 value: Colr.fromHsvObject(this.state.hsv).toHex(),
                 requestChange: this._update.bind(this),
               },
-              className: cx(this.props.inputHtml.className, "form-control"),
-              onClick: this._onInputClick.bind(this),
+              disabled: true,
+			  onClick: this._onInputClick.bind(this),
+              style: {
+                 backgroundColor: Colr.fromHsvObject(this.state.hsv).toHex(),
+              },
             }),
           )
         ),
