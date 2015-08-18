@@ -1,12 +1,12 @@
 {
-  "name": "frig",
+  "name": "frigging-bootstrap",
   "version": "0.1.4",
   "private": false,
-  "main": "src/javascripts/frig.coffee",
+  "main": "dist/frigging-bootstrap.js",
   "dependencies": {
-    "coffee-script": "1.9.3"
   },
   "devDependencies":{
+    "coffee-script": "1.9.3",
     "webpack": "*",
     "webpack-dev-server": "*",
     "css-loader": "*",

@@ -2,9 +2,8 @@ ExtractTextPlugin = require "extract-text-webpack-plugin"
 path = require "path"
 webpack = require "webpack"
 
-# isProduction = process.env.FRIG_ENV == "production"
-isProduction = true
-minimize = true
+isProduction = process.env.FRIG_ENV == "production"
+minimize = process.env.FRIG_MIN == "minimize"
 
 module.exports =
   entry: "./src/javascripts/index.js"
