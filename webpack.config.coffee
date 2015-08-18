@@ -5,6 +5,14 @@ webpack = require "webpack"
 isProduction = process.env.FRIG_ENV == "production"
 minimize = process.env.FRIG_MIN == "minimize"
 
+unless isProduction
+  console.log(
+    "\nPlease use npm link and the Frig examples for debugging "+
+    "Frigging Bootstrap."+
+    "\n\nSee the Frig's HACKING.md for further details.\n"
+  )
+  process.exit()
+
 module.exports =
   entry: "./src/javascripts/index.js"
   devtool: if isProduction then "source-map" else "inline-source-map"
