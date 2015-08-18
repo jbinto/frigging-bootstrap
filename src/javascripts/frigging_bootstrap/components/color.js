@@ -98,7 +98,7 @@ export default class extends React.Component {
     })
   }
 
-  _displayColorMap(){
+  _displayColor(){
     if (this.state.showPopup === false) return false
     return div({className: "controls colorpicker"},
       div({ className: "hue-slider" },
@@ -143,7 +143,7 @@ export default class extends React.Component {
             },
           }),
         ),
-        this._displayColorMap(),
+        this._displayColor(),
         errorList(this.props.errors),
       )
     )
