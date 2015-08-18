@@ -41,11 +41,6 @@ export default class extends React.Component {
     })
   }
 
-  // replace current color with another one
-  _loadColor(color) {
-    this.setState(this._getStateFrom(color))
-  }
-
   // update the current color using the raw hsv values
   _update() {
     let color = Colr.fromHsvObject(this.state.hsv)
@@ -56,6 +51,17 @@ export default class extends React.Component {
   _setHue(hue) {
     this.state.hsv.h = hue
     this._update()
+  }
+
+  _setHex(hex) {
+    hex = hex.replace(/[^\w\s]/gi, '')
+    if(hex.length !== 3 && hex.length !== 6) return false
+
+    let color = Colr.fromHex(hex)
+    this.setState({
+      color: color,
+      hsv: color.toRawHsvObject(),
+    })
   }
 
   // set the saturation
@@ -126,9 +132,8 @@ export default class extends React.Component {
         input(Object.assign({}, this.props.inputHtml, {
             valueLink: {
               value: this._getCurrentHex(),
-              requestChange: this._update.bind(this),
+              requestChange: this._setHex.bind(this),
             },
-            disabled: true,
             className: cx(this.props.inputHtml.className, "form-control"),
             onClick: this._onInputClick.bind(this),
             style: {
