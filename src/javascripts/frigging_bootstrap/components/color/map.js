@@ -28,7 +28,7 @@ export default class extends React.Component {
       {
         className: cx(Object.assign({}, this.props.className, {
             map: true,
-            active: this.props.valueLink.value,
+            active: this.props.activeLink.value,
           })
         ),
         onMouseDown: this.startUpdates.bind(this),

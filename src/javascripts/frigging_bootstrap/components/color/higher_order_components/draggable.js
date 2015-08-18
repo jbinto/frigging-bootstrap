@@ -36,12 +36,12 @@ export default function(componentClass) {
 
         startUpdates(e) {
           var coords = this.getPosition(e)
-          this.props.valueLink.requestChange(true)
+          this.props.activeLink.requestChange(true)
           this._updatePosition(coords.x, coords.y)
         },
 
         handleUpdate(e) {
-          if (this.props.valueLink.value) {
+          if (this.props.activeLink.value) {
             e.preventDefault()
             var coords = this.getPosition(e)
             this._updatePosition(coords.x, coords.y)
@@ -49,8 +49,8 @@ export default function(componentClass) {
         },
 
         stopUpdates() {
-          if (this.props.valueLink.value) {
-            this.props.valueLink.requestChange(false)
+          if (this.props.activeLink.value) {
+            this.props.activeLink.requestChange(false)
           }
         },
 
@@ -75,7 +75,7 @@ export default function(componentClass) {
       })
 
       let childProps = Object.assign({}, this.props, {
-        valueLink: {
+        activeLink: {
           value: this.state.active,
           requestChange: this._changeActive.bind(this),
         },
