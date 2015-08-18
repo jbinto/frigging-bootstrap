@@ -4,13 +4,13 @@ let cx = require("classnames")
 let fuzzy = require('fuzzy')
 let {div, a, input, i, ul, li} = React.DOM
 let BootstrapInput = require("./input.js")
-let FrigInput = React.createFactory(require("frig/components/input"))
+let FrigInput = React.createFactory(require("frig").Input)
 let {errorList} = require("../util")
-let {promisedTimeout} = require("frig/util")
+let {promisedTimeout} = require("frig").util
 
 export default class extends React.Component {
 
-  static displayName = "Frig.friggingBootstrap.Typeahead"
+  displayName = "Frig.friggingBootstrap.Typeahead"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
     minLength: 3,

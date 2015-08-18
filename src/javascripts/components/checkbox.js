@@ -1,8 +1,8 @@
-var React                         = require("react")
+var React = require("react")
 var {errorList, sizeClassNames, formGroupCx} = require("../util.js")
-var {div, label, input}           = React.DOM
-var cx                            = require("classnames")
-let booleanHOC = require("frig/higher_order_components/boolean")
+var {div, label, input} = React.DOM
+var cx = require("classnames")
+let booleanHOC = require("frig").HigherOrderComponents.Boolean
 
 @booleanHOC
 export default class extends React.Component {

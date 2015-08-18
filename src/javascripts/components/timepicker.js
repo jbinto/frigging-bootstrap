@@ -6,7 +6,7 @@ let {div, input} = React.DOM
 
 export default class extends React.Component {
 
-  static displayName = "Frig.friggingBootstrap.TimePicker"
+  displayName = "Frig.friggingBootstrap.TimePicker"
 
   static defaultProps = Object.assign(require("../default_props.js"))
 

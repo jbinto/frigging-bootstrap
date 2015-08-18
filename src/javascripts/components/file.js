@@ -5,7 +5,7 @@ let cx = require("classnames")
 
 export default class extends React.Component {
 
-  static displayName = "Frig.friggingBootstrap.FileInput"
+  displayName = "Frig.friggingBootstrap.FileInput"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
     prefix:          undefined,

@@ -5,7 +5,7 @@ let cx = require("classnames")
 
 export default class extends React.Component {
 
-  static displayName = "Frig.friggingBootstrap.Text"
+  displayName = "Frig.friggingBootstrap.Text"
 
   static defaultProps = Object.assign(require("../default_props.js"))
 

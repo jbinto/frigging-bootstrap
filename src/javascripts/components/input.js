@@ -1,11 +1,11 @@
-let React                         = require("react")
+let React = require("react")
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {div, input}           = React.DOM
+let {div, input} = React.DOM
 let cx = require("classnames")
 
 export default class extends React.Component {
 
-  static displayName = "Frig.friggingBootstrap.Input"
+  displayName = "Frig.friggingBootstrap.Input"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
     // Bootstrap input addon texts

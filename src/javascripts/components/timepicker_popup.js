@@ -1,10 +1,12 @@
 let React = require("react")
 let BootstrapInput = require("./input.js")
-let FrigInput = React.createFactory(require("frig/components/input"))
+let FrigInput = React.createFactory(require("frig").Input)
 let BootstrapSwitch = require("./switch.js")
 let {div} = React.DOM
 
 export default class extends React.Component {
+  displayName = "Frig.friggingBootstrap.TimePickerPopup"
+
   static defaultProps = Object.assign(require("../default_props.js"))
 
   // Returns the number of hours from 12 to 1 to 11

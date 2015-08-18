@@ -1,5 +1,5 @@
-let React                         = require("react")
-let {form}                        = React.DOM
+let React = require("react")
+let {form} = React.DOM
 
 export default class FriggingBootstrapForm extends React.Component {
 

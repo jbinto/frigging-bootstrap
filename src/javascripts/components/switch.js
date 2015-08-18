@@ -1,14 +1,13 @@
 let React = require("react")
 let cx = require("classnames")
-let booleanHOC = require("frig/higher_order_components/boolean")
+let booleanHOC = require("frig").HigherOrderComponents.Boolean
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-
 let {div, span} = React.DOM
 
 @booleanHOC
 export default class extends React.Component {
 
-  static displayName = "Frig.friggingBootstrap.Switch"
+  displayName = "Frig.friggingBootstrap.Switch"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
     onColor:  "primary",

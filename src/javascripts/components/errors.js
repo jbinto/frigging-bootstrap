@@ -1,5 +1,5 @@
-var React                         = require("react")
-var {div, span, i}                = React.DOM
+var React = require("react")
+var {div, span, i} = React.DOM
 
 export default class extends React.Component {
 

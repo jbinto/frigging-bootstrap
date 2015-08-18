@@ -1,9 +1,10 @@
 // Note: The babel polyfill bloats FriggingBootstrap. If we could find a smaller
 // polyfill or a polyfill for just the things we use it would save a lot of
 // bytes.
-try {require("babel-core/polyfill")} catch (e) {}
+require("babel-core/polyfill")
 
 require("../stylesheets/index.styl")
+console.log("FRIGGING BOOTSTRAP")
 
 module.exports = {
 

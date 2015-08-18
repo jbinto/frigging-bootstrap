@@ -31,10 +31,7 @@ module.exports =
     library: "FriggingBootstrap"
   externals:
     "react": "React"
-    "frig/higher_order_components/boolean": "Frig.higherOrderComponents.Boolean"
-    "frig/components/input": "Frig.Input"
-    "frig/util": "Frig.util"
-    "frig/components/value_linked_select": "Frig.ValueLinkedSelect"
+    "frig": "Frig"
     # "whatwg-fetch/fetch.js": "fetch"
   resolve:
     root: [
