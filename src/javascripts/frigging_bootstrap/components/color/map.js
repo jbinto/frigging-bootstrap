@@ -20,7 +20,7 @@ export default class extends React.Component {
     x = this.getScaledValue(x)
     y = this.getScaledValue(y)
 
-    this.props.onChange(x, y)
+    this.props.valueLink.requestChange(x, y)
   }
 
   render() {

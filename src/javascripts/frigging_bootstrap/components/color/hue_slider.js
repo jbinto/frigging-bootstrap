@@ -8,14 +8,11 @@ let {div} = React.DOM
 export default class extends React.Component {
   static defaultProps = Object.assign(require("../../default_props.js"))
 
-  static propTypes = {
-    value: React.PropTypes.number.isRequired,
-  }
-
   _updatePosition(clientX, clientY) {
     let rect = React.findDOMNode(this).getBoundingClientRect()
     let value = this.getScaledValue((rect.bottom - clientY) / rect.height)
-    this.props.onChange(value)
+
+    this.props.valueLink.requestChange(value)
   }
 
   render() {
@@ -30,7 +27,7 @@ export default class extends React.Component {
         div({
           className: "pointer",
           style: {
-            "bottom": this.getPercentageValue(this.props.value),
+            "bottom": this.getPercentageValue(this.props.valueLink.value),
           },
         })
       )
