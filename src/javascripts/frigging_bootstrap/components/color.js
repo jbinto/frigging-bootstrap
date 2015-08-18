@@ -64,12 +64,6 @@ export default class extends React.Component {
     this._update()
   }
 
-  // set the value
-  _setValue(value) {
-    this.state.hsv.v = value
-    this._update()
-  }
-
   // set the saturation and the value
   _setSaturationAndValue(saturation, value) {
     this.state.hsv.s = saturation
