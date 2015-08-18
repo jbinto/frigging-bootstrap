@@ -1,3 +1,5 @@
+colorpicker-components-top = 5em
+
 abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
   display: block
   position: absolute
@@ -8,7 +10,7 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
 .colorpicker
   height: 50%
   .map
-    abs(25px, 56px, 56px, 181px)
+    abs(colorpicker-components-top, 56px, 56px, 181px)
     user-select: none
     overflow: hidden
     &.active
@@ -89,13 +91,13 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
   .sat-slider
     abs(auto, 56px, 33px, 181px)
   .light-slider
-    abs(25px, 23px, 56px, auto)
+    abs(colorpicker-components-top, 23px, 56px, auto)
   .hue-slider
-    abs(25px, auto, 56px, 158px)
+    abs(colorpicker-components-top, auto, 56px, 158px)
     .track
       background: linear-gradient(to bottom, red 0%, #ff0099 10%, #cd00ff 20%, #3200ff 30%, #0066ff 40%, #00fffd 50%, #00ff66 60%, #35ff00 70%, #cdff00 80%, #ff9900 90%, red 100%)
   .sample
-    abs(25px, auto, auto, 25px)
+    abs(colorpicker-components-top, auto, auto, 25px)
     width: 100px
     height: 100px
     .current

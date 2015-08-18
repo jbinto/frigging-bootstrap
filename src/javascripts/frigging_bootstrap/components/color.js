@@ -54,8 +54,6 @@ export default class extends React.Component {
   _update() {
     let color = Colr.fromHsvObject(this.state.hsv)
     this.setState({ color: color })
-    console.log(color)
-    // this.props.onChange(color).bind(this)
   }
 
   // set the hue
@@ -108,6 +106,16 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
+        div({className: "colorpicker-text-container"},
+          input(Object.assign({}, this.props.inputHtml, {
+              valueLink: {
+                value: Colr.fromHsvObject(this.state.hsv).toHex(),
+                requestChange: this._update.bind(this),
+              },
+              className: cx(this.props.inputHtml.className, "form-control"),
+            }),
+          )
+        ),
         div({className: "controls colorpicker"},
           div({ className: "hue-slider" },
             hue_slider({
