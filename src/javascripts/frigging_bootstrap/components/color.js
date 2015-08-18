@@ -130,22 +130,21 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
-        div({className: "row"},
-          input(Object.assign({}, this.props.inputHtml, {
-              valueLink: {
-                value: Colr.fromHsvObject(this.state.hsv).toHex(),
-                requestChange: this._update.bind(this),
-              },
-              disabled: true,
-			  onClick: this._onInputClick.bind(this),
-              style: {
-                 backgroundColor: Colr.fromHsvObject(this.state.hsv).toHex(),
-              },
-            }),
-          )
+        input(Object.assign({}, this.props.inputHtml, {
+            valueLink: {
+              value: Colr.fromHsvObject(this.state.hsv).toHex(),
+              requestChange: this._update.bind(this),
+            },
+            className: cx(this.props.inputHtml.className, "form-control"),
+            disabled: true,
+            onClick: this._onInputClick.bind(this),
+            style: {
+               backgroundColor: Colr.fromHsvObject(this.state.hsv).toHex(),
+            },
+          }),
         ),
-      this._displayColorMap(),
-      errorList(this.props.errors),
+        this._displayColorMap(),
+        errorList(this.props.errors),
       )
     )
   }
