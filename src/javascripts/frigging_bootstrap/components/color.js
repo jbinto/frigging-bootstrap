@@ -26,18 +26,6 @@ export default class extends React.Component {
    this.setState({ showPopup: false })
   }
 
-  // compare props against state using hex strings
-  // only use the new props if the color is different
-  // this prevents data loss when converting between RGB and HSV
-  componentWillReceiveProps(nextProps) {
-    let nextColor = nextProps.color.toLowerCase()
-    let currentColor = this._getCurrentHex()
-
-    if(nextColor !== currentColor) {
-      this.setState(this._getStateFrom(nextProps.color))
-    }
-  }
-
   // generate state object from a hex string
   _getStateFrom(color) {
     color = Colr.fromHex(color)
@@ -56,7 +44,6 @@ export default class extends React.Component {
   // replace current color with another one
   _loadColor(color) {
     this.setState(this._getStateFrom(color))
-    this.props.onChange(Colr.fromHex(color))
   }
 
   // update the current color using the raw hsv values
