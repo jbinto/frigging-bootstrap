@@ -43,7 +43,6 @@ export default class extends React.Component {
     color = Colr.fromHex(color)
     return {
       color: color,
-      origin: color.clone(),
       hsv: color.toRawHsvObject(),
     }
   }
@@ -125,7 +124,6 @@ export default class extends React.Component {
       this._inputMap(),
       sample({
         color: this.state.color.toHex(),
-        origin: this.state.origin.toHex(),
         onChange: this._loadColor.bind(this),
       }),
     )

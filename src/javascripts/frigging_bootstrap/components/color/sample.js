@@ -8,11 +8,6 @@ export default class extends React.Component {
 
   propTypes: {
     color: React.PropTypes.string.isRequired,
-    origin: React.PropTypes.string.isRequired,
-  }
-
-  _loadOrigin() {
-    this.props.onChange(this.props.origin)
   }
 
   render() {
@@ -23,11 +18,6 @@ export default class extends React.Component {
           className: "current",
           style: {background: this.props.color},
         }),
-        div({
-          className: "origin",
-          style:({background: this.props.origin}),
-          onClick: this._loadOrigin.bind(this),
-        })
       )
     }
 }
