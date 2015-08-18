@@ -1,4 +1,5 @@
-colorpicker-components-top = 5em
+colorpicker-components-top = 1em
+colorpicker-components-bottom = 1em
 
 abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
   display: block
@@ -8,9 +9,18 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
   left: $left
   right: $right
 .colorpicker
-  height: 50%
+  height: 15em
+  width: 95%
+  position: absolute
+  z-index: 999
+  background-color: #fff
+  border: 1px solid #ccc
+  border-radius: 0.3em
+  box-shadow: 0.2em 0.2em 0.1em #ccc
+  padding: 0.5em
+  margin-top: 0.5em
   .map
-    abs(colorpicker-components-top, 1em, 56px, 2.3em)
+    abs(colorpicker-components-top, 1em, colorpicker-components-bottom, 2.3em)
     user-select: none
     overflow: hidden
     &.active
@@ -93,7 +103,7 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
   .light-slider
     abs(colorpicker-components-top, 23px, 56px, auto)
   .hue-slider
-    abs(colorpicker-components-top, auto, 56px, 1.7em)
+    abs(colorpicker-components-top, auto, colorpicker-components-bottom, 1.7em)
     .track
       background: linear-gradient(to bottom, red 0%, #ff0099 10%, #cd00ff 20%, #3200ff 30%, #0066ff 40%, #00fffd 50%, #00ff66 60%, #35ff00 70%, #cdff00 80%, #ff9900 90%, red 100%)
   .sample
