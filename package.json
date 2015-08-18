@@ -5,6 +5,8 @@
   "main": "dist/frigging-bootstrap.js",
   "dependencies": {
   },
+  "preversion": "FRIG_ENV=\"production\" FRIG_MODE=\"core\" webpack --progress",
+  "version": "git add ./dist",
   "devDependencies":{
     "coffee-script": "1.9.3",
     "webpack": "*",
