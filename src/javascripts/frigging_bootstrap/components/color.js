@@ -136,7 +136,7 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
-        div({className: "colorpicker-text-container"},
+        div({className: "row"},
           input(Object.assign({}, this.props.inputHtml, {
               valueLink: {
                 value: Colr.fromHsvObject(this.state.hsv).toHex(),
