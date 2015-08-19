@@ -11,15 +11,7 @@ export default class extends React.Component {
 
   static displayName = "Frig.friggingBootstrap.Color"
 
-  static defaultProps = Object.assign(require("../default_props.js"), {
-    color: "#000000",
-  })
-
-  propTypes: {
-    color: React.PropTypes.string,
-  }
-
-  state = this._getStateFrom(this.props.color)
+  static defaultProps = Object.assign(require("../default_props.js"))
 
   componentDidMount() {
    this.setState({ showPopup: false })
