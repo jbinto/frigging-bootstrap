@@ -1,11 +1,10 @@
 let React = require("react")
 let Colr = require('colr')
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {div, input, img} = React.DOM
+let {div, input} = React.DOM
 let cx = require("classnames")
 
 let colorMap = React.createFactory(require("./color/map"))
-let sample =  React.createFactory(require("./color/sample"))
 let hue_slider =  React.createFactory(require("./color/hue_slider"))
 
 export default class extends React.Component {
