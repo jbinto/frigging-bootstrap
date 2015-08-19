@@ -6,20 +6,27 @@ let {div} = React.DOM
 
 @draggable
 export default class extends React.Component {
+  _getHSV() {
+    let hexColor = this.props.valueLink.value || "#fff"
+    let hsv = Colr.fromHex(hexColor).toRawHsvObject()
+
+    return [hsv, hexColor]
+  }
+
   _updatePosition(clientX, clientY) {
     let rect = React.findDOMNode(this).getBoundingClientRect()
     let x = (clientX - rect.left) / rect.width
     let y = (rect.bottom - clientY) / rect.height
+    let saturation = this.getScaledValue(x)
+    let value = this.getScaledValue(y)
+    let [hsv] = this._getHSV()
+    let color = Colr.fromHsv(hsv.h, saturation, value)
 
-    x = this.getScaledValue(x)
-    y = this.getScaledValue(y)
-
-    this.props.valueLink.requestChange(x, y)
+    this.props.valueLink.requestChange(color.toHex())
   }
 
   render() {
-    let hexColor = this.props.valueLink.value || "#fff"
-    let hsv = Colr.fromHex(hexColor).toRawHsvObject()
+    let [hsv, hexColor] = this._getHSV()
     let x = hsv.s
     let y = hsv.v
     let hue = Colr.fromHsv(hsv.h, 100, 100).toHex()
