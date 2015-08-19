@@ -15,15 +15,6 @@ export default class extends React.Component {
 
   state = { showPopup: false }
 
-  // generate state object from a hex string
-  _getStateFrom(color) {
-    color = Colr.fromHex(color)
-    return {
-      color: color,
-      hsv: color.toRawHsvObject(),
-    }
-  }
-
   _onInputClick() {
     this.setState({
       showPopup: !this.state.showPopup,
