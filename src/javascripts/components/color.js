@@ -83,7 +83,7 @@ export default class extends React.Component {
         dark: luminosity <= 128,
         light: luminosity > 128,
       }),
-      onChange: this._setSaturationAndValue.bind(this),
+      valueLink: this.props.valueLink,
     })
   }
 
@@ -92,9 +92,8 @@ export default class extends React.Component {
     return div({className: "controls colorpicker"},
       div({ className: "hue-slider" },
         hue_slider({
-          value: this.state.hsv.h,
           max: 360,
-          onChange: this._setHue.bind(this),
+          valueLink: this.props.valueLink,
         })
       ),
       this._inputMap(),
@@ -119,10 +118,7 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         label(this.props),
         input(Object.assign({}, this.props.inputHtml, {
-            valueLink: {
-              value: this._getCurrentHex(),
-              requestChange: this._setHex.bind(this),
-            },
+            valueLink: this.props.valueLink,
             className: cx(this.props.inputHtml.className, "form-control"),
             onClick: this._onInputClick.bind(this),
             style: {
