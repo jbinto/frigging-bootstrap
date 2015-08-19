@@ -52,10 +52,6 @@ export default class extends React.Component {
     )
   }
 
-  _getCurrentHex() {
-    return Colr.fromHsvObject(this.state.hsv).toHex()
-  }
-
   _getContrastYIQ(hexcolor){
     var r = parseInt(hexcolor.substr(1,2),16)
     var g = parseInt(hexcolor.substr(3,2),16)
@@ -74,8 +70,8 @@ export default class extends React.Component {
             className: cx(this.props.inputHtml.className, "form-control"),
             onClick: this._onInputClick.bind(this),
             style: {
-               backgroundColor: this._getCurrentHex(),
-               color: this._getContrastYIQ(this._getCurrentHex()),
+               backgroundColor: this.props.valueLink.value,
+               color: this._getContrastYIQ(this.props.valueLink.value),
             },
           }),
         ),
