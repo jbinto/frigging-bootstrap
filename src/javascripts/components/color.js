@@ -30,18 +30,6 @@ export default class extends React.Component {
     })
   }
 
-  // update the current color using the raw hsv values
-  _update() {
-    let color = Colr.fromHsvObject(this.state.hsv)
-    this.setState({ color: color })
-  }
-
-  // set the hue
-  _setHue(hue) {
-    this.state.hsv.h = hue
-    this._update()
-  }
-
   _setHex(hex) {
     hex = hex.replace(/[^\w\s]/gi, '')
     if(hex.length !== 3 && hex.length !== 6) return false
@@ -53,36 +41,9 @@ export default class extends React.Component {
     })
   }
 
-  // set the saturation
-  _setSaturation(saturation) {
-    this.state.hsv.s = saturation
-    this._update()
-  }
-
-  // set the saturation and the value
-  _setSaturationAndValue(saturation, value) {
-    this.state.hsv.s = saturation
-    this.state.hsv.v = value
-    this._update()
-  }
-
-  _getBackgroundHue() {
-    return Colr.fromHsv(this.state.hsv.h, 100, 100).toHex()
-  }
-
   _inputMap() {
-    let hue = this._getBackgroundHue()
-    let luminosity = this.state.color.toGrayscale()
-
     return colorMap({
-      x: this.state.hsv.s,
-      y: this.state.hsv.v,
       max: 100,
-      backgroundColor: hue,
-      className: cx({
-        dark: luminosity <= 128,
-        light: luminosity > 128,
-      }),
       valueLink: this.props.valueLink,
     })
   }
