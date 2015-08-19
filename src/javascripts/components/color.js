@@ -32,13 +32,6 @@ export default class extends React.Component {
     })
   }
 
-  _inputMap() {
-    return colorMap({
-      max: 100,
-      valueLink: this.props.valueLink,
-    })
-  }
-
   _displayColor(){
     if (this.state.showPopup === false) return false
     return div({className: "controls colorpicker"},
@@ -48,7 +41,10 @@ export default class extends React.Component {
           valueLink: this.props.valueLink,
         })
       ),
-      this._inputMap(),
+      colorMap({
+        max: 100,
+        valueLink: this.props.valueLink,
+      })
     )
   }
 
