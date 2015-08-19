@@ -49,6 +49,7 @@ export default class extends React.Component {
   }
 
   _getContrastYIQ(hexcolor){
+    hexcolor = hexcolor || "#fff"
     var r = parseInt(hexcolor.substr(1,2),16)
     var g = parseInt(hexcolor.substr(3,2),16)
     var b = parseInt(hexcolor.substr(5,2),16)
