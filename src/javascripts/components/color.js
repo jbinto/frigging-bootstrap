@@ -13,9 +13,7 @@ export default class extends React.Component {
 
   static defaultProps = Object.assign(require("../default_props.js"))
 
-  componentDidMount() {
-   this.setState({ showPopup: false })
-  }
+  state = { showPopup: false }
 
   // generate state object from a hex string
   _getStateFrom(color) {
