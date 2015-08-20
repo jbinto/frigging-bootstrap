@@ -56,8 +56,15 @@ export default function(componentClass) {
         },
 
         getHSV() {
-          let hexColor = this.props.valueLink.value || "#fff"
-          let hsv = Colr.fromHex(hexColor).toRawHsvObject()
+          let defaultColor = "fff"
+          let hexColor = this.props.valueLink.value || defaultColor
+
+          hexColor = hexColor.replace(/[^\w\s]/gi, '')
+          if (hexColor.length !== 3 && hexColor.length !== 6) {
+            hexColor = defaultColor
+          }
+
+          let hsv = Colr.fromHex(`#${hexColor}`).toRawHsvObject()
 
           return [hsv, hexColor]
         },
