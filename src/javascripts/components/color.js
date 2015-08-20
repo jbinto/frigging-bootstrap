@@ -49,14 +49,15 @@ export default class extends React.Component {
   }
 
   _getContrastYIQ(){
+<<<<<<< HEAD
     let hexColor = this.props.valueLink.value || "000000"
+=======
+    let [, hexColor, colorLen] = getHSV(this.props, "#000")
+>>>>>>> 07710c8... Remove Duplicated Functionality From Color
 
     if (this.refs.colorText === undefined
       || this.props.valueLink.value.length === 0) return hexColor
 
-    hexColor = hexColor.replace(/[^\w\s]/gi, '')
-
-    let colorLen = hexColor.length
     let currentTextColor = this.refs.colorText.props.style.color
 
     if (colorLen !== 3 && colorLen !== 6) return currentTextColor
@@ -67,17 +68,19 @@ export default class extends React.Component {
     let b = parseInt(hexColor.substr(4,2),16)
     let yiq = ((r*299)+(g*587)+(b*114))/1000
 
-    return (yiq >= 128) ? 'black' : 'white'
+    return (yiq >= 128) ? "#000" : "#FFF"
   }
 
+<<<<<<< HEAD
   _changeBackgroundColor(){
     let newBGColor = this.props.valueLink.value || "FFF"
+=======
+  _changeBackgroundColor() {
+    let [, newBGColor, bgColorLen] = getHSV(this.props)
+>>>>>>> 07710c8... Remove Duplicated Functionality From Color
     if (this.refs.colorText === undefined) return newBGColor
 
     let currentBG = this.refs.colorText.props.style.backgroundColor
-    newBGColor = newBGColor.replace(/[^\w\s]/gi, '')
-
-    let bgColorLen = newBGColor.length
 
     return bgColorLen === 3 || bgColorLen === 6 ? `#${newBGColor}` : currentBG
   }
