@@ -12,7 +12,7 @@ export default class extends React.Component {
     let y = (rect.bottom - clientY) / rect.height
     let saturation = this.getScaledValue(x)
     let value = this.getScaledValue(y)
-    let [hsv] = this.getHSV()
+    let [hsv] = getHSV(this.props)
     let color = Colr.fromHsv(hsv.h, saturation, value)
 
     this.props.valueLink.requestChange(color.toHex())
