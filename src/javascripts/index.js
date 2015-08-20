@@ -4,7 +4,6 @@
 require("babel-core/polyfill")
 
 require("../stylesheets/index.styl")
-console.log("FRIGGING BOOTSTRAP")
 
 module.exports = {
 
