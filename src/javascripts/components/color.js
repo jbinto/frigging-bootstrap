@@ -48,10 +48,19 @@ export default class extends React.Component {
     )
   }
 
-  _getContrastYIQ(hexColor){
-    hexColor = hexColor || "000000"
+  _getContrastYIQ(){
+    let hexColor = this.props.valueLink.value || "000000"
+
+    if (this.refs.colorText === undefined
+      || this.props.valueLink.value.length === 0) return hexColor
+
     hexColor = hexColor.replace(/[^\w\s]/gi, '')
-    if (hexColor.length === 3) hexColor = hexColor.concat(hexColor)
+
+    let colorLen = hexColor.length
+    let currentTextColor = this.refs.colorText.props.style.color
+
+    if (colorLen !== 3 && colorLen !== 6) return currentTextColor
+    if (colorLen === 3) hexColor = hexColor.concat(hexColor)
 
     let r = parseInt(hexColor.substr(0,2),16)
     let g = parseInt(hexColor.substr(2,2),16)
@@ -67,6 +76,7 @@ export default class extends React.Component {
 
     let currentBG = this.refs.colorText.props.style.backgroundColor
     newBGColor = newBGColor.replace(/[^\w\s]/gi, '')
+
     let bgColorLen = newBGColor.length
 
     return bgColorLen === 3 || bgColorLen === 6 ? `#${newBGColor}` : currentBG
@@ -83,7 +93,7 @@ export default class extends React.Component {
             onClick: this._onInputClick.bind(this),
             style: {
                backgroundColor: this._changeBackgroundColor(),
-               color: this._getContrastYIQ(this.props.valueLink.value),
+               color: this._getContrastYIQ(),
             },
           }),
         ),
