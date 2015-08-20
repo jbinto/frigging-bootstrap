@@ -17,12 +17,12 @@ export default class extends React.Component {
 
   render() {
     return div({
-        className: "slider vertical",
+        className: "frigb-slider frigb-vertical",
         onMouseDown: this.startUpdates.bind(this),
         onTouchStart: this.startUpdates.bind(this),
       },
         div({
-          className: "track",
+          className: "frigb-track",
         }),
         div({
           className: "frigb-pointer",

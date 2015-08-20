@@ -26,16 +26,16 @@ export default class extends React.Component {
     return div(
       {
         className: cx({
-            map: true,
-            active: this.props.activeLink.value,
-            dark: luminosity <= 128,
-            light: luminosity > 128,
+            "frigb-map": true,
+            "frigb-active": this.props.activeLink.value,
+            "frigb-dark": luminosity <= 128,
+            "frigb-light": luminosity > 128,
         }),
         onMouseDown: this.startUpdates.bind(this),
         onTouchStart: this.startUpdates.bind(this),
       },
       div({
-        className: "background",
+        className: "frigb-background",
         style: {
           backgroundColor: hue,
         },

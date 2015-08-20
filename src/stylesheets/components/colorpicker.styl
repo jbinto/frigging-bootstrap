@@ -8,7 +8,7 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
   bottom: $bottom
   left: $left
   right: $right
-.colorpicker
+.frigb-colorpicker
   height: 15em
   width: 95%
   position: absolute
@@ -19,7 +19,7 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
   box-shadow: 0.2em 0.2em 0.1em #ccc
   padding: 0.5em
   margin-top: 0.5em
-  .map
+  .frigb-map
     abs(colorpicker-components-top, 1em, colorpicker-components-bottom, 2.3em)
     user-select: none
     overflow: visible
@@ -36,14 +36,14 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
       margin-bottom: -1*5px
       border-radius: 100%
       border: 1px solid #fff
-    .background
+    .frigb-background
       top: 0
       left: 0
       position: absolute
       height: 100%
       width: 100%
-    .background:before,
-    .background:after
+    .frigb-background:before,
+    .frigb-background:after
       display: block
       content: ""
       position: absolute
@@ -51,40 +51,27 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
       left: 0
       bottom: 0
       right: 0
-    .background:after
+    .frigb-background:after
       background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)
-    .background:before
+    .frigb-background:before
       background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%)
-  .slider
+  .frigb-slider
     position: absolute
     user-select: none
-    &.vertical
+    &.frigb-vertical
       top: 0
       bottom: 0
       left: 50%
       width: 10px
       cursor: pointer
-      .track
+      .frigb-track
         position: absolute
         top: 0
         bottom: 0
         left: 50%
         width: 6px
         margin-left: -1*3px
-    &.horizontal
-      left: 0
-      right: 0
-      top: 50%
-      height: 10px
-      cursor: pointer
-      .track
-        position: absolute
-        left: 0
-        right: 0
-        top: 50%
-        height: 6px
-        margin-top: -1*3px
-    .track
+    .frigb-track
       border-radius: 3px
       background: #888888
     .frigb-pointer
@@ -97,44 +84,7 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
       margin-left: -1*7px
       margin-bottom: -1*7px
       border-radius: 14px
-  .sat-slider
-    abs(auto, 56px, 33px, 181px)
-  .light-slider
-    abs(colorpicker-components-top, 23px, 56px, auto)
-  .hue-slider
+  .frigb-hue-slider
     abs(colorpicker-components-top, auto, colorpicker-components-bottom, 1.7em)
-    .track
+    .frigb-track
       background: linear-gradient(to bottom, red 0%, #ff0099 10%, #cd00ff 20%, #3200ff 30%, #0066ff 40%, #00fffd 50%, #00ff66 60%, #35ff00 70%, #cdff00 80%, #ff9900 90%, red 100%)
-  .sample
-    abs(colorpicker-components-top, auto, auto, 25px)
-    width: 100px
-    height: 100px
-    .current
-      height: 100%
-  .details
-    abs(140px, auto, 0, 25px)
-    width: 100px
-    overflow: hidden
-    ul
-      padding: 0
-      margin: 0 0 20px 0
-      li
-        list-style-type: none
-    label
-      display: inline-block
-      color: #888888
-      width: 15px
-      margin-right: 5px
-      text-align: right
-    input
-      width: 74px
-      text-transform: uppercase
-      background: none
-      border-radius: 3px
-      border: none
-      outline: none
-      color: #cccccc
-      background: rgba(black, 0.1)
-      &:focus
-        color: #333333
-        background: rgba(white, 0.9)

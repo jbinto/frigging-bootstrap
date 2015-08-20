@@ -23,8 +23,8 @@ export default class extends React.Component {
 
   _colorPopup(){
     if (this.state.showPopup === false) return undefined
-    return div({className: "controls colorpicker"},
-      div({ className: "hue-slider" },
+    return div({className: "controls frigb-colorpicker"},
+      div({ className: "frigb-hue-slider" },
         hue_slider({
           max: 360,
           colrLink: this._colrLink(),
