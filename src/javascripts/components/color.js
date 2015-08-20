@@ -48,12 +48,15 @@ export default class extends React.Component {
     )
   }
 
-  _getContrastYIQ(hexcolor){
-    hexcolor = hexcolor || "#fff"
-    var r = parseInt(hexcolor.substr(1,2),16)
-    var g = parseInt(hexcolor.substr(3,2),16)
-    var b = parseInt(hexcolor.substr(5,2),16)
-    var yiq = ((r*299)+(g*587)+(b*114))/1000
+  _getContrastYIQ(hexColor){
+    hexColor = hexColor || "000000"
+    hexColor = hexColor.replace(/[^\w\s]/gi, '')
+    if (hexColor.length === 3) hexColor = hexColor.concat(hexColor)
+
+    let r = parseInt(hexColor.substr(0,2),16)
+    let g = parseInt(hexColor.substr(2,2),16)
+    let b = parseInt(hexColor.substr(4,2),16)
+    let yiq = ((r*299)+(g*587)+(b*114))/1000
 
     return (yiq >= 128) ? 'black' : 'white'
   }
