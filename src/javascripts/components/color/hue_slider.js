@@ -1,23 +1,21 @@
 let React = require("react")
 let Colr = require('colr')
 let draggable = require('./higher_order_components/draggable')
-let {div} = React.DOM
+let { div } = React.DOM
 
 @draggable
 export default class extends React.Component {
   static defaultProps = Object.assign(require("../../default_props.js"))
 
-  _updatePosition(saturation, value){
+  _updatePosition(clientX, clientY){
     let rect = React.findDOMNode(this).getBoundingClientRect()
-    let hue = this.getScaledValue((rect.bottom - value) / rect.height)
-    let color = Colr.fromHsv(hue, saturation, value)
+    let hue = this.getScaledValue((rect.bottom - clientY) / rect.height)
+    let colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v)
 
-    this.props.valueLink.requestChange(color.toHex())
+    this.props.colrLink.requestChange(colr)
   }
 
   render() {
-    let [hsv] = this.getHSV()
-
     return div({
         className: "slider vertical",
         onMouseDown: this.startUpdates.bind(this),
@@ -27,9 +25,9 @@ export default class extends React.Component {
           className: "track",
         }),
         div({
-          className: "pointer",
+          className: "frigb-pointer",
           style: {
-            "bottom": this.getPercentageValue(hsv.h),
+            "bottom": this.getPercentageValue(this.props.hsv.h),
           },
         })
       )

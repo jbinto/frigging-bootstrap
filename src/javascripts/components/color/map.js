@@ -12,18 +12,16 @@ export default class extends React.Component {
     let y = (rect.bottom - clientY) / rect.height
     let saturation = this.getScaledValue(x)
     let value = this.getScaledValue(y)
-    let [hsv] = getHSV(this.props)
-    let color = Colr.fromHsv(hsv.h, saturation, value)
+    let colr = Colr.fromHsv(this.props.hsv.h, saturation, value)
 
-    this.props.valueLink.requestChange(color.toHex())
+    this.props.colrLink.requestChange(colr)
   }
 
   render() {
-    let [hsv, hexColor] = this.getHSV()
-    let x = hsv.s
-    let y = hsv.v
-    let hue = Colr.fromHsv(hsv.h, 100, 100).toHex()
-    let luminosity = Colr.fromHex(hexColor).toGrayscale()
+    let x = this.props.hsv.s
+    let y = this.props.hsv.v
+    let hue = Colr.fromHsv(this.props.hsv.h, 100, 100).toHex()
+    let luminosity = this.props.colrLink.value.toGrayscale()
 
     return div(
       {
@@ -43,7 +41,7 @@ export default class extends React.Component {
         },
       }),
       div({
-        className: "pointer",
+        className: "frigb-pointer",
         style: {
           left: this.getPercentageValue(x),
           bottom: this.getPercentageValue(y),

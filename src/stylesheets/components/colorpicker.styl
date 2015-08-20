@@ -22,18 +22,18 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
   .map
     abs(colorpicker-components-top, 1em, colorpicker-components-bottom, 2.3em)
     user-select: none
-    overflow: hidden
+    overflow: visible
     cursor: pointer
-    &.dark .pointer
+    &.dark .frigb-pointer
       border-color: white
-    &.light .pointer
+    &.light .frigb-pointer
       border-color: black
-    .pointer
+    .frigb-pointer
       position: absolute
       width: 10px
       height: 10px
       margin-left: -1*5px
-      margin-top: -1*5px
+      margin-bottom: -1*5px
       border-radius: 100%
       border: 1px solid #fff
     .background
@@ -87,7 +87,7 @@ abs($top = auto, $left = auto, $bottom = $auto, $right = auto)
     .track
       border-radius: 3px
       background: #888888
-    .pointer
+    .frigb-pointer
       position: absolute
       bottom: 50%
       left: 50%

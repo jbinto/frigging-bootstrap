@@ -21,68 +21,54 @@ export default class extends React.Component {
     })
   }
 
-  _setHex(hex) {
-    hex = hex.replace(/[^\w\s]/gi, '')
-    if(hex.length !== 3 && hex.length !== 6) return false
-
-    let color = Colr.fromHex(hex)
-    this.setState({
-      color: color,
-      hsv: color.toRawHsvObject(),
-    })
-  }
-
-  _displayColor(){
-    if (this.state.showPopup === false) return false
+  _colorPopup(){
+    if (this.state.showPopup === false) return undefined
     return div({className: "controls colorpicker"},
       div({ className: "hue-slider" },
         hue_slider({
           max: 360,
-          valueLink: this.props.valueLink,
+          colrLink: this._colrLink(),
+          hsv: this._hsv(),
         })
       ),
       colorMap({
         max: 100,
-        valueLink: this.props.valueLink,
+        colrLink: this._colrLink(),
+        hsv: this._hsv(),
       })
     )
   }
 
-  _getContrastYIQ(){
-<<<<<<< HEAD
-    let hexColor = this.props.valueLink.value || "000000"
-=======
-    let [, hexColor, colorLen] = getHSV(this.props, "#000")
->>>>>>> 07710c8... Remove Duplicated Functionality From Color
-
-    if (this.refs.colorText === undefined
-      || this.props.valueLink.value.length === 0) return hexColor
-
-    let currentTextColor = this.refs.colorText.props.style.color
-
-    if (colorLen !== 3 && colorLen !== 6) return currentTextColor
-    if (colorLen === 3) hexColor = hexColor.concat(hexColor)
-
-    let r = parseInt(hexColor.substr(0,2),16)
-    let g = parseInt(hexColor.substr(2,2),16)
-    let b = parseInt(hexColor.substr(4,2),16)
-    let yiq = ((r*299)+(g*587)+(b*114))/1000
-
-    return (yiq >= 128) ? "#000" : "#FFF"
+  _colr() {
+    let value = this.props.valueLink.value
+    if (!value.match(/^#?([a-f0-9]{3}|[a-f0-9]{6})$/i)) value = "#FFF"
+    return Colr.fromHex(value)
   }
 
-<<<<<<< HEAD
-  _changeBackgroundColor(){
-    let newBGColor = this.props.valueLink.value || "FFF"
-=======
-  _changeBackgroundColor() {
-    let [, newBGColor, bgColorLen] = getHSV(this.props)
->>>>>>> 07710c8... Remove Duplicated Functionality From Color
-    if (this.refs.colorText === undefined) return newBGColor
+  _colrLink() {
+    return {
+      value: this._colr(),
+      requestChange: (colr) => this.props.valueLink.requestChange(colr.toHex()),
+    }
+  }
 
-    let currentBG = this.refs.colorText.props.style.backgroundColor
+  _hsv() {
+    return this._colr().toHsvObject()
+  }
 
-    return bgColorLen === 3 || bgColorLen === 6 ? `#${newBGColor}` : currentBG
+  // Returns a number greater then 128 if this is "lightish" and a number
+  // less then 128 if it is "darkish".
+  _yiqSum() {
+    let {r, g, b} = this._colr().toRgbObject()
+    return ((r*299)+(g*587)+(b*114))/1000
+  }
+
+  _fontColor(){
+    return this._yiqSum() > 128 ? "#000" : "#FFF"
+  }
+
+  _backgroundColor() {
+    return this._colr().toHex()
   }
 
   render() {
@@ -91,16 +77,15 @@ export default class extends React.Component {
         label(this.props),
         input(Object.assign({}, this.props.inputHtml, {
             valueLink: this.props.valueLink,
-            ref: "colorText",
             className: cx(this.props.inputHtml.className, "form-control"),
             onClick: this._onInputClick.bind(this),
             style: {
-               backgroundColor: this._changeBackgroundColor(),
-               color: this._getContrastYIQ(),
+               backgroundColor: this._backgroundColor(),
+               color: this._fontColor(),
             },
           }),
         ),
-        this._displayColor(),
+        this._colorPopup(),
         errorList(this.props.errors),
       )
     )

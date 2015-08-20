@@ -36,7 +36,7 @@ export default function(componentClass) {
         },
 
         startUpdates(e) {
-          var coords = this.getPosition(e)
+          let coords = this.getPosition(e)
           this.props.activeLink.requestChange(true)
           this._updatePosition(coords.x, coords.y)
         },
@@ -44,7 +44,7 @@ export default function(componentClass) {
         handleUpdate(e) {
           if (this.props.activeLink.value) {
             e.preventDefault()
-            var coords = this.getPosition(e)
+            let coords = this.getPosition(e)
             this._updatePosition(coords.x, coords.y)
           }
         },
