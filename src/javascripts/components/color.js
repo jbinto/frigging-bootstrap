@@ -61,16 +61,28 @@ export default class extends React.Component {
     return (yiq >= 128) ? 'black' : 'white'
   }
 
+  _changeBackgroundColor(){
+    let newBGColor = this.props.valueLink.value || "FFF"
+    if (this.refs.colorText === undefined) return newBGColor
+
+    let currentBG = this.refs.colorText.props.style.backgroundColor
+    newBGColor = newBGColor.replace(/[^\w\s]/gi, '')
+    let bgColorLen = newBGColor.length
+
+    return bgColorLen === 3 || bgColorLen === 6 ? `#${newBGColor}` : currentBG
+  }
+
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
         input(Object.assign({}, this.props.inputHtml, {
             valueLink: this.props.valueLink,
+            ref: "colorText",
             className: cx(this.props.inputHtml.className, "form-control"),
             onClick: this._onInputClick.bind(this),
             style: {
-               backgroundColor: this.props.valueLink.value,
+               backgroundColor: this._changeBackgroundColor(),
                color: this._getContrastYIQ(this.props.valueLink.value),
             },
           }),
