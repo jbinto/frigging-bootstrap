@@ -14,12 +14,16 @@ export default class extends React.Component {
     showPopup: false,
   }
 
-  _onInputClick() {
+  _onKeydown(e) {
+    if (e.key === "Tab") this._turnOffColorPopup()
+  }
+
+  _turnOnTimePopup() {
     if (this.state.showPopup === true) return undefined
     this.setState({ showPopup: true })
   }
 
-  _onPopupBGClick() {
+  _turnOffColorPopup() {
     this.setState({ showPopup: false })
   }
 
@@ -31,18 +35,19 @@ export default class extends React.Component {
           "frig-timepicker-input",
           "form-control",
         ),
-        onClick: this._onInputClick.bind(this),
+        onClick: this._turnOnTimePopup.bind(this),
+        onKeyDownCapture: this._onKeydown.bind(this),
       })
     )
   }
 
-  _inputPopup() {
+  _timePopup() {
     if(this.state.showPopup === false) return
 
     return [
       div({
         className: "frigb-popup-bg",
-        onClick: this._onPopupBGClick.bind(this),
+        onClick: this._turnOffColorPopup.bind(this),
       }),
       popup({ valueLink: this.props.valueLink }),
     ]
@@ -51,13 +56,11 @@ export default class extends React.Component {
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
-        div({},
-          label(this.props)
-        ),
+        div({}, label(this.props)),
         this._input(),
         errorList(this.props.errors),
       ),
-      this._inputPopup(),
+      this._timePopup(),
     )
   }
 
