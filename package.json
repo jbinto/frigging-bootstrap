@@ -34,7 +34,8 @@
     "font-awesome-webpack": "*",
     "classnames": "*",
     "whatwg-fetch": "*",
-    "fuzzy": "*"
+    "fuzzy": "*",
+    "colr": "*"
   },
   "engines": {
     "node": "~0.12.x",

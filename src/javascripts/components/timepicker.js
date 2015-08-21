@@ -14,37 +14,57 @@ export default class extends React.Component {
     showPopup: false,
   }
 
-  _onInputClick() {
-    this.setState({
-      showPopup: !this.state.showPopup,
-    })
+  _onKeydown(e) {
+    if (e.key === "Tab") this._turnOffColorPopup()
+  }
+
+  _turnOnTimePopup() {
+    this.setState({ showPopup: true })
+  }
+
+  _turnOffColorPopup() {
+    this.setState({ showPopup: false })
   }
 
   _input() {
     return input(Object.assign({}, this.props.inputHtml, {
         valueLink: this.props.valueLink,
-        className: cx(this.props.inputHtml.className, "form-control"),
-        onClick: this._onInputClick.bind(this),
+        className: cx(
+          this.props.inputHtml.className,
+          { "frigb-popup-input": this.state.showPopup },
+          "frigb-timepicker-input",
+          "form-control",
+        ),
+        onClick: this._turnOnTimePopup.bind(this),
+        onKeyDownCapture: this._onKeydown.bind(this),
       })
     )
   }
 
-  _inputPopup() {
+  _timePopup() {
     if(this.state.showPopup === false) return
 
-    return popup({ valueLink: this.props.valueLink })
+    return [
+      div({
+        className: "frigb-popup-bg",
+        onClick: this._turnOffColorPopup.bind(this),
+        key: "frigb-time-popup-bg",
+      }),
+      popup({
+        valueLink: this.props.valueLink,
+        key: "frigb-time-popup",
+      }),
+    ]
   }
 
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
-        div({},
-          label(this.props)
-        ),
+        div({}, label(this.props)),
         this._input(),
         errorList(this.props.errors),
       ),
-      this._inputPopup(),
+      this._timePopup(),
     )
   }
 

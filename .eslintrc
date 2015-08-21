@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true
+  },
+  "rules": {
+    "semi": [2, "never"],
+    "comma-dangle": [2, "always-multiline"],
+    "eqeqeq": [2, "smart"],
+    "curly": [2, "multi-line"],
+    "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],
+    "key-spacing": 0,
+    "no-multi-spaces": 0,
+    "no-underscore-dangle": 0,
+    "no-loop-func": 0,
+    "no-debugger": 0,
+    "strict": 0
+  }
+}
