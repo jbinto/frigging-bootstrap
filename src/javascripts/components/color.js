@@ -83,7 +83,7 @@ export default class extends React.Component {
           valueLink: this.props.valueLink,
           className: cx(
             this.props.inputHtml.className,
-            "frig-color-input",
+            "frigb-color-input",
             "form-control",
           ),
           onClick: this._turnOnColorPopup.bind(this),
