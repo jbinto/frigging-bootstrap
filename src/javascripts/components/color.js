@@ -15,20 +15,56 @@ export default class extends React.Component {
 
   state = { showPopup: false }
 
-  _onColorPopupInputClick() {
+  _backgroundColor() {
+    return this._colr().toHex()
+  }
+
+  _colr() {
+    let value = this.props.valueLink.value
+    if (!value.match(/^#?([a-f0-9]{3}|[a-f0-9]{6})$/i)) value = "#FFF"
+    return Colr.fromHex(value)
+  }
+
+  _colrLink() {
+    return {
+      value: this._colr(),
+      requestChange: (colr) => this.props.valueLink.requestChange(colr.toHex()),
+    }
+  }
+
+  _fontColor(){
+    return this._yiqSum() > 128 ? "#000" : "#FFF"
+  }
+
+  _hsv() {
+    return this._colr().toHsvObject()
+  }
+
+  _onKeydown(e) {
+    if (e.key === "Tab") this._turnOffColorPopup()
+  }
+
+  _turnOnColorPopup() {
     if (this.state.showPopup === true) return undefined
     this.setState({ showPopup: true })
   }
 
-  _onColorPopupBGClick() {
+  _turnOffColorPopup() {
     this.setState({ showPopup: false })
+  }
+
+  // Returns a number greater then 128 if this is "lightish" and a number
+  // less then 128 if it is "darkish".
+  _yiqSum() {
+    let {r, g, b} = this._colr().toRgbObject()
+    return ((r*299)+(g*587)+(b*114))/1000
   }
 
   _colorPopup() {
     if (this.state.showPopup === false) return undefined
     return [ div({
         className: "frigb-popup-bg",
-        onClick: this._onColorPopupBGClick.bind(this),
+        onClick: this._turnOffColorPopup.bind(this),
       }),
       div({className: "controls frigb-colorpicker"},
         div({ className: "frigb-hue-slider" },
@@ -47,38 +83,6 @@ export default class extends React.Component {
     ]
   }
 
-  _colr() {
-    let value = this.props.valueLink.value
-    if (!value.match(/^#?([a-f0-9]{3}|[a-f0-9]{6})$/i)) value = "#FFF"
-    return Colr.fromHex(value)
-  }
-
-  _colrLink() {
-    return {
-      value: this._colr(),
-      requestChange: (colr) => this.props.valueLink.requestChange(colr.toHex()),
-    }
-  }
-
-  _hsv() {
-    return this._colr().toHsvObject()
-  }
-
-  // Returns a number greater then 128 if this is "lightish" and a number
-  // less then 128 if it is "darkish".
-  _yiqSum() {
-    let {r, g, b} = this._colr().toRgbObject()
-    return ((r*299)+(g*587)+(b*114))/1000
-  }
-
-  _fontColor(){
-    return this._yiqSum() > 128 ? "#000" : "#FFF"
-  }
-
-  _backgroundColor() {
-    return this._colr().toHex()
-  }
-
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
@@ -90,7 +94,8 @@ export default class extends React.Component {
               "frig-color-input",
               "form-control",
             ),
-            onClick: this._onColorPopupInputClick.bind(this),
+            onClick: this._turnOnColorPopup.bind(this),
+            onKeyDownCapture: this._onKeydown.bind(this),
             style: {
                backgroundColor: this._backgroundColor(),
                color: this._fontColor(),
