@@ -40,6 +40,11 @@ export default class extends React.Component {
     if (e.key === "Tab") this._turnOffColorPopup()
   }
 
+  _onColorBlockClick() {
+    this._turnOnColorPopup()
+    React.findDOMNode(this.refs.frigColorInput).select()
+  }
+
   _turnOnColorPopup() {
     this.setState({ showPopup: true })
   }
@@ -81,6 +86,7 @@ export default class extends React.Component {
         label(this.props),
         input(Object.assign({}, this.props.inputHtml, {
           valueLink: this.props.valueLink,
+          ref: "frigColorInput",
           className: cx(
             this.props.inputHtml.className,
             "frigb-color-input",
@@ -92,6 +98,7 @@ export default class extends React.Component {
         div({
           className: "frigb-color-block",
           style: { backgroundColor: this._backgroundColor() },
+          onClick: this._onColorBlockClick.bind(this),
         }),
         this._colorPopup(),
         errorList(this.props.errors),
