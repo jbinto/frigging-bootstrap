@@ -31,7 +31,7 @@ export default class extends React.Component {
         valueLink: this.props.valueLink,
         className: cx(
           this.props.inputHtml.className,
-          "frig-timepicker-input",
+          "frigb-timepicker-input",
           "form-control",
         ),
         onClick: this._turnOnTimePopup.bind(this),
