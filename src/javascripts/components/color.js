@@ -89,6 +89,7 @@ export default class extends React.Component {
           ref: "frigColorInput",
           className: cx(
             this.props.inputHtml.className,
+            { "frigb-popup-input": this.state.showPopup },
             "frigb-color-input",
             "form-control",
           ),
