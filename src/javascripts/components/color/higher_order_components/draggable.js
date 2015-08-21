@@ -1,5 +1,4 @@
 let React = require("react")
-let {clamp} = require("../clamp")
 
 export default function(componentClass) {
 
@@ -34,6 +33,11 @@ export default function(componentClass) {
           document.removeEventListener('touchend', this.stopUpdates.bind(this))
         },
 
+        getPosition(e) {
+          return {x: e.clientX, y: e.clientY}
+        },
+
+
         startUpdates(e) {
           let coords = this.getPosition(e)
           this.props.activeLink.requestChange(true)
@@ -59,7 +63,10 @@ export default function(componentClass) {
         },
 
         getScaledValue(value) {
-          return clamp(value, 0, 1) * this.props.max
+          let min = 0
+          let max = 1
+          let clamp = value < min ? min : (value > max ? max : value)
+          return clamp * this.props.max
         },
       })
 
