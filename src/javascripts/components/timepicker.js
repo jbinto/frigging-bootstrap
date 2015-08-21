@@ -48,8 +48,12 @@ export default class extends React.Component {
       div({
         className: "frigb-popup-bg",
         onClick: this._turnOffColorPopup.bind(this),
+        key: "frigb-time-popup-bg",
       }),
-      popup({ valueLink: this.props.valueLink }),
+      popup({
+        valueLink: this.props.valueLink,
+        key: "frigb-time-popup",
+      }),
     ]
   }
 
