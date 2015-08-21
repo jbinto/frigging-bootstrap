@@ -1,5 +1,4 @@
 let React = require("react")
-let Colr = require('colr')
 let {clamp} = require("../clamp")
 
 export default function(componentClass) {
@@ -52,31 +51,6 @@ export default function(componentClass) {
         stopUpdates() {
           if (this.props.activeLink.value) {
             this.props.activeLink.requestChange(false)
-          }
-        },
-
-        getHSV() {
-          let defaultColor = "fff"
-          let hexColor = this.props.valueLink.value || defaultColor
-
-          hexColor = hexColor.replace(/[^\w\s]/gi, '')
-          if (hexColor.length !== 3 && hexColor.length !== 6) {
-            hexColor = defaultColor
-          }
-
-          let hsv = Colr.fromHex(`#${hexColor}`).toRawHsvObject()
-
-          return [hsv, hexColor]
-        },
-
-        getPosition(e) {
-          if (e.touches) {
-            e = e.touches[0]
-          }
-
-          return {
-            x : e.clientX,
-            y : e.clientY,
           }
         },
 
