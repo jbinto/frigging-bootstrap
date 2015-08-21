@@ -15,15 +15,22 @@ export default class extends React.Component {
   }
 
   _onInputClick() {
-    this.setState({
-      showPopup: !this.state.showPopup,
-    })
+    if (this.state.showPopup === true) return undefined
+    this.setState({ showPopup: true })
+  }
+
+  _onPopupBGClick() {
+    this.setState({ showPopup: false })
   }
 
   _input() {
     return input(Object.assign({}, this.props.inputHtml, {
         valueLink: this.props.valueLink,
-        className: cx(this.props.inputHtml.className, "form-control"),
+        className: cx(
+          this.props.inputHtml.className,
+          "frig-timepicker-input",
+          "form-control",
+        ),
         onClick: this._onInputClick.bind(this),
       })
     )
@@ -32,7 +39,13 @@ export default class extends React.Component {
   _inputPopup() {
     if(this.state.showPopup === false) return
 
-    return popup({ valueLink: this.props.valueLink })
+    return [
+      div({
+        className: "frigb-popup-bg",
+        onClick: this._onPopupBGClick.bind(this),
+      }),
+      popup({ valueLink: this.props.valueLink }),
+    ]
   }
 
   render() {
