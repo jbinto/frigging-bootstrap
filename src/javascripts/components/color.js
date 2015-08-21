@@ -15,28 +15,36 @@ export default class extends React.Component {
 
   state = { showPopup: false }
 
-  _onInputClick() {
-    this.setState({
-      showPopup: !this.state.showPopup,
-    })
+  _onColorPopupInputClick() {
+    if (this.state.showPopup === true) return undefined
+    this.setState({ showPopup: true })
   }
 
-  _colorPopup(){
+  _onColorPopupBGClick() {
+    this.setState({ showPopup: false })
+  }
+
+  _colorPopup() {
     if (this.state.showPopup === false) return undefined
-    return div({className: "controls frigb-colorpicker"},
-      div({ className: "frigb-hue-slider" },
-        hue_slider({
-          max: 360,
+    return [ div({
+        className: "frigb-popup-bg",
+        onClick: this._onColorPopupBGClick.bind(this),
+      }),
+      div({className: "controls frigb-colorpicker"},
+        div({ className: "frigb-hue-slider" },
+          hue_slider({
+            max: 360,
+            colrLink: this._colrLink(),
+            hsv: this._hsv(),
+          })
+        ),
+        colorMap({
+          max: 100,
           colrLink: this._colrLink(),
           hsv: this._hsv(),
         })
       ),
-      colorMap({
-        max: 100,
-        colrLink: this._colrLink(),
-        hsv: this._hsv(),
-      })
-    )
+    ]
   }
 
   _colr() {
@@ -77,8 +85,12 @@ export default class extends React.Component {
         label(this.props),
         input(Object.assign({}, this.props.inputHtml, {
             valueLink: this.props.valueLink,
-            className: cx(this.props.inputHtml.className, "form-control"),
-            onClick: this._onInputClick.bind(this),
+            className: cx(
+              this.props.inputHtml.className,
+              "frig-color-input",
+              "form-control",
+            ),
+            onClick: this._onColorPopupInputClick.bind(this),
             style: {
                backgroundColor: this._backgroundColor(),
                color: this._fontColor(),
