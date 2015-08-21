@@ -34,6 +34,7 @@ export default function(componentClass) {
         },
 
         getPosition(e) {
+          if (e.touches) e = e.touches[0]
           return {x: e.clientX, y: e.clientY}
         },
 
