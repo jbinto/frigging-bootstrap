@@ -32,10 +32,6 @@ export default class extends React.Component {
     }
   }
 
-  _fontColor(){
-    return this._yiqSum() > 128 ? "#000" : "#FFF"
-  }
-
   _hsv() {
     return this._colr().toHsvObject()
   }
@@ -51,13 +47,6 @@ export default class extends React.Component {
 
   _turnOffColorPopup() {
     this.setState({ showPopup: false })
-  }
-
-  // Returns a number greater then 128 if this is "lightish" and a number
-  // less then 128 if it is "darkish".
-  _yiqSum() {
-    let {r, g, b} = this._colr().toRgbObject()
-    return ((r*299)+(g*587)+(b*114))/1000
   }
 
   _colorPopup() {
@@ -92,20 +81,19 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         label(this.props),
         input(Object.assign({}, this.props.inputHtml, {
-            valueLink: this.props.valueLink,
-            className: cx(
-              this.props.inputHtml.className,
-              "frig-color-input",
-              "form-control",
-            ),
-            onClick: this._turnOnColorPopup.bind(this),
-            onKeyDownCapture: this._onKeydown.bind(this),
-            style: {
-               backgroundColor: this._backgroundColor(),
-               color: this._fontColor(),
-            },
-          }),
-        ),
+          valueLink: this.props.valueLink,
+          className: cx(
+            this.props.inputHtml.className,
+            "frig-color-input",
+            "form-control",
+          ),
+          onClick: this._turnOnColorPopup.bind(this),
+          onKeyDownCapture: this._onKeydown.bind(this),
+        })),
+        div({
+          className: "frigb-color-block",
+          style: { backgroundColor: this._backgroundColor() },
+        }),
         this._colorPopup(),
         errorList(this.props.errors),
       )
