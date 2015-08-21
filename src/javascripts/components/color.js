@@ -97,7 +97,10 @@ export default class extends React.Component {
           onKeyDownCapture: this._onKeydown.bind(this),
         })),
         div({
-          className: "frigb-color-block",
+          className: cx(
+            { "frigb-popup-input": this.state.showPopup },
+            "frigb-color-block",
+          ),
           style: { backgroundColor: this._backgroundColor() },
           onClick: this._onColorBlockClick.bind(this),
         }),
