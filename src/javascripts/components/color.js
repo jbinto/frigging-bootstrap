@@ -65,8 +65,12 @@ export default class extends React.Component {
     return [ div({
         className: "frigb-popup-bg",
         onClick: this._turnOffColorPopup.bind(this),
+        key: "frigb-color-popup-bg",
       }),
-      div({className: "controls frigb-colorpicker"},
+      div({
+          className: "controls frigb-colorpicker",
+          key: "frigb-color-popup",
+        },
         div({ className: "frigb-hue-slider" },
           hue_slider({
             max: 360,
