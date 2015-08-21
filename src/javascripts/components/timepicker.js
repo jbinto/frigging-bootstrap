@@ -19,7 +19,6 @@ export default class extends React.Component {
   }
 
   _turnOnTimePopup() {
-    if (this.state.showPopup === true) return undefined
     this.setState({ showPopup: true })
   }
 

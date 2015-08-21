@@ -41,7 +41,6 @@ export default class extends React.Component {
   }
 
   _turnOnColorPopup() {
-    if (this.state.showPopup === true) return undefined
     this.setState({ showPopup: true })
   }
 
