@@ -1,60 +1,41 @@
 let React = require("react")
 let cx = require("classnames")
+let {Focusable} = require("frig").HigherOrderComponents
 let popup = React.createFactory(require("./timepicker_popup"))
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
 let {div, input} = React.DOM
 
+@Focusable
 export default class extends React.Component {
 
   displayName = "Frig.friggingBootstrap.TimePicker"
 
   static defaultProps = Object.assign(require("../default_props.js"))
 
-  state = {
-    showPopup: false,
-  }
-
-  _onKeydown(e) {
-    if (e.key === "Tab") this._turnOffColorPopup()
-  }
-
-  _turnOnTimePopup() {
-    this.setState({ showPopup: true })
-  }
-
-  _turnOffColorPopup() {
-    this.setState({ showPopup: false })
+  _inputCx() {
+    return cx(
+      this.props.inputHtml.className,
+      "frigb-timepicker-input",
+      "form-control",
+      {"frigb-popup-input": this.props.focused},
+    )
   }
 
   _input() {
     return input(Object.assign({}, this.props.inputHtml, {
         valueLink: this.props.valueLink,
-        className: cx(
-          this.props.inputHtml.className,
-          { "frigb-popup-input": this.state.showPopup },
-          "frigb-timepicker-input",
-          "form-control",
-        ),
-        onClick: this._turnOnTimePopup.bind(this),
-        onKeyDownCapture: this._onKeydown.bind(this),
+        className: this._inputCx,
       })
     )
   }
 
   _timePopup() {
-    if(this.state.showPopup === false) return
+    if(this.props.focused === false) return
 
-    return [
-      div({
-        className: "frigb-popup-bg",
-        onClick: this._turnOffColorPopup.bind(this),
-        key: "frigb-time-popup-bg",
-      }),
-      popup({
-        valueLink: this.props.valueLink,
-        key: "frigb-time-popup",
-      }),
-    ]
+    return popup({
+      valueLink: this.props.valueLink,
+      key: "frigb-time-popup",
+    })
   }
 
   render() {

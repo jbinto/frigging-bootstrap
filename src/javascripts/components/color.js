@@ -3,24 +3,24 @@ let Colr = require('colr')
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
 let {div, input} = React.DOM
 let cx = require("classnames")
+let {Focusable} = require("frig").HigherOrderComponents
 
 let colorMap = React.createFactory(require("./color/map"))
 let hue_slider =  React.createFactory(require("./color/hue_slider"))
 
+@Focusable
 export default class extends React.Component {
 
   static displayName = "Frig.friggingBootstrap.Color"
 
   static defaultProps = Object.assign(require("../default_props.js"))
 
-  state = { showPopup: false }
-
   _backgroundColor() {
     return this._colr().toHex()
   }
 
   _colr() {
-    let value = this.props.valueLink.value
+    let value = this.props.valueLink.value || ""
     if (!value.match(/^#?([a-f0-9]{3}|[a-f0-9]{6})$/i)) value = "#FFF"
     return Colr.fromHex(value)
   }
@@ -36,30 +36,13 @@ export default class extends React.Component {
     return this._colr().toHsvObject()
   }
 
-  _onKeydown(e) {
-    if (e.key === "Tab") this._turnOffColorPopup()
-  }
-
   _onColorBlockClick() {
-    this._turnOnColorPopup()
     React.findDOMNode(this.refs.frigColorInput).select()
   }
 
-  _turnOnColorPopup() {
-    this.setState({ showPopup: true })
-  }
-
-  _turnOffColorPopup() {
-    this.setState({ showPopup: false })
-  }
-
   _colorPopup() {
-    if (this.state.showPopup === false) return undefined
-    return [ div({
-        className: "frigb-popup-bg",
-        onClick: this._turnOffColorPopup.bind(this),
-        key: "frigb-color-popup-bg",
-      }),
+    if (this.props.focused === false) return undefined
+    return [
       div({
           className: "controls frigb-colorpicker",
           key: "frigb-color-popup",
@@ -89,16 +72,14 @@ export default class extends React.Component {
           ref: "frigColorInput",
           className: cx(
             this.props.inputHtml.className,
-            { "frigb-popup-input": this.state.showPopup },
+            { "frigb-popup-input": this.props.focused },
             "frigb-color-input",
             "form-control",
           ),
-          onClick: this._turnOnColorPopup.bind(this),
-          onKeyDownCapture: this._onKeydown.bind(this),
         })),
         div({
           className: cx(
-            { "frigb-popup-input": this.state.showPopup },
+            { "frigb-popup-input": this.props.focused },
             "frigb-color-block",
           ),
           style: { backgroundColor: this._backgroundColor() },
