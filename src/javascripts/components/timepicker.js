@@ -24,7 +24,7 @@ export default class extends React.Component {
   _input() {
     return input(Object.assign({}, this.props.inputHtml, {
         valueLink: this.props.valueLink,
-        className: this._inputCx,
+        className: this._inputCx(),
       })
     )
   }
