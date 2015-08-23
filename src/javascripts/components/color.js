@@ -42,25 +42,20 @@ export default class extends React.Component {
 
   _colorPopup() {
     if (this.props.focused === false) return undefined
-    return [
-      div({
-          className: "controls frigb-colorpicker",
-          key: "frigb-color-popup",
-        },
-        div({ className: "frigb-hue-slider" },
-          hue_slider({
-            max: 360,
-            colrLink: this._colrLink(),
-            hsv: this._hsv(),
-          })
-        ),
-        colorMap({
-          max: 100,
+    return div({className: "controls frigb-colorpicker"},
+      div({ className: "frigb-hue-slider" },
+        hue_slider({
+          max: 360,
           colrLink: this._colrLink(),
           hsv: this._hsv(),
         })
       ),
-    ]
+      colorMap({
+        max: 100,
+        colrLink: this._colrLink(),
+        hsv: this._hsv(),
+      })
+    )
   }
 
   render() {
@@ -72,16 +67,12 @@ export default class extends React.Component {
           ref: "frigColorInput",
           className: cx(
             this.props.inputHtml.className,
-            { "frigb-popup-input": this.props.focused },
             "frigb-color-input",
             "form-control",
           ),
         })),
         div({
-          className: cx(
-            { "frigb-popup-input": this.props.focused },
-            "frigb-color-block",
-          ),
+          className: "frigb-color-block",
           style: { backgroundColor: this._backgroundColor() },
           onClick: this._onColorBlockClick.bind(this),
         }),

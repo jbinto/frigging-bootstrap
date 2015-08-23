@@ -17,7 +17,6 @@ export default class extends React.Component {
       this.props.inputHtml.className,
       "frigb-timepicker-input",
       "form-control",
-      {"frigb-popup-input": this.props.focused},
     )
   }
 
@@ -34,7 +33,6 @@ export default class extends React.Component {
 
     return popup({
       valueLink: this.props.valueLink,
-      key: "frigb-time-popup",
     })
   }
 
