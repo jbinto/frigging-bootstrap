@@ -15,25 +15,52 @@ export default class extends React.Component {
 
   static defaultProps = Object.assign(require("../default_props.js"))
 
-  _backgroundColor() {
-    return this._colr().toHex()
+  // Color information is stored in state (as well as being received in props)
+  // because the HSV format we use looses some accuracy when converted to the
+  // RGB format (ie. it is a lossy conversion). To maintain information we
+  // have to maintain the HSV non-lossy intermediate value.
+  //
+  // As an example if you were to set the saturation to 0 then the RGB color
+  // would set hue and value to zero as well (#000) loosing that hue and value
+  // context we need for the color map.
+  state = {colr: Colr.fromHex("#fff")}
+
+  componentWillMount() {
+    this._updateColrCache(this.props)
   }
 
-  _colr() {
-    let value = this.props.valueLink.value || ""
-    if (!value.match(/^#?([a-f0-9]{3}|[a-f0-9]{6})$/i)) value = "#FFF"
-    return Colr.fromHex(value)
+  componentWillReceiveProps(nextProps) {
+    this._updateColrCache(nextProps)
+  }
+
+  _updateColrCache(nextProps) {
+    let nextColr = this._generateColr(nextProps.valueLink.value)
+    if( this.state.colr.toHex() === nextColr.toHex()) return
+    this.setState({colr: nextColr})
+  }
+
+  _generateColr(hex) {
+    hex = hex || "#fff"
+    if (!hex.match(/^#?([a-f0-9]{3}|[a-f0-9]{6})$/i)) hex = "#fff"
+    return Colr.fromHex(hex)
+  }
+
+  _requestColrChange(colr) {
+    // Update state and then props so that the cache invalidation for incomming
+    // props (_updateColrCache) always sees the latest state.
+    let updateProps = () => this.props.valueLink.requestChange(colr.toHex())
+    this.setState({colr: colr}, updateProps)
   }
 
   _colrLink() {
     return {
-      value: this._colr(),
-      requestChange: (colr) => this.props.valueLink.requestChange(colr.toHex()),
+      value: this.state.colr,
+      requestChange: this._requestColrChange.bind(this),
     }
   }
 
   _hsv() {
-    return this._colr().toHsvObject()
+    return this.state.colr.toHsvObject()
   }
 
   _onColorBlockClick() {
@@ -73,7 +100,7 @@ export default class extends React.Component {
         })),
         div({
           className: "frigb-color-block",
-          style: { backgroundColor: this._backgroundColor() },
+          style: { backgroundColor: this.state.colr.toHex() },
           onClick: this._onColorBlockClick.bind(this),
         }),
         this._colorPopup(),
