@@ -5489,7 +5489,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var overrides = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
 	    var labelHtml = Object.assign({}, props, overrides);
-	    return props.label == null ? "" : _label(labelHtml, props.label);
+	    labelHtml.className = cx(labelHtml.className, {
+	      "col-sm-3": props.layout == "horizontal"
+	    });
+	    return props.label ? _label(labelHtml, props.label) : "";
+	  },
+
+	  inputContainerCx: function inputContainerCx(props) {
+	    return cx({ "col-sm-9": props.layout == "horizontal" });
 	  },
 
 	  sizeClassNames: function sizeClassNames(props) {
@@ -5633,7 +5640,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	"use strict";
 
 	module.exports = {
-	  layout: "vertical",
 	  // Sizes
 	  xs: 12,
 	  sm: undefined,
@@ -7014,6 +7020,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var sizeClassNames = _require.sizeClassNames;
 	var formGroupCx = _require.formGroupCx;
 	var label = _require.label;
+
+	var _require2 = __webpack_require__(191);
+
+	var inputContainerCx = _require2.inputContainerCx;
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
 	var input = _React$DOM.input;
@@ -7068,7 +7078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: "controls" }, this._inputGroup()), errorList(this.props.errors)));
+	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: inputContainerCx(this.props) }, this._inputGroup(), errorList(this.props.errors))));
 	    }
 	  }], [{
 	    key: "defaultProps",
@@ -7170,6 +7180,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
@@ -7197,21 +7209,48 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  _createClass(_default, [{
+	    key: "_inputCx",
+	    value: function _inputCx() {
+	      var _optionalClasses;
+
+	      var optionalClasses = (_optionalClasses = {
+	        "btn-block": this.props.block
+	      }, _defineProperty(_optionalClasses, "btn-" + this.props.bsSize, this.props.bsSize != null), _defineProperty(_optionalClasses, "pull-right", this.props.align == "right"), _optionalClasses);
+	      return cx(this.props.className, "btn btn-" + this.props.bsStyle, optionalClasses);
+	    }
+	  }, {
 	    key: "_inputHtml",
 	    value: function _inputHtml() {
 	      return Object.assign({}, this.props.inputHtml, {
-	        className: cx(this.props.className, "btn btn-default"),
+	        className: this._inputCx(),
 	        type: "submit"
+	      });
+	    }
+	  }, {
+	    key: "_submitContainerCx",
+	    value: function _submitContainerCx() {
+	      var _props = this.props;
+	      var layout = _props.layout;
+	      var block = _props.block;
+
+	      if (layout !== "horizontal") return "";
+	      return cx({
+	        "col-sm-9 col-sm-offset-3": block === false,
+	        "col-sm-12": block === true
 	      });
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: "form-group" }, button(this._inputHtml(), this.props.title)));
+	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: "form-group" }, div({ className: this._submitContainerCx() }, button(this._inputHtml(), this.props.title))));
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: __webpack_require__(194),
+	    value: Object.assign({}, __webpack_require__(194), {
+	      bsStyle: "default",
+	      bsSize: undefined,
+	      block: false
+	    }),
 	    enumerable: true
 	  }]);
 
@@ -7251,6 +7290,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var sizeClassNames = _require.sizeClassNames;
 	var formGroupCx = _require.formGroupCx;
 	var label = _require.label;
+
+	var _require2 = __webpack_require__(191);
+
+	var inputContainerCx = _require2.inputContainerCx;
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
 	var span = _React$DOM.span;
@@ -7282,7 +7325,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function _switchCx() {
 	      var _cx;
 
-	      return cx("bootstrap-switch", "bootstrap-switch-wrapper", "bootstrap-switch-on", "bootstrap-switch-id-switch-state", "bootstrap-switch-animate", (_cx = {}, _defineProperty(_cx, "bootstrap-switch-" + this.props.size, this.props.size != null), _defineProperty(_cx, "bootstrap-switch-disabled", this.props.disabled), _cx));
+	      return cx("bootstrap-switch", "bootstrap-switch-wrapper", "bootstrap-switch-on", "bootstrap-switch-id-switch-state", "bootstrap-switch-animate", (_cx = {}, _defineProperty(_cx, "bootstrap-switch-" + this.props.bsSize, this.props.bsSize != null), _defineProperty(_cx, "bootstrap-switch-disabled", this.props.disabled), _defineProperty(_cx, "pull-right", this.props.align == "right"), _cx));
 	    }
 	  }, {
 	    key: "_onSpanCx",
@@ -7293,21 +7336,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: "_offSpanCx",
 	    value: function _offSpanCx() {
 	      return cx("bootstrap-switch-handle-off", _defineProperty({}, "bootstrap-switch-" + this.props.offColor, this.props.offColor != null));
-	    }
-	  }, {
-	    key: "_labelContainerCx",
-	    value: function _labelContainerCx() {
-	      return cx({
-	        "pull-left": this.props.layout === "horizontal"
-	      });
-	    }
-	  }, {
-	    key: "_inputContainerCx",
-	    value: function _inputContainerCx() {
-	      return cx({
-	        "pull-right": this.props.layout === "horizontal",
-	        "controls": this.props.layout === "vertical"
-	      });
 	    }
 	  }, {
 	    key: "_input",
@@ -7322,7 +7350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, div({ className: this._labelContainerCx() }, label(this.props)), div({ className: this._inputContainerCx() }, div({ className: this._switchCx() }, this._input()), errorList(this.props.errors))));
+	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: inputContainerCx(this.props) }, div({ className: this._switchCx() }, this._input()), errorList(this.props.errors))));
 	    }
 	  }], [{
 	    key: "defaultProps",
