@@ -16,7 +16,14 @@ module.exports = {
 
   label(props, overrides = {}) {
     let labelHtml = Object.assign({}, props, overrides)
-    return props.label ? "" : label(labelHtml, props.label)
+    labelHtml.className = cx(labelHtml.className, {
+      "col-sm-3": props.layout == "horizontal",
+    })
+    return props.label ? label(labelHtml, props.label) : ""
+  },
+
+  inputContainerCx(props) {
+    return cx({"col-sm-9": props.layout == "horizontal"})
   },
 
   sizeClassNames(props) {

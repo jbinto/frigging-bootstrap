@@ -2,6 +2,7 @@ let React = require("react")
 let cx = require("classnames")
 let booleanHOC = require("frig").HigherOrderComponents.Boolean
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
+let {inputContainerCx} = require("../util.js")
 let {div, span} = React.DOM
 
 @booleanHOC
@@ -35,8 +36,9 @@ export default class extends React.Component {
       "bootstrap-switch-id-switch-state",
       "bootstrap-switch-animate",
       {
-        [`bootstrap-switch-${this.props.size}`]: this.props.size != null,
+        [`bootstrap-switch-${this.props.bsSize}`]: this.props.bsSize != null,
         "bootstrap-switch-disabled": this.props.disabled,
+        "pull-right": this.props.align == "right",
       },
     )
   }
@@ -53,22 +55,9 @@ export default class extends React.Component {
     })
   }
 
-  _labelContainerCx() {
-    return cx({
-      "pull-left": this.props.layout === "horizontal",
-    })
-  }
-
-  _inputContainerCx() {
-    return cx({
-      "pull-right": this.props.layout === "horizontal",
-      "controls": this.props.layout === "vertical",
-    })
-  }
-
   _input() {
     return div({
-        className: `bootstrap-switch-container`,
+        className: "bootstrap-switch-container",
         ref: "switchContainer",
         onClick: this._onClick.bind(this),
         style: {marginLeft: this._isChecked() ? "0" : "-50px"},
@@ -88,10 +77,8 @@ export default class extends React.Component {
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
-        div({className: this._labelContainerCx()},
-          label(this.props)
-        ),
-        div({className: this._inputContainerCx()},
+        label(this.props),
+        div({className: inputContainerCx(this.props)},
           div({className: this._switchCx()},
             this._input(),
           ),

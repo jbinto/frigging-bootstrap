@@ -1,5 +1,6 @@
 let React = require("react")
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
+let {inputContainerCx} = require("../util.js")
 let {div, input} = React.DOM
 let cx = require("classnames")
 
@@ -52,10 +53,10 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
-        div({className: "controls"},
+        div({className: inputContainerCx(this.props)},
           this._inputGroup(),
+          errorList(this.props.errors),
         ),
-        errorList(this.props.errors),
       ),
     )
   }
