@@ -16,7 +16,7 @@ module.exports = {
 
   label(props, overrides = {}) {
     let labelHtml = Object.assign({}, props, overrides)
-    return props.label == null ? "" : label(labelHtml, props.label)
+    return props.label ? "" : label(labelHtml, props.label)
   },
 
   sizeClassNames(props) {
