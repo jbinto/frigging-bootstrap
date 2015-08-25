@@ -1,5 +1,5 @@
 var React = require("react")
-var {span, label} = React.DOM
+var {div, span, label} = React.DOM
 var cx = require("classnames")
 
 module.exports = {
@@ -16,7 +16,15 @@ module.exports = {
 
   label(props, overrides = {}) {
     let labelHtml = Object.assign({}, props, overrides)
-    return props.label == null ? "" : label(labelHtml, props.label)
+    // return props.label == null ? "" : label(labelHtml, props.label)
+    if (props.label == null) {
+      return ""
+    } else {
+      return div({},
+        label(labelHtml, props.label),
+        props.saved === false ? "" : span({className: "pull-right"}, "saved")
+      )
+    }
   },
 
   sizeClassNames(props) {
