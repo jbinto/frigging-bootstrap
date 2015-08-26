@@ -30,6 +30,16 @@ module.exports = {
     return saved ? span({className: "frigb-saved pull-right"}, "saved") : ""
   },
 
+  savedNotification(props) {
+    let layout = props.layout
+    let label = props.label
+    let saved = props.saved
+    let savedInline = span({className: "frigb-saved-inline"}, "saved")
+
+    if (label === false && saved) return savedInline
+    if (label && saved && layout == "horizontal") return savedInline
+  },
+
   inputContainerCx(props) {
     return cx({"col-sm-9": props.layout == "horizontal"})
   },

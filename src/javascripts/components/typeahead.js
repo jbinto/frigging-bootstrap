@@ -5,7 +5,7 @@ let fuzzy = require('fuzzy')
 let {div, a, input, i, ul, li, span} = React.DOM
 let BootstrapInput = require("./input.js")
 let FrigInput = React.createFactory(require("frig").Input)
-let {errorList} = require("../util")
+let {errorList, savedNotification} = require("../util")
 let {promisedTimeout} = require("frig").util
 
 export default class extends React.Component {
@@ -233,16 +233,6 @@ export default class extends React.Component {
     )
   }
 
-  _savedNotification(){
-    let layout = this.props.layout
-    let label = this.props.label
-    let saved = this.props.saved
-    let savedInline = span({className: "frigb-saved-inline"}, "saved")
-
-    if (label === false && saved) return savedInline
-    if (label && saved && layout == "horizontal") return savedInline
-  }
-
   _inputWrapper(inputHtml) {
     let className = inputHtml.className
     inputHtml = Object.assign({}, inputHtml, {
@@ -256,7 +246,7 @@ export default class extends React.Component {
         this._selectionsList(),
         input(inputHtml),
       ),
-      this._savedNotification(),
+      savedNotification(this.props),
       this._suggestionsList(),
       errorList(this.state.errors),
     )

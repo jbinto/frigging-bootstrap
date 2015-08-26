@@ -1,5 +1,5 @@
 let React = require("react")
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
+let {errorList, sizeClassNames, formGroupCx, label, savedNotification} = require("../util.js")
 let {div, input, span, p} = React.DOM
 let {inputContainerCx} = require("../util.js")
 let cx = require("classnames")
@@ -31,15 +31,15 @@ export default class extends React.Component {
     return this.props.inputWrapper(this._inputHtml())
   }
 
-  _savedNotification(){
-    let layout = this.props.layout
-    let label = this.props.label
-    let saved = this.props.saved
-    let savedInline = span({className: "frigb-saved-inline"}, "saved")
+  // _savedNotification(){
+  //   let layout = this.props.layout
+  //   let label = this.props.label
+  //   let saved = this.props.saved
+  //   let savedInline = span({className: "frigb-saved-inline"}, "saved")
 
-    if (label === false && saved) return savedInline
-    if (label && saved && layout == "horizontal") return savedInline
-  }
+  //   if (label === false && saved) return savedInline
+  //   if (label && saved && layout == "horizontal") return savedInline
+  // }
 
   _inputSuffix() {
     if (this.props.suffix == null) return ""
@@ -51,14 +51,14 @@ export default class extends React.Component {
       return div({className: "input-group"},
         this._inputPrefix(),
         this._input(),
-        this._savedNotification(),
+        savedNotification(this.props),
         this._inputSuffix(),
       )
     }
     else {
       return div({},
         this._input(),
-        this._savedNotification(),
+        savedNotification(this.props),
         )
     }
   }

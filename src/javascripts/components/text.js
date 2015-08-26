@@ -1,5 +1,5 @@
 let React = require("react")
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
+let {errorList, sizeClassNames, formGroupCx, label, savedNotification} = require("../util.js")
 let {div, textarea, span} = React.DOM
 let cx = require("classnames")
 
@@ -17,16 +17,6 @@ export default class extends React.Component {
     })
   }
 
-   _savedNotification(){
-    let layout = this.props.layout
-    let label = this.props.label
-    let saved = this.props.saved
-    let savedInline = span({className: "frigb-saved-inline"}, "saved")
-
-    if (label === false && saved) return savedInline
-    if (label && saved && layout == "horizontal") return savedInline
-  }
-
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
@@ -34,7 +24,7 @@ export default class extends React.Component {
         div({className: "controls"},
           textarea(this._inputHtml()),
         ),
-        this._savedNotification(),
+        savedNotification(this.props),
         errorList(this.props.errors),
       ),
     )
