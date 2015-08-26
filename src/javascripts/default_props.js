@@ -1,5 +1,4 @@
 module.exports = {
-  layout:          "vertical",
   // Sizes
   xs:              12,
   sm:              undefined,

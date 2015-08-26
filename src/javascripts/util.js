@@ -15,16 +15,23 @@ module.exports = {
   },
 
   label(props, overrides = {}) {
+    if (!props.label) return ""
     let labelHtml = Object.assign({}, props, overrides)
-    // return props.label == null ? "" : label(labelHtml, props.label)
-    if (props.label == null) {
-      return ""
-    } else {
-      return div({},
-        label(labelHtml, props.label),
-        props.saved === false ? "" : span({className: "pull-right"}, "saved")
-      )
-    }
+    labelHtml.className = cx(labelHtml.className, {
+      "col-sm-3": props.layout === "horizontal",
+    })
+    return div({},
+      label(labelHtml, props.label),
+      savedText({saved: props.saved && props.layout === "vertical"}),
+    )
+  },
+
+  savedText({saved}) {
+    return saved ? span({className: "frigb-saved pull-right"}, "saved") : ""
+  },
+
+  inputContainerCx(props) {
+    return cx({"col-sm-9": props.layout == "horizontal"})
   },
 
   sizeClassNames(props) {
@@ -54,3 +61,5 @@ module.exports = {
   },
 
 }
+
+var {savedText} = module.exports
