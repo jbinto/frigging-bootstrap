@@ -90,7 +90,7 @@ export default class extends React.Component {
     let label = this.props.label
     let saved = this.props.saved
     let savedInline = span({
-      className: "frigb-saved-inline frigb-color-inline"},
+      className: "frigb-saved-inline frigb-colorpicker-inline"},
       "saved")
 
     if (label === false && saved) return savedInline
