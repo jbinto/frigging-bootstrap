@@ -3,7 +3,7 @@ let cx = require("classnames")
 let {Focusable} = require("frig").HigherOrderComponents
 let popup = React.createFactory(require("./timepicker_popup"))
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {div, input} = React.DOM
+let {div, input, span} = React.DOM
 
 @Focusable
 export default class extends React.Component {
@@ -36,11 +36,22 @@ export default class extends React.Component {
     })
   }
 
+  _savedNotification(){
+    let layout = this.props.layout
+    let label = this.props.label
+    let saved = this.props.saved
+    let savedInline = span({className: "frigb-saved-inline"}, "saved")
+
+    if (label === false && saved) return savedInline
+    if (label && saved && layout == "horizontal") return savedInline
+  }
+
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         div({}, label(this.props)),
         this._input(),
+        this._savedNotification(),
         errorList(this.props.errors),
       ),
       this._timePopup(),

@@ -1,6 +1,6 @@
 let React = require("react")
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {div, input, img} = React.DOM
+let {div, input, img, span} = React.DOM
 let cx = require("classnames")
 
 export default class extends React.Component {
@@ -73,6 +73,16 @@ export default class extends React.Component {
     }
   }
 
+  _savedNotification(){
+    let layout = this.props.layout
+    let label = this.props.label
+    let saved = this.props.saved
+    let savedInline = span({className: "frigb-saved-inline"}, "saved")
+
+    if (label === false) return savedInline
+    if (label && saved && layout == "horizontal") return savedInline
+  }
+
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
@@ -81,6 +91,7 @@ export default class extends React.Component {
           div({className: "image-upload"},
             this._image(),
             this._inputGroup(),
+            this._savedNotification(),
           ),
         ),
         errorList(this.props.errors),

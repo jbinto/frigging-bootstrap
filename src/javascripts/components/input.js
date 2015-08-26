@@ -35,10 +35,10 @@ export default class extends React.Component {
     let layout = this.props.layout
     let label = this.props.label
     let saved = this.props.saved
-    let savedComponent = span({className: "frigb-saved-inline"}, "saved")
+    let savedInline = span({className: "frigb-saved-inline"}, "saved")
 
-    if (label === false) return savedComponent
-    if (label && saved && layout == "horizontal") return savedComponent
+    if (label === false && saved) return savedInline
+    if (label && saved && layout == "horizontal") return savedInline
   }
 
   _inputSuffix() {

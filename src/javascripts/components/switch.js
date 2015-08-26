@@ -74,11 +74,22 @@ export default class extends React.Component {
     )
   }
 
+  _savedNotification(){
+    let layout = this.props.layout
+    let label = this.props.label
+    let saved = this.props.saved
+    let savedInline = span({className: "frigb-saved-inline"}, "saved")
+
+    if (label === false) return savedInline
+    if (label && saved && layout == "horizontal") return savedInline
+  }
+
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
         div({className: inputContainerCx(this.props)},
+          this._savedNotification(),
           div({className: this._switchCx()},
             this._input(),
           ),
