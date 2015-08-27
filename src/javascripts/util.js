@@ -31,7 +31,7 @@ module.exports = {
   },
 
   savedNotification(props) {
-    let {layout, label, saved} = this.props
+    let {layout, label, saved} = props
     let savedInline = span({className: "frigb-saved-inline"}, "saved")
 
     if (label === false && saved) return savedInline
