@@ -31,16 +31,6 @@ export default class extends React.Component {
     return this.props.inputWrapper(this._inputHtml())
   }
 
-  // _savedNotification(){
-  //   let layout = this.props.layout
-  //   let label = this.props.label
-  //   let saved = this.props.saved
-  //   let savedInline = span({className: "frigb-saved-inline"}, "saved")
-
-  //   if (label === false && saved) return savedInline
-  //   if (label && saved && layout == "horizontal") return savedInline
-  // }
-
   _inputSuffix() {
     if (this.props.suffix == null) return ""
     div({className: "input-group-addon"}, this.props.suffix)
