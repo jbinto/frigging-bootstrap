@@ -21,7 +21,7 @@ export default class extends React.Component {
 
   _savedNotification(){
     let saved = this.props.saved
-    let savedInline = span({className: "frigb-checkbook"},"saved")
+    let savedInline = span({className: "frigb-checkbox"},"saved")
 
     if (saved) return savedInline
   }
