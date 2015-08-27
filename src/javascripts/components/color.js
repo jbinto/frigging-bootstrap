@@ -86,12 +86,9 @@ export default class extends React.Component {
   }
 
   _savedNotification(){
-    let layout = this.props.layout
-    let label = this.props.label
-    let saved = this.props.saved
-    let savedInline = span({
-      className: "frigb-saved-inline frigb-colorpicker-inline"},
-      "saved")
+    let {layout, label, saved} = this.props
+    let className = "frigb-saved-inline frigb-colorpicker-inline"
+    let savedInline = span({className},"saved")
 
     if (label === false && saved) return savedInline
     if (label && saved && layout == "horizontal") return savedInline
