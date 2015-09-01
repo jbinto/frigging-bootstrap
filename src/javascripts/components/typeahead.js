@@ -252,7 +252,7 @@ export default class extends React.Component {
   }
 
   _inputValue() {
-    return this.state.inputValue
+    return this.state.inputValue || ""
   }
 
   render() {
