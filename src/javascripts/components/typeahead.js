@@ -15,6 +15,7 @@ export default class extends React.Component {
   static defaultProps = Object.assign(require("../default_props.js"), {
     minLength: 3,
     maxSuggestions: 5,
+    displaySelections: true,
   })
 
   state = {
@@ -188,7 +189,7 @@ export default class extends React.Component {
   }
 
   _selectionsList() {
-    if (!this.props.multiple) return ""
+    if (!this.props.multiple || !this.props.displaySelections) return ""
     let className = "label label-primary frigb-ta-selection"
     let index = 0
     // if there are selected items and multiple is true return the actual list
