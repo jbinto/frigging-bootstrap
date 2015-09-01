@@ -225,7 +225,7 @@ export default class extends React.Component {
     return div({className: wrapperCx},
       ul({className: "dropdown-menu frigb-ta-suggestions col-xs-12"},
         suggestions.map((o) => {
-          return li({},
+          return li({key: `option-${o.hash}`},
             a({href: "#", onClick: this._select.bind(this, o)}, o.label),
           )
         })
