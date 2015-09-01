@@ -5405,10 +5405,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var errorList = _require.errorList;
 	var sizeClassNames = _require.sizeClassNames;
 	var formGroupCx = _require.formGroupCx;
+	var savedText = _require.savedText;
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
 	var label = _React$DOM.label;
 	var input = _React$DOM.input;
+	var span = _React$DOM.span;
 
 	var cx = __webpack_require__(192);
 	var booleanHOC = __webpack_require__(193).HigherOrderComponents.Boolean;
@@ -5436,7 +5438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: "form-group" }, div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props.labelHtml, input(this._inputHtml()), this.props.label ? " " + this.props.label : ""), errorList(this.props.errors))));
+	      return div({ className: "form-group" }, div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props.labelHtml, input(this._inputHtml()), this.props.label ? " " + this.props.label : ""), savedText({ saved: this.props.saved, className: "frigb-checkbox" }), errorList(this.props.errors))));
 	    }
 	  }], [{
 	    key: "defaultProps",
@@ -5466,6 +5468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = __webpack_require__(190);
 	var _React$DOM = React.DOM;
+	var div = _React$DOM.div;
 	var span = _React$DOM.span;
 	var _label = _React$DOM.label;
 
@@ -5488,11 +5491,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	  label: function label(props) {
 	    var overrides = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
+	    if (!props.label) return "";
 	    var labelHtml = Object.assign({}, props, overrides);
 	    labelHtml.className = cx(labelHtml.className, {
-	      "col-sm-3": props.layout == "horizontal"
+	      "col-sm-3": props.layout === "horizontal"
 	    });
-	    return props.label ? _label(labelHtml, props.label) : "";
+	    return div({}, _label(labelHtml, props.label), savedText({ saved: props.saved && props.layout === "vertical" }));
+	  },
+
+	  savedText: function savedText(_ref) {
+	    var saved = _ref.saved;
+	    var className = _ref.className;
+
+	    className = className || "frigb-saved pull-right";
+	    if (!saved) return "";
+	    return span({ className: className, key: "saved" }, "saved");
+	  },
+
+	  savedNotification: function savedNotification(_ref2) {
+	    var layout = _ref2.layout;
+	    var label = _ref2.label;
+	    var saved = _ref2.saved;
+	    var className = _ref2.className;
+
+	    className = className || "frigb-saved-inline";
+	    var savedInline = savedText({ saved: saved, className: className });
+
+	    if (label === false && saved) return savedInline;
+	    if (label && saved && layout == "horizontal") return savedInline;
 	  },
 
 	  inputContainerCx: function inputContainerCx(props) {
@@ -5573,6 +5599,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	};
+
+	var savedText = module.exports.savedText;
 
 /***/ },
 /* 192 */
@@ -5679,9 +5707,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var sizeClassNames = _require.sizeClassNames;
 	var formGroupCx = _require.formGroupCx;
 	var label = _require.label;
+
+	var _require2 = __webpack_require__(191);
+
+	var savedNotification = _require2.savedNotification;
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
 	var input = _React$DOM.input;
+	var span = _React$DOM.span;
 
 	var cx = __webpack_require__(192);
 
@@ -5780,7 +5813,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        className: "frigb-color-block",
 	        style: { backgroundColor: this.state.colr.toHex() },
 	        onClick: this._onColorBlockClick.bind(this)
-	      }), this._colorPopup(), errorList(this.props.errors)));
+	      }), this._colorPopup(), savedNotification({
+	        parentProps: this.props,
+	        className: "frigb-saved-inline frigb-colorpicker-inline"
+	      }), errorList(this.props.errors)));
 	    }
 	  }], [{
 	    key: "displayName",
@@ -6835,10 +6871,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var sizeClassNames = _require.sizeClassNames;
 	var formGroupCx = _require.formGroupCx;
 	var label = _require.label;
+	var savedNotification = _require.savedNotification;
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
 	var input = _React$DOM.input;
 	var img = _React$DOM.img;
+	var span = _React$DOM.span;
 
 	var cx = __webpack_require__(192);
 
@@ -6920,7 +6958,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: "controls" }, div({ className: "image-upload" }, this._image(), this._inputGroup())), errorList(this.props.errors)));
+	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: "controls" }, div({ className: "image-upload" }, this._image(), this._inputGroup(), savedNotification({ parentProps: this.props }))), errorList(this.props.errors)));
 	    }
 	  }], [{
 	    key: "defaultProps",
@@ -7023,10 +7061,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _require2 = __webpack_require__(191);
 
-	var inputContainerCx = _require2.inputContainerCx;
+	var savedNotification = _require2.savedNotification;
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
 	var input = _React$DOM.input;
+	var span = _React$DOM.span;
+	var p = _React$DOM.p;
+
+	var _require3 = __webpack_require__(191);
+
+	var inputContainerCx = _require3.inputContainerCx;
 
 	var cx = __webpack_require__(192);
 
@@ -7050,15 +7094,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    }
 	  }, {
-	    key: "_input",
-	    value: function _input() {
-	      return this.props.inputWrapper(this._inputHtml());
-	    }
-	  }, {
 	    key: "_inputPrefix",
 	    value: function _inputPrefix() {
 	      if (this.props.prefix == null) return "";
 	      return div({ className: "input-group-addon" }, this.props.prefix);
+	    }
+	  }, {
+	    key: "_input",
+	    value: function _input() {
+	      return this.props.inputWrapper(this._inputHtml());
 	    }
 	  }, {
 	    key: "_inputSuffix",
@@ -7070,9 +7114,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: "_inputGroup",
 	    value: function _inputGroup() {
 	      if (this.props.prefix || this.props.suffix) {
-	        return div({ className: "input-group" }, this._inputPrefix(), this._input(), this._inputSuffix());
+	        return div({ className: "input-group" }, this._inputPrefix(), this._input(), savedNotification({ parentProps: this.props }), this._inputSuffix());
 	      } else {
-	        return this._input();
+	        return div({}, this._input(), savedNotification({ parentProps: this.props }));
 	      }
 	    }
 	  }, {
@@ -7124,6 +7168,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var sizeClassNames = _require.sizeClassNames;
 	var formGroupCx = _require.formGroupCx;
 	var label = _require.label;
+
+	var _require2 = __webpack_require__(191);
+
+	var savedNotification = _require2.savedNotification;
 	var div = React.DOM.div;
 
 	var select = React.createFactory(__webpack_require__(193).ValueLinkedSelect);
@@ -7152,7 +7200,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props, { className: "" }), div({ className: "controls" }, select(this._inputHtml()), errorList(this.props.errors))));
+	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props, { className: "" }), div({ className: "controls" }, select(this._inputHtml()), savedNotification({ parentProps: this.props }), errorList(this.props.errors))));
 	    }
 	  }], [{
 	    key: "defaultProps",
@@ -7293,7 +7341,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _require2 = __webpack_require__(191);
 
-	var inputContainerCx = _require2.inputContainerCx;
+	var savedNotification = _require2.savedNotification;
+
+	var _require3 = __webpack_require__(191);
+
+	var inputContainerCx = _require3.inputContainerCx;
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
 	var span = _React$DOM.span;
@@ -7350,7 +7402,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: inputContainerCx(this.props) }, div({ className: this._switchCx() }, this._input()), errorList(this.props.errors))));
+	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: inputContainerCx(this.props) }, savedNotification({ parentProps: this.props }), div({ className: this._switchCx() }, this._input()), errorList(this.props.errors))));
 	    }
 	  }], [{
 	    key: "defaultProps",
@@ -7399,9 +7451,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var sizeClassNames = _require.sizeClassNames;
 	var formGroupCx = _require.formGroupCx;
 	var label = _require.label;
+
+	var _require2 = __webpack_require__(191);
+
+	var savedNotification = _require2.savedNotification;
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
 	var textarea = _React$DOM.textarea;
+	var span = _React$DOM.span;
 
 	var cx = __webpack_require__(192);
 
@@ -7428,7 +7485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: "controls" }, textarea(this._inputHtml())), errorList(this.props.errors)));
+	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: "controls" }, textarea(this._inputHtml())), savedNotification({ parentProps: this.props }), errorList(this.props.errors)));
 	    }
 	  }], [{
 	    key: "defaultProps",
@@ -7473,9 +7530,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var sizeClassNames = _require.sizeClassNames;
 	var formGroupCx = _require.formGroupCx;
 	var label = _require.label;
+
+	var _require2 = __webpack_require__(191);
+
+	var savedNotification = _require2.savedNotification;
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
 	var input = _React$DOM.input;
+	var span = _React$DOM.span;
 
 	var _default = (function (_React$Component) {
 	  _inherits(_default, _React$Component);
@@ -7513,7 +7575,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, div({}, label(this.props)), this._input(), errorList(this.props.errors)), this._timePopup());
+	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, div({}, label(this.props)), this._input(), savedNotification({ parentProps: this.props }), errorList(this.props.errors)), this._timePopup());
 	    }
 	  }], [{
 	    key: "defaultProps",
@@ -7798,6 +7860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var i = _React$DOM.i;
 	var ul = _React$DOM.ul;
 	var li = _React$DOM.li;
+	var span = _React$DOM.span;
 
 	var BootstrapInput = __webpack_require__(204);
 	var FrigInput = React.createFactory(__webpack_require__(193).Input);
@@ -7805,6 +7868,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _require = __webpack_require__(191);
 
 	var errorList = _require.errorList;
+	var savedNotification = _require.savedNotification;
 
 	var promisedTimeout = __webpack_require__(193).util.promisedTimeout;
 
@@ -8107,7 +8171,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function _selectionsList() {
 	      var _this2 = this;
 
-	      if (!this.props.multiple) return "";
+	      if (!this.props.multiple || !this.props.displaySelections) return "";
 	      var className = "label label-primary frigb-ta-selection";
 	      var index = 0;
 	      // if there are selected items and multiple is true return the actual list
@@ -8144,7 +8208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        open: suggestions.length > 0 && this.state.focused
 	      });
 	      return div({ className: wrapperCx }, ul({ className: "dropdown-menu frigb-ta-suggestions col-xs-12" }, suggestions.map(function (o) {
-	        return li({}, a({ href: "#", onClick: _this3._select.bind(_this3, o) }, o.label));
+	        return li({ key: "option-" + o.hash }, a({ href: "#", onClick: _this3._select.bind(_this3, o) }, o.label));
 	      })));
 	    }
 	  }, {
@@ -8165,12 +8229,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      inputHtml.onKeyDown = this._onKeyDown.bind(this);
 	      return div({ className: "frigb-ta", ref: function ref(c) {
 	          return _this4._wrapperComponent = c;
-	        } }, div({ className: className, onClick: this._focusInput.bind(this) }, this._selectionsList(), input(inputHtml)), this._suggestionsList(), errorList(this.state.errors));
+	        } }, div({ className: className, onClick: this._focusInput.bind(this) }, this._selectionsList(), input(inputHtml)), savedNotification({ parentProps: this.props }), this._suggestionsList(), errorList(this.state.errors));
 	    }
 	  }, {
 	    key: "_inputValue",
 	    value: function _inputValue() {
-	      return this.state.inputValue;
+	      return this.state.inputValue || "";
 	    }
 	  }, {
 	    key: "render",
@@ -8197,7 +8261,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: "defaultProps",
 	    value: Object.assign(__webpack_require__(194), {
 	      minLength: 3,
-	      maxSuggestions: 5
+	      maxSuggestions: 5,
+	      displaySelections: true
 	    }),
 	    enumerable: true
 	  }]);

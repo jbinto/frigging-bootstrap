@@ -518,3 +518,25 @@
 .frigb-colorpicker .frigb-hue-slider .frigb-track {
   background: linear-gradient(to bottom, #f00 0%, #f09 10%, #cd00ff 20%, #3200ff 30%, #06f 40%, #00fffd 50%, #0f6 60%, #35ff00 70%, #cdff00 80%, #f90 90%, #f00 100%);
 }
+.frigb-saved {
+  font-size: 14px;
+  color: #3c763d;
+}
+.frigb-saved-inline {
+  position: absolute;
+  top: -1px;
+  right: 32px;
+  padding: 9px 2px;
+  font-size: 14px;
+  color: #3c763d;
+  text-align: center;
+  width: 33px;
+}
+.frigb-colorpicker-inline {
+  right: 56px;
+}
+.frigb-checkbox {
+  float: right;
+  color: #3c763d;
+  font-size: 14px;
+}
