@@ -1,7 +1,7 @@
 let React = require("react")
 let Colr = require('colr')
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {div, input} = React.DOM
+let {div, input, span} = React.DOM
 let cx = require("classnames")
 let {Focusable} = require("frig").HigherOrderComponents
 
@@ -85,6 +85,15 @@ export default class extends React.Component {
     )
   }
 
+  _savedNotification(){
+    let {layout, label, saved} = this.props
+    let className = "frigb-saved-inline frigb-colorpicker-inline"
+    let savedInline = span({className},"saved")
+
+    if (label === false && saved) return savedInline
+    if (label && saved && layout == "horizontal") return savedInline
+  }
+
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
@@ -104,6 +113,7 @@ export default class extends React.Component {
           onClick: this._onColorBlockClick.bind(this),
         }),
         this._colorPopup(),
+        this._savedNotification(),
         errorList(this.props.errors),
       )
     )

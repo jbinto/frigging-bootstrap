@@ -1,6 +1,6 @@
 let React = require("react")
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {div, textarea} = React.DOM
+let {errorList, sizeClassNames, formGroupCx, label, savedNotification} = require("../util.js")
+let {div, textarea, span} = React.DOM
 let cx = require("classnames")
 
 export default class extends React.Component {
@@ -24,6 +24,7 @@ export default class extends React.Component {
         div({className: "controls"},
           textarea(this._inputHtml()),
         ),
+        savedNotification(this.props),
         errorList(this.props.errors),
       ),
     )

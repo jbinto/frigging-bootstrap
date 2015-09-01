@@ -1,6 +1,6 @@
 let React = require("react")
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {div, input, img} = React.DOM
+let {errorList, sizeClassNames, formGroupCx, label, savedNotification} = require("../util.js")
+let {div, input, img, span} = React.DOM
 let cx = require("classnames")
 
 export default class extends React.Component {
@@ -81,6 +81,7 @@ export default class extends React.Component {
           div({className: "image-upload"},
             this._image(),
             this._inputGroup(),
+            savedNotification(this.props),
           ),
         ),
         errorList(this.props.errors),

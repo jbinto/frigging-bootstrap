@@ -2,8 +2,8 @@ let React = require("react")
 let cx = require("classnames")
 let {Focusable} = require("frig").HigherOrderComponents
 let popup = React.createFactory(require("./timepicker_popup"))
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {div, input} = React.DOM
+let {errorList, sizeClassNames, formGroupCx, label, savedNotification} = require("../util.js")
+let {div, input, span} = React.DOM
 
 @Focusable
 export default class extends React.Component {
@@ -41,6 +41,7 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         div({}, label(this.props)),
         this._input(),
+        savedNotification(this.props),
         errorList(this.props.errors),
       ),
       this._timePopup(),

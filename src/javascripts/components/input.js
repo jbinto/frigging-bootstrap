@@ -1,7 +1,7 @@
 let React = require("react")
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
+let {errorList, sizeClassNames, formGroupCx, label, savedNotification} = require("../util.js")
+let {div, input, span, p} = React.DOM
 let {inputContainerCx} = require("../util.js")
-let {div, input} = React.DOM
 let cx = require("classnames")
 
 export default class extends React.Component {
@@ -22,13 +22,13 @@ export default class extends React.Component {
     })
   }
 
-  _input() {
-    return this.props.inputWrapper(this._inputHtml())
-  }
-
   _inputPrefix() {
     if (this.props.prefix == null) return ""
     return div({className: "input-group-addon"}, this.props.prefix)
+  }
+
+  _input() {
+    return this.props.inputWrapper(this._inputHtml())
   }
 
   _inputSuffix() {
@@ -41,11 +41,15 @@ export default class extends React.Component {
       return div({className: "input-group"},
         this._inputPrefix(),
         this._input(),
+        savedNotification(this.props),
         this._inputSuffix(),
       )
     }
     else {
-      return this._input()
+      return div({},
+        this._input(),
+        savedNotification(this.props),
+        )
     }
   }
 

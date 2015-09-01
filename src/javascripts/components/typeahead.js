@@ -2,10 +2,10 @@ require("whatwg-fetch/fetch.js")
 let React = require("react")
 let cx = require("classnames")
 let fuzzy = require('fuzzy')
-let {div, a, input, i, ul, li} = React.DOM
+let {div, a, input, i, ul, li, span} = React.DOM
 let BootstrapInput = require("./input.js")
 let FrigInput = React.createFactory(require("frig").Input)
-let {errorList} = require("../util")
+let {errorList, savedNotification} = require("../util")
 let {promisedTimeout} = require("frig").util
 
 export default class extends React.Component {
@@ -246,6 +246,7 @@ export default class extends React.Component {
         this._selectionsList(),
         input(inputHtml),
       ),
+      savedNotification(this.props),
       this._suggestionsList(),
       errorList(this.state.errors),
     )
