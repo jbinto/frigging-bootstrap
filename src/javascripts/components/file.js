@@ -81,7 +81,7 @@ export default class extends React.Component {
           div({className: "image-upload"},
             this._image(),
             this._inputGroup(),
-            savedNotification(this.props),
+            savedNotification({parentProps: this.props}),
           ),
         ),
         errorList(this.props.errors),

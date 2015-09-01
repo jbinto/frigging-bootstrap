@@ -1,5 +1,6 @@
 let React = require("react")
-let {errorList, sizeClassNames, formGroupCx, label, savedNotification} = require("../util.js")
+let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
+let {savedNotification} = require("../util.js")
 let {div, input, span, p} = React.DOM
 let {inputContainerCx} = require("../util.js")
 let cx = require("classnames")
@@ -41,15 +42,15 @@ export default class extends React.Component {
       return div({className: "input-group"},
         this._inputPrefix(),
         this._input(),
-        savedNotification(this.props),
+        savedNotification({parentProps: this.props}),
         this._inputSuffix(),
       )
     }
     else {
       return div({},
         this._input(),
-        savedNotification(this.props),
-        )
+        savedNotification({parentProps: this.props}),
+      )
     }
   }
 

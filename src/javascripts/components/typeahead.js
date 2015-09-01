@@ -246,7 +246,7 @@ export default class extends React.Component {
         this._selectionsList(),
         input(inputHtml),
       ),
-      savedNotification(this.props),
+      savedNotification({parentProps: this.props}),
       this._suggestionsList(),
       errorList(this.state.errors),
     )

@@ -26,13 +26,15 @@ module.exports = {
     )
   },
 
-  savedText({saved}) {
-    return saved ? span({className: "frigb-saved pull-right"}, "saved") : ""
+  savedText({saved, className}) {
+    className = className || "frigb-saved pull-right"
+    if (!saved) return ""
+    return span({className, key: "saved"}, "saved")
   },
 
-  savedNotification(props) {
-    let {layout, label, saved} = props
-    let savedInline = span({className: "frigb-saved-inline"}, "saved")
+  savedNotification({layout, label, saved, className}) {
+    className = className || "frigb-saved-inline"
+    let savedInline = savedText({saved, className})
 
     if (label === false && saved) return savedInline
     if (label && saved && layout == "horizontal") return savedInline
