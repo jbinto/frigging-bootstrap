@@ -8056,7 +8056,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                while (1) switch (context$3$0.prev = context$3$0.next) {
 	                  case 0:
 	                    this._suggestionReqTimestamp = Date.now();
-	                    req = this._remotePromise = fetch(remote.url(val));
+	                    req = this._remotePromise = fetch(remote.url(val), {
+	                      credentials: "same-origin"
+	                    });
 	                    context$3$0.next = 4;
 	                    return regeneratorRuntime.awrap(req);
 
