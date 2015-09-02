@@ -133,7 +133,9 @@ export default class extends React.Component {
     // Make the request and await an ajax response
     try {
       this._suggestionReqTimestamp = Date.now()
-      let req = this._remotePromise = fetch(remote.url(val))
+      let req = this._remotePromise = fetch(remote.url(val), {
+        credentials: "same-origin"
+      })
       let res = await req
       // If another request is made after this one abort this one
       if (this._remotePromise !== req) throw "request aborted"
