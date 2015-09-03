@@ -7380,6 +7380,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return cx("bootstrap-switch", "bootstrap-switch-wrapper", "bootstrap-switch-on", "bootstrap-switch-id-switch-state", "bootstrap-switch-animate", (_cx = {}, _defineProperty(_cx, "bootstrap-switch-" + this.props.bsSize, this.props.bsSize != null), _defineProperty(_cx, "bootstrap-switch-disabled", this.props.disabled), _defineProperty(_cx, "pull-right", this.props.align == "right"), _cx));
 	    }
 	  }, {
+	    key: "_switchStyle",
+	    value: function _switchStyle() {
+	      var handleWidth = this.props.handleWidth;
+
+	      return { width: handleWidth ? handleWidth * 2 + 2 + "px" : undefined };
+	    }
+	  }, {
 	    key: "_onSpanCx",
 	    value: function _onSpanCx() {
 	      return cx("bootstrap-switch-handle-on", _defineProperty({}, "bootstrap-switch-" + this.props.onColor, this.props.onColor != null));
@@ -7392,17 +7399,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "_input",
 	    value: function _input() {
+	      var handleWidth = this.props.handleWidth;
+
+	      var handleStyle = { width: handleWidth };
+	      var checkedOffset = handleWidth ? handleWidth : 50;
 	      return div({
 	        className: "bootstrap-switch-container",
 	        ref: "switchContainer",
 	        onClick: this._onClick.bind(this),
-	        style: { marginLeft: this._isChecked() ? "0" : "-50px" }
-	      }, span({ className: this._onSpanCx() }, this.props.onText), span({ className: "bootstrap-switch-label" }, " "), span({ className: this._offSpanCx() }, this.props.offText));
+	        style: {
+	          marginLeft: this._isChecked() ? "0" : "-" + checkedOffset + "px",
+	          width: handleWidth ? handleWidth * 3 : undefined
+	        }
+	      }, span({ className: this._onSpanCx(), style: handleStyle }, this.props.onText), span({ className: "bootstrap-switch-label", style: handleStyle }, " "), span({ className: this._offSpanCx(), style: handleStyle }, this.props.offText));
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: inputContainerCx(this.props) }, savedNotification({ parentProps: this.props }), div({ className: this._switchCx() }, this._input()), errorList(this.props.errors))));
+	      var handleWidth = this.props.handleWidth;
+
+	      return div({ className: cx(sizeClassNames(this.props)) }, div({ className: formGroupCx(this.props) }, label(this.props), div({ className: inputContainerCx(this.props) }, savedNotification({ parentProps: this.props }), div({ className: this._switchCx(), style: this._switchStyle() }, this._input()), errorList(this.props.errors))));
 	    }
 	  }], [{
 	    key: "defaultProps",
@@ -7412,7 +7428,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      offColor: "default",
 	      offText: "OFF",
 	      size: "normal",
-	      disabled: false
+	      disabled: false,
+	      handleWidth: undefined
 	    }),
 	    enumerable: true
 	  }]);
