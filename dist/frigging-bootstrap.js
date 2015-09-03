@@ -5466,6 +5466,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	var React = __webpack_require__(190);
 	var _React$DOM = React.DOM;
 	var div = _React$DOM.div;
@@ -5491,11 +5493,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  label: function label(props) {
 	    var overrides = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-	    if (!props.label) return "";
+	    var width = (props.labelWidth || {}).sm || 3;
+	    if (!props.label || props.block) {
+	      if (props.layout === "horizontal" && !props.block) {
+	        return div({ className: "col-sm-" + width });
+	      } else {
+	        return "";
+	      }
+	    }
 	    var labelHtml = Object.assign({}, props, overrides);
-	    labelHtml.className = cx(labelHtml.className, {
-	      "col-sm-3": props.layout === "horizontal"
-	    });
+	    labelHtml.className = cx(labelHtml.className, _defineProperty({}, "col-sm-" + width, props.layout === "horizontal"));
 	    return div({}, _label(labelHtml, props.label), savedText({ saved: props.saved && props.layout === "vertical" }));
 	  },
 
@@ -5522,7 +5529,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  inputContainerCx: function inputContainerCx(props) {
-	    return cx({ "col-sm-9": props.layout == "horizontal" });
+	    var width = 12 - ((props.labelWidth || {}).sm || 3);
+	    return cx("col-xs-12", _defineProperty({}, "col-sm-" + width, props.layout == "horizontal" && !props.block));
 	  },
 
 	  sizeClassNames: function sizeClassNames(props) {
@@ -7130,7 +7138,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Bootstrap input addon texts
 	      prefix: undefined,
 	      suffix: undefined,
-	      inputWrapper: input
+	      inputWrapper: input,
+	      // Block changes inputs with layout: "horizontal" to use the full width of
+	      // their container and disables the label.
+	      block: false,
+	      // Label width for horizontal labels
+	      labelWidth: { sm: 2 }
 	    }),
 	    enumerable: true
 	  }]);
