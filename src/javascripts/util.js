@@ -15,10 +15,18 @@ module.exports = {
   },
 
   label(props, overrides = {}) {
-    if (!props.label) return ""
+    let width = (props.labelWidth||{}).sm || 3
+    if (!props.label || props.block) {
+      if (props.layout === "horizontal" && !props.block) {
+        return div({className: `col-sm-${width}`})
+      }
+      else {
+        return ""
+      }
+    }
     let labelHtml = Object.assign({}, props, overrides)
     labelHtml.className = cx(labelHtml.className, {
-      "col-sm-3": props.layout === "horizontal",
+      [`col-sm-${width}`]: props.layout === "horizontal",
     })
     return div({},
       label(labelHtml, props.label),
@@ -41,7 +49,10 @@ module.exports = {
   },
 
   inputContainerCx(props) {
-    return cx({"col-sm-9": props.layout == "horizontal"})
+    let width = 12 - ((props.labelWidth||{}).sm || 3)
+    return cx("col-xs-12", {
+      [`col-sm-${width}`]: props.layout == "horizontal" && !props.block,
+    })
   },
 
   sizeClassNames(props) {
