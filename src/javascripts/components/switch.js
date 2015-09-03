@@ -18,6 +18,7 @@ export default class extends React.Component {
     offText:  "OFF",
     size:     "normal",
     disabled: false,
+    handleWidth: undefined,
   })
 
   _isChecked() {
@@ -44,6 +45,11 @@ export default class extends React.Component {
     )
   }
 
+  _switchStyle() {
+    let {handleWidth} = this.props
+    return {width: handleWidth ? `${handleWidth*2+2}px` : undefined}
+  }
+
   _onSpanCx() {
     return cx("bootstrap-switch-handle-on", {
       [`bootstrap-switch-${this.props.onColor}`]: this.props.onColor != null,
@@ -57,31 +63,38 @@ export default class extends React.Component {
   }
 
   _input() {
+    let {handleWidth} = this.props
+    let handleStyle = {width: handleWidth}
+    let checkedOffset = handleWidth ? handleWidth : 50
     return div({
         className: "bootstrap-switch-container",
         ref: "switchContainer",
         onClick: this._onClick.bind(this),
-        style: {marginLeft: this._isChecked() ? "0" : "-50px"},
+        style: {
+          marginLeft: this._isChecked() ? "0" : `-${checkedOffset}px`,
+          width: handleWidth ? handleWidth * 3 : undefined,
+        },
       },
-      span({className: this._onSpanCx()},
+      span({className: this._onSpanCx(), style: handleStyle},
         this.props.onText
       ),
-      span({className: `bootstrap-switch-label`},
+      span({className: `bootstrap-switch-label`, style: handleStyle},
         "\u00a0"
       ),
-      span({className: this._offSpanCx()},
+      span({className: this._offSpanCx(), style: handleStyle},
         this.props.offText
       ),
     )
   }
 
   render() {
+    let {handleWidth} = this.props
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
         div({className: inputContainerCx(this.props)},
           savedNotification({parentProps: this.props}),
-          div({className: this._switchCx()},
+          div({className: this._switchCx(), style: this._switchStyle()},
             this._input(),
           ),
           errorList(this.props.errors),
