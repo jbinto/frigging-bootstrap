@@ -15,10 +15,10 @@ module.exports = {
   },
 
   label(props, overrides = {}) {
-    let width = (props.labelWidth||{}).sm || 3
+    let horizontalClasses = sizeClassNames(props.labelWidth, {offsets: false})
     if (!props.label || props.block) {
       if (props.layout === "horizontal" && !props.block) {
-        return div({className: `col-sm-${width}`})
+        return div({className: horizontalClasses})
       }
       else {
         return ""
@@ -26,7 +26,7 @@ module.exports = {
     }
     let labelHtml = Object.assign({}, props, overrides)
     labelHtml.className = cx(labelHtml.className, {
-      [`col-sm-${width}`]: props.layout === "horizontal",
+      [horizontalClasses]: props.layout === "horizontal",
     })
     return div({},
       label(labelHtml, props.label),
@@ -49,13 +49,21 @@ module.exports = {
   },
 
   inputContainerCx(props) {
-    let width = 12 - ((props.labelWidth||{}).sm || 3)
-    return cx("col-xs-12", {
-      [`col-sm-${width}`]: props.layout == "horizontal" && !props.block,
+    let labelWidth = props.labelWidth || {}
+    let inputWidth = {}
+    // The width of the input is the number of columns left after the label
+    // is placed on the row. If the label takes a full row (12 coluns) then
+    // the input is given another row (12 columns wide).
+    for (let k in labelWidth) inputWidth[k] = (12 - labelWidth[k]) || 12
+    let horizontalClasses = sizeClassNames(inputWidth, {offsets: false})
+    console.log(horizontalClasses)
+    return cx({
+      [horizontalClasses]: props.layout == "horizontal" && !props.block,
+      ["col-xs-12"]: props.layout == "horizontal" && props.block,
     })
   },
 
-  sizeClassNames(props) {
+  sizeClassNames(props = {}, opts = {offsets: true}) {
     var classes = {}
     var sizes = ["xs", "sm", "md", "lg"]
     // Adding column classes
@@ -63,12 +71,14 @@ module.exports = {
       if (props[k] != null) classes[`col-${k}-${props[k]}`] = true
     }
     // Adding offset classes
-    for (var size of sizes) {
-      k = `${size}Offset`
-      if (props[k] == null) continue
-      classes[`col-${size}-offset-${props[k]}`] = true
+    if (opts.offsets) {
+      for (var size of sizes) {
+        k = `${size}Offset`
+        if (props[k] == null) continue
+        classes[`col-${size}-offset-${props[k]}`] = true
+      }
     }
-    return classes
+    return cx(classes)
   },
 
   formGroupCx(props, overrides = {}) {
@@ -83,4 +93,4 @@ module.exports = {
 
 }
 
-var {savedText} = module.exports
+var {savedText, sizeClassNames} = module.exports
