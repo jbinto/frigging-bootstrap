@@ -5493,16 +5493,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  label: function label(props) {
 	    var overrides = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-	    var width = (props.labelWidth || {}).sm || 3;
+	    var horizontalClasses = sizeClassNames(props.labelWidth, { offsets: false });
 	    if (!props.label || props.block) {
 	      if (props.layout === "horizontal" && !props.block) {
-	        return div({ className: "col-sm-" + width });
+	        return div({ className: horizontalClasses });
 	      } else {
 	        return "";
 	      }
 	    }
 	    var labelHtml = Object.assign({}, props, overrides);
-	    labelHtml.className = cx(labelHtml.className, _defineProperty({}, "col-sm-" + width, props.layout === "horizontal"));
+	    labelHtml.className = cx(labelHtml.className, _defineProperty({}, horizontalClasses, props.layout === "horizontal"));
 	    return div({}, _label(labelHtml, props.label), savedText({ saved: props.saved && props.layout === "vertical" }));
 	  },
 
@@ -5529,11 +5529,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  inputContainerCx: function inputContainerCx(props) {
-	    var width = 12 - ((props.labelWidth || {}).sm || 3);
-	    return cx("col-xs-12", _defineProperty({}, "col-sm-" + width, props.layout == "horizontal" && !props.block));
+	    var _cx2;
+
+	    var labelWidth = props.labelWidth || {};
+	    var inputWidth = {};
+	    // The width of the input is the number of columns left after the label
+	    // is placed on the row. If the label takes a full row (12 coluns) then
+	    // the input is given another row (12 columns wide).
+	    for (var k in labelWidth) {
+	      inputWidth[k] = 12 - labelWidth[k] || 12;
+	    }var horizontalClasses = sizeClassNames(inputWidth, { offsets: false });
+	    console.log(horizontalClasses);
+	    return cx((_cx2 = {}, _defineProperty(_cx2, horizontalClasses, props.layout == "horizontal" && !props.block), _defineProperty(_cx2, "col-xs-12", props.layout == "horizontal" && props.block), _cx2));
 	  },
 
-	  sizeClassNames: function sizeClassNames(props) {
+	  sizeClassNames: function sizeClassNames() {
+	    var props = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var opts = arguments.length <= 1 || arguments[1] === undefined ? { offsets: true } : arguments[1];
+
 	    var classes = {};
 	    var sizes = ["xs", "sm", "md", "lg"];
 	    // Adding column classes
@@ -5564,34 +5577,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 
-	    var _iteratorNormalCompletion2 = true;
-	    var _didIteratorError2 = false;
-	    var _iteratorError2 = undefined;
+	    if (opts.offsets) {
+	      var _iteratorNormalCompletion2 = true;
+	      var _didIteratorError2 = false;
+	      var _iteratorError2 = undefined;
 
-	    try {
-	      for (var _iterator2 = sizes[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-	        var size = _step2.value;
-
-	        k = size + "Offset";
-	        if (props[k] == null) continue;
-	        classes["col-" + size + "-offset-" + props[k]] = true;
-	      }
-	    } catch (err) {
-	      _didIteratorError2 = true;
-	      _iteratorError2 = err;
-	    } finally {
 	      try {
-	        if (!_iteratorNormalCompletion2 && _iterator2["return"]) {
-	          _iterator2["return"]();
+	        for (var _iterator2 = sizes[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	          var size = _step2.value;
+
+	          k = size + "Offset";
+	          if (props[k] == null) continue;
+	          classes["col-" + size + "-offset-" + props[k]] = true;
 	        }
+	      } catch (err) {
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
 	      } finally {
-	        if (_didIteratorError2) {
-	          throw _iteratorError2;
+	        try {
+	          if (!_iteratorNormalCompletion2 && _iterator2["return"]) {
+	            _iterator2["return"]();
+	          }
+	        } finally {
+	          if (_didIteratorError2) {
+	            throw _iteratorError2;
+	          }
 	        }
 	      }
 	    }
-
-	    return classes;
+	    return cx(classes);
 	  },
 
 	  formGroupCx: function formGroupCx(props) {
@@ -5608,7 +5622,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	};
 
-	var savedText = module.exports.savedText;
+	var _module$exports = module.exports;
+	var savedText = _module$exports.savedText;
+	var sizeClassNames = _module$exports.sizeClassNames;
 
 /***/ },
 /* 192 */
@@ -5685,7 +5701,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  xsOffset: undefined,
 	  smOffset: undefined,
 	  mdOffset: undefined,
-	  lgOffset: undefined
+	  lgOffset: undefined,
+	  // Block changes inputs with layout: "horizontal" to use the full width of
+	  // their container and disables the label.
+	  block: false,
+	  // Label width for horizontal labels
+	  labelWidth: {
+	    xs: 12,
+	    sm: 2
+	  }
 	};
 
 /***/ },
@@ -7138,12 +7162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Bootstrap input addon texts
 	      prefix: undefined,
 	      suffix: undefined,
-	      inputWrapper: input,
-	      // Block changes inputs with layout: "horizontal" to use the full width of
-	      // their container and disables the label.
-	      block: false,
-	      // Label width for horizontal labels
-	      labelWidth: { sm: 2 }
+	      inputWrapper: input
 	    }),
 	    enumerable: true
 	  }]);
