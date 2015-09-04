@@ -22,6 +22,14 @@ export default class extends React.Component {
     persistedOptions: [],
   }
 
+  componentWillMount() {
+    this._updateInputValueFromProps(this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._updateInputValueFromProps(nextProps, this.props)
+  }
+
   componentDidMount() {
     this._onDocumentClick = this._onDocumentClick.bind(this)
     document.addEventListener("click", this._onDocumentClick)
@@ -34,6 +42,14 @@ export default class extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.inputValue === prevState.inputValue) return
     this._onInputChange(this.state.inputValue)
+  }
+
+  _updateInputValueFromProps(nextProps, prevProps = {valueLink: {}}) {
+    if (nextProps.valueLink.value === (prevProps.valueLink||{}).value) return
+    let selections = this._selections(nextProps)
+    if (this.props.multiple || selections.length != 1) return
+    let value = selections[0].label
+    if (value !== this.state.inputValue) this.setState({inputValue: value})
   }
 
   // Select the user-entered option if they press enter
@@ -102,8 +118,8 @@ export default class extends React.Component {
     if(!this.props.multiple && option != null) this._select(option)
   }
 
-  _options() {
-    let options = this.props.options
+  _options(nextProps = this.props) {
+    let options = nextProps.options
     options = (options || []).concat(this.state.persistedOptions)
     let hashes = []
     // Adding hashes (for selection lookup) and removing duplicates
@@ -115,20 +131,20 @@ export default class extends React.Component {
     return options
   }
 
-  _selections() {
-    let values = this.props.valueLink.value
+  _selections(nextProps = this.props) {
+    let values = nextProps.valueLink.value
     if (values == null) return []
-    if (!this.props.multiple) values = [values]
+    if (!nextProps.multiple) values = [values]
     let hashedValues = values.map((value) => JSON.stringify(value))
-    return this._options().filter((o) => hashedValues.indexOf(o.hash) >= 0)
+    let options = this._options(nextProps)
+    return options.filter((o) => hashedValues.indexOf(o.hash) >= 0)
   }
 
   _suggestions() {
-    let suggestions
     // fuzzy match on the options
     let fuzzyOpts = {extract: (o) => o.label}
     let matches = fuzzy.filter(this._inputValue(), this._options(), fuzzyOpts)
-    suggestions = matches.map((match) => match.original)
+    let suggestions = matches.map((match) => match.original)
     // filter out already selected options from the suggestions
     let selectionHashes = this._selections().map((o) => o.hash)
     suggestions = suggestions.filter((o) => selectionHashes.indexOf(o.hash) < 0)
