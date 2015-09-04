@@ -109,7 +109,7 @@ export default class extends React.Component {
     // Adding hashes (for selection lookup) and removing duplicates
     for (let i in options) {
       let hash = options[i].hash = JSON.stringify(options[i].value)
-      if (hashes.includes(hash)) delete options[i]
+      if (hashes.indexOf(hash) >= 0) delete options[i]
       hashes.push(hash)
     }
     return options
@@ -120,7 +120,7 @@ export default class extends React.Component {
     if (values == null) return []
     if (!this.props.multiple) values = [values]
     let hashedValues = values.map((value) => JSON.stringify(value))
-    return this._options().filter((o) => hashedValues.includes(o.hash))
+    return this._options().filter((o) => hashedValues.indexOf(o.hash) >= 0)
   }
 
   _suggestions() {
@@ -131,7 +131,7 @@ export default class extends React.Component {
     suggestions = matches.map((match) => match.original)
     // filter out already selected options from the suggestions
     let selectionHashes = this._selections().map((o) => o.hash)
-    suggestions = suggestions.filter((o) => !selectionHashes.includes(o.hash))
+    suggestions = suggestions.filter((o) => selectionHashes.indexOf(o.hash) < 0)
     // truncate the suggestions to it's max length
     suggestions.length = Math.min(suggestions.length, this.props.maxSuggestions)
     return suggestions
