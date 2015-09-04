@@ -63,16 +63,14 @@ export default class extends React.Component {
     // the input text for single-selects
     this.setState({
       inputValue: this.props.multiple ? "" : option.label,
-      options: [],
       // Selected options are persisted so that they are not lost when the
-      // remote overwrites the options list
+      // props.options updates
       persistedOptions: this.state.persistedOptions.concat(option),
     })
     let requestChange = this.props.valueLink.requestChange
     if (this.props.multiple) {
-      this._remotePromise = undefined
-      let value = this.props.valueLink.value || []
-      requestChange(value.concat(option.value))
+      let values = (this.props.valueLink.value || []).concat(option.value)
+      requestChange(values)
     }
     else {
       requestChange(option.value)
@@ -88,7 +86,9 @@ export default class extends React.Component {
     let persistedOptions = this.state.persistedOptions.filter(filter)
     this.setState({persistedOptions})
     if (this.props.multiple) {
-      let value = this.props.valueLink.value.filter(filter)
+      let value = this.props.valueLink.value.filter(
+        (val) => JSON.stringify(val) !== option.hash
+      )
       this.props.valueLink.requestChange(value)
     }
     else {
@@ -96,61 +96,14 @@ export default class extends React.Component {
     }
   }
 
-  async _onInputChange(val) {
-    this._remotePromise = undefined
-    // If the input text is greater then the mininum length and a remote is set
-    // request an updated list of options that match the inputted value via
-    // AJAX.
-      if (val.length >= this.props.minLength && this.props.remote != null) {
-        // Ignoring failed and aborted AJAX requests
-        try {
-          await this._requestRemoteUpdate(val)
-        } catch (e) {}
-      }
-      // select the user's input if it matches an option (single-selects only)
-      let option = this._optionForCurrentInput(val)
-      if(!this.props.multiple && option != null) this._select(option)
-  }
-
-  async _requestRemoteUpdate(val) {
-    let remote = this.props.remote
-    // Rate limiting
-    if (remote.maxReqsPerMinute != null) {
-      let msSinceReq = Date.now() - (this._suggestionReqTimestamp||0)
-      if (msSinceReq < 60000.0 / remote.maxReqsPerMinute) {
-        // Set a timeout to run the update asyncronously once the request
-        // rate limiting has been satisfied
-        let timeUntilRequest = 60000.0 / remote.maxReqsPerMinute - msSinceReq
-        let timeout = this._remotePromise = promisedTimeout(timeUntilRequest)
-        await timeout
-        // If another request or timeout is made after this one or if the input
-        // value has subsequently changed abort this request
-        if (this._remotePromise !== timeout || this.state.inputValue !== val) {
-          throw "request aborted"
-        }
-      }
-    }
-    // Make the request and await an ajax response
-    try {
-      this._suggestionReqTimestamp = Date.now()
-      let req = this._remotePromise = fetch(remote.url(val), {
-        credentials: "same-origin"
-      })
-      let res = await req
-      // If another request is made after this one abort this one
-      if (this._remotePromise !== req) throw "request aborted"
-      // Parse the response and update the state
-      let parser = remote.parser || (() => res.json())
-      this.setState({options: parser(await res.json())})
-      this._remotePromise = undefined
-    } catch (e) {
-      // TODO: handle AJAX failures
-      throw e
-    }
+  _onInputChange(val) {
+    // select the user's input if it matches an option (single-selects only)
+    let option = this._optionForCurrentInput(val)
+    if(!this.props.multiple && option != null) this._select(option)
   }
 
   _options() {
-    let options = (this.props.remote == null ? this.props : this.state).options
+    let options = this.props.options
     options = (options || []).concat(this.state.persistedOptions)
     let hashes = []
     // Adding hashes (for selection lookup) and removing duplicates
@@ -172,16 +125,10 @@ export default class extends React.Component {
 
   _suggestions() {
     let suggestions
-    // If the suggestions are not loaded via ajax then fuzzy match on the
-    // options
-    if (this.props.remote) {
-      suggestions = this._options()
-    }
-    else {
-      let fuzzyOpts = {extract: (o) => o.label}
-      let matches = fuzzy.filter(this._inputValue(), this._options(), fuzzyOpts)
-      suggestions = matches.map((match) => match.original)
-    }
+    // fuzzy match on the options
+    let fuzzyOpts = {extract: (o) => o.label}
+    let matches = fuzzy.filter(this._inputValue(), this._options(), fuzzyOpts)
+    suggestions = matches.map((match) => match.original)
     // filter out already selected options from the suggestions
     let selectionHashes = this._selections().map((o) => o.hash)
     suggestions = suggestions.filter((o) => !selectionHashes.includes(o.hash))
