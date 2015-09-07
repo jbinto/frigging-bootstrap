@@ -12,11 +12,11 @@ export default class extends React.Component {
   displayName = "Frig.friggingBootstrap.Switch"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
-    onColor:  "primary",
-    onText:   "ON",
+    onColor: "primary",
+    onText: "ON",
     offColor: "default",
-    offText:  "OFF",
-    size:     "normal",
+    offText: "OFF",
+    bsSize: undefined,
     disabled: false,
     handleWidth: undefined,
   })
