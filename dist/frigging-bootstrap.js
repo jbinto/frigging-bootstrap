@@ -2189,7 +2189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      onText: "ON",
 	      offColor: "default",
 	      offText: "OFF",
-	      size: "normal",
+	      bsSize: undefined,
 	      disabled: false,
 	      handleWidth: undefined
 	    }),
