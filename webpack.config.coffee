@@ -30,8 +30,22 @@ module.exports =
     libraryTarget: "umd"
     library: "FriggingBootstrap"
   externals:
-    "react": "React"
-    "frig": "Frig"
+    "react": {
+      root: "React"
+      this: "React"
+      var: "React"
+      commonjs: "react"
+      commonjs2: "react"
+      amd: "react"
+    }
+    "frig": {
+      root: "Frig"
+      this: "Frig"
+      var: "Frig"
+      commonjs: "frig"
+      commonjs2: "frig"
+      amd: "frig"
+    }
     # "whatwg-fetch/fetch.js": "fetch"
   resolve:
     root: [
