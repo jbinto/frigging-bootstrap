@@ -2802,12 +2802,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var values = nextProps.valueLink.value;
 	      if (values == null) return [];
 	      if (!nextProps.multiple) values = [values];
-	      var hashedValues = values.map(function (value) {
-	        return JSON.stringify(value);
-	      });
 	      var options = this._options(nextProps);
-	      return options.filter(function (o) {
-	        return hashedValues.indexOf(o.hash) >= 0;
+	      return values.map(function (value) {
+	        var hash = JSON.stringify(value);
+	        return options.find(function (o) {
+	          return o.hash == hash;
+	        });
 	      });
 	    }
 	  }, {
