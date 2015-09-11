@@ -138,7 +138,12 @@ export default class extends React.Component {
     let options = this._options(nextProps)
     return values.map((value) => {
       let hash = JSON.stringify(value)
-      return options.find((o) => o.hash == hash)
+      let option = options.find((o) => o.hash == hash)
+      if (option == null) throw(
+        `Typeahead selection (${value}) for ${this.props.name} not included `+
+        `in the typeahead options`
+      )
+      return option
     })
   }
 
