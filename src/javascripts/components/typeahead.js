@@ -135,9 +135,11 @@ export default class extends React.Component {
     let values = nextProps.valueLink.value
     if (values == null) return []
     if (!nextProps.multiple) values = [values]
-    let hashedValues = values.map((value) => JSON.stringify(value))
     let options = this._options(nextProps)
-    return options.filter((o) => hashedValues.indexOf(o.hash) >= 0)
+    return values.map((value) => {
+      let hash = JSON.stringify(value)
+      return options.find((o) => o.hash == hash)
+    })
   }
 
   _suggestions() {
