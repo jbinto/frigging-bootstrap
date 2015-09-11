@@ -125,7 +125,7 @@ export default class extends React.Component {
     // Adding hashes (for selection lookup) and removing duplicates
     for (let i in options) {
       let hash = options[i].hash = JSON.stringify(options[i].value)
-      if (hashes.indexOf(hash) >= 0) delete options[i]
+      if (hashes.indexOf(hash) >= 0) options.splice(i, 1)
       hashes.push(hash)
     }
     return options
