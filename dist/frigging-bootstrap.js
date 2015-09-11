@@ -2789,7 +2789,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Adding hashes (for selection lookup) and removing duplicates
 	      for (var _i in options) {
 	        var hash = options[_i].hash = JSON.stringify(options[_i].value);
-	        if (hashes.indexOf(hash) >= 0) delete options[_i];
+	        if (hashes.indexOf(hash) >= 0) options.splice(_i, 1);
 	        hashes.push(hash);
 	      }
 	      return options;
