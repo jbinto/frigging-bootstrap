@@ -1,7 +1,7 @@
 let React = require("react")
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
 let {savedNotification} = require("../util.js")
-let {div, textarea, span} = React.DOM
+let {div, textarea} = React.DOM
 let cx = require("classnames")
 
 export default class extends React.Component {
