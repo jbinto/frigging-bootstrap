@@ -13,7 +13,9 @@ export default class extends React.Component {
   _inputHtml() {
     return Object.assign({}, this.props.inputHtml, {
       className: cx(this.props.className, "form-control"),
-      valueLink: this.props.valueLink,
+      valueLink: {
+        value: this.props.valueLink.value || "",
+      },
       rows: this.props.rows,
     })
   }
