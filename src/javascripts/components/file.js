@@ -1,6 +1,6 @@
 let React = require("react")
 let {errorList, sizeClassNames, formGroupCx, label, savedNotification} = require("../util.js")
-let {div, input, img, span} = React.DOM
+let {div, input, img} = React.DOM
 let cx = require("classnames")
 
 export default class extends React.Component {

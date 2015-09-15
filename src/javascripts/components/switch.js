@@ -40,7 +40,7 @@ export default class extends React.Component {
       {
         [`bootstrap-switch-${this.props.bsSize}`]: this.props.bsSize != null,
         "bootstrap-switch-disabled": this.props.disabled,
-        "pull-right": this.props.align == "right",
+        "pull-right": this.props.align === "right",
       },
     )
   }
@@ -88,7 +88,6 @@ export default class extends React.Component {
   }
 
   render() {
-    let {handleWidth} = this.props
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
