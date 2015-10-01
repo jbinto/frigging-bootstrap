@@ -1,8 +1,14 @@
 let React = require("react")
 let cx = require("classnames")
 
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {savedNotification} = require("../util.js")
+let {
+  savedText,
+  errorList,
+  sizeClassNames,
+  formGroupCx,
+  label,
+  savedNotification,
+} = require("../util.js")
 let {div} = React.DOM
 let select = React.createFactory(require("frig").ValueLinkedSelect)
 
@@ -25,6 +31,10 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props, {className: ""}),
+        savedText({
+          saved: this.props.saved &&
+          this.props.layout === "vertical"
+        }),
         div({className: "controls"},
           select(this._inputHtml()),
           savedNotification({parentProps: this.props}),

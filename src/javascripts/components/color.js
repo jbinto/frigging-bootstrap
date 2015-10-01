@@ -1,7 +1,13 @@
 let React = require("react")
 let Colr = require('colr')
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {savedNotification} = require("../util.js")
+let {
+  savedText,
+  errorList,
+  sizeClassNames,
+  formGroupCx,
+  label,
+  savedNotification
+} = require("../util.js")
 let {div, input} = React.DOM
 let cx = require("classnames")
 let {Focusable} = require("frig").HigherOrderComponents
@@ -90,6 +96,10 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
+        savedText({
+          saved: this.props.saved &&
+          this.props.layout === "vertical"
+        }),
         input(Object.assign({}, this.props.inputHtml, {
           valueLink: this.props.valueLink,
           ref: "frigColorInput",

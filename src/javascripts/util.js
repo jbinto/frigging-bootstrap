@@ -28,10 +28,8 @@ module.exports = {
     labelHtml.className = cx(labelHtml.className, {
       [horizontalClasses]: props.layout === "horizontal",
     })
-    return div({},
-      label(labelHtml, props.label),
-      savedText({saved: props.saved && props.layout === "vertical"}),
-    )
+
+    return div({}, label(labelHtml, props.label))
   },
 
   savedText({saved, className}) {

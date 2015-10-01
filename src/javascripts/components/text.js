@@ -1,6 +1,12 @@
 let React = require("react")
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {savedNotification} = require("../util.js")
+let {
+  savedText,
+  errorList,
+  sizeClassNames,
+  formGroupCx,
+  label,
+  savedNotification
+} = require("../util.js")
 let {div, textarea} = React.DOM
 let cx = require("classnames")
 
@@ -24,6 +30,10 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
+        savedText({
+          saved: this.props.saved &&
+          this.props.layout === "vertical"
+        }),
         div({className: "controls"},
           textarea(this._inputHtml()),
         ),
