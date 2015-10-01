@@ -99,6 +99,7 @@ export default class extends React.Component {
         label(this.props),
         savedText({
           saved: this.props.saved &&
+          this.props.modified &&
           this.props.layout === "vertical"
         }),
         div({className: inputContainerCx(this.props)},
