@@ -20,6 +20,7 @@ export default class extends React.Component {
       className: cx(this.props.className, "form-control"),
       valueLink: {
         value: this.props.valueLink.value || "",
+        requestChange: this.props.valueLink.requestChange,
       },
       rows: this.props.rows,
     })
