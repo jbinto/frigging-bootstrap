@@ -118,6 +118,7 @@ export default class extends React.Component {
         this._colorPopup(),
         savedNotification({
           parentProps: this.props,
+          saved: this.props.saved && this.props.modified,
           className: "frigb-saved-inline frigb-colorpicker-inline",
         }),
         errorList(this.props.errors),

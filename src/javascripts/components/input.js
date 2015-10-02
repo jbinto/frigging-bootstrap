@@ -45,18 +45,22 @@ export default class extends React.Component {
   }
 
   _inputGroup() {
+    let notificationProps = {
+      parentProps: this.props,
+      saved: this.props.saved && this.props.modified,
+    }
     if (this.props.prefix || this.props.suffix) {
       return div({className: "input-group"},
         this._inputPrefix(),
         this._input(),
-        savedNotification({parentProps: this.props}),
+        savedNotification(notificationProps),
         this._inputSuffix(),
       )
     }
     else {
       return div({},
         this._input(),
-        savedNotification({parentProps: this.props}),
+        savedNotification(notificationProps),
       )
     }
   }

@@ -103,7 +103,10 @@ export default class extends React.Component {
           this.props.layout === "vertical"
         }),
         div({className: inputContainerCx(this.props)},
-          savedNotification({parentProps: this.props}),
+          savedNotification({
+            parentProps: this.props,
+            saved: this.props.saved && this.props.modified,
+          }),
           div({className: this._switchCx(), style: this._switchStyle()},
             this._input(),
           ),

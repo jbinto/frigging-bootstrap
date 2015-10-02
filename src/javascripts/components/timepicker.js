@@ -59,7 +59,10 @@ export default class extends React.Component {
             this.props.layout === "vertical"
           }),
         this._input(),
-        savedNotification({parentProps: this.props}),
+        savedNotification({
+          parentProps: this.props,
+          saved: this.props.saved && this.props.modified,
+        }),
         errorList(this.props.errors),
       ),
       this._timePopup(),

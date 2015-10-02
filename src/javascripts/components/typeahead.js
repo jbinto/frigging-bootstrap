@@ -218,7 +218,10 @@ export default class extends React.Component {
         this._selectionsList(),
         input(inputHtml),
       ),
-      savedNotification({parentProps: this.props}),
+      savedNotification({
+        parentProps: this.props,
+        saved: this.props.saved && this.props.modified,
+      }),
       this._suggestionsList(),
       errorList(this.state.errors),
     )
