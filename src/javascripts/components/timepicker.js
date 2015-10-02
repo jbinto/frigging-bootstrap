@@ -8,7 +8,6 @@ let {
   sizeClassNames,
   formGroupCx,
   label,
-  savedNotification
 } = require("../util.js")
 let {div, input} = React.DOM
 
@@ -54,15 +53,9 @@ export default class extends React.Component {
         div({},
           label(this.props)),
           savedText({
-            saved: this.props.saved &&
-            this.props.modified &&
-            this.props.layout === "vertical"
+            saved: this.props.saved && this.props.modified,
           }),
         this._input(),
-        savedNotification({
-          parentProps: this.props,
-          saved: this.props.saved && this.props.modified,
-        }),
         errorList(this.props.errors),
       ),
       this._timePopup(),

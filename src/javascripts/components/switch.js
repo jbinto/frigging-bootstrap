@@ -7,7 +7,6 @@ let {
   sizeClassNames,
   formGroupCx,
   label,
-  savedNotification,
   inputContainerCx,
 } = require("../util.js")
 let {div, span} = React.DOM
@@ -98,15 +97,9 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         label(this.props),
         savedText({
-          saved: this.props.saved &&
-          this.props.modified &&
-          this.props.layout === "vertical"
+          saved: this.props.saved && this.props.modified,
         }),
         div({className: inputContainerCx(this.props)},
-          savedNotification({
-            parentProps: this.props,
-            saved: this.props.saved && this.props.modified,
-          }),
           div({className: this._switchCx(), style: this._switchStyle()},
             this._input(),
           ),

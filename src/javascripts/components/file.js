@@ -5,7 +5,6 @@ let {
   sizeClassNames,
   formGroupCx,
   label,
-  savedNotification
 } = require("../util.js")
 let {div, input, img} = React.DOM
 let cx = require("classnames")
@@ -85,18 +84,12 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         label(this.props),
         savedText({
-          saved: this.props.saved &&
-          this.props.modified &&
-          this.props.layout === "vertical"
+          saved: this.props.saved && this.props.modified,
         }),
         div({className: "controls"},
           div({className: "image-upload"},
             this._image(),
             this._inputGroup(),
-            savedNotification({
-              parentProps: this.props,
-              saved: this.props.saved && this.props.modified,
-            }),
           ),
         ),
         errorList(this.props.errors),

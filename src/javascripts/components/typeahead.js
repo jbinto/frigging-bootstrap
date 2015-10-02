@@ -4,7 +4,7 @@ let fuzzy = require('fuzzy')
 let {div, a, input, i, ul, li, span} = React.DOM
 let BootstrapInput = require("./input.js")
 let FrigInput = React.createFactory(require("frig").Input)
-let {errorList, savedNotification} = require("../util")
+let {errorList} = require("../util")
 let {promisedTimeout} = require("frig").util
 
 export default class extends React.Component {
@@ -218,10 +218,6 @@ export default class extends React.Component {
         this._selectionsList(),
         input(inputHtml),
       ),
-      savedNotification({
-        parentProps: this.props,
-        saved: this.props.saved && this.props.modified,
-      }),
       this._suggestionsList(),
       errorList(this.state.errors),
     )

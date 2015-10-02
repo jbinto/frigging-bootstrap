@@ -6,12 +6,10 @@ let {
   sizeClassNames,
   formGroupCx,
   label,
-  savedNotification
 } = require("../util.js")
 let {div, input} = React.DOM
 let cx = require("classnames")
 let {Focusable} = require("frig").HigherOrderComponents
-
 let colorMap = React.createFactory(require("./color/map"))
 let hue_slider =  React.createFactory(require("./color/hue_slider"))
 
@@ -97,9 +95,7 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         label(this.props),
         savedText({
-          saved: this.props.saved &&
-          this.props.modified &&
-          this.props.layout === "vertical"
+          saved: this.props.saved && this.props.modified,
         }),
         input(Object.assign({}, this.props.inputHtml, {
           valueLink: this.props.valueLink,
@@ -116,11 +112,6 @@ export default class extends React.Component {
           onClick: this._onColorBlockClick.bind(this),
         }),
         this._colorPopup(),
-        savedNotification({
-          parentProps: this.props,
-          saved: this.props.saved && this.props.modified,
-          className: "frigb-saved-inline frigb-colorpicker-inline",
-        }),
         errorList(this.props.errors),
       )
     )

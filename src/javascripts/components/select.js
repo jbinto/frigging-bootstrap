@@ -7,7 +7,6 @@ let {
   sizeClassNames,
   formGroupCx,
   label,
-  savedNotification,
 } = require("../util.js")
 let {div} = React.DOM
 let select = React.createFactory(require("frig").ValueLinkedSelect)
@@ -32,16 +31,10 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         label(this.props, {className: ""}),
         savedText({
-          saved: this.props.saved &&
-          this.props.modified &&
-          this.props.layout === "vertical"
+          saved: this.props.saved && this.props.modified,
         }),
         div({className: "controls"},
           select(this._inputHtml()),
-          savedNotification({
-            parentProps: this.props,
-            saved: this.props.saved && this.props.modified,
-          }),
           errorList(this.props.errors),
         )
       )
