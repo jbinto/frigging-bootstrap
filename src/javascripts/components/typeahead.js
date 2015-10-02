@@ -1,11 +1,10 @@
 let React = require("react")
 let cx = require("classnames")
 let fuzzy = require('fuzzy')
-let {div, a, input, i, ul, li, span} = React.DOM
+let {div, a, input, i, ul, li} = React.DOM
 let BootstrapInput = require("./input.js")
 let FrigInput = React.createFactory(require("frig").Input)
 let {errorList} = require("../util")
-let {promisedTimeout} = require("frig").util
 
 export default class extends React.Component {
 
@@ -46,7 +45,7 @@ export default class extends React.Component {
   _updateInputValueFromProps(nextProps, prevProps = {valueLink: {}}) {
     if (nextProps.valueLink.value === (prevProps.valueLink||{}).value) return
     let selections = this._selections(nextProps)
-    if (this.props.multiple || selections.length != 1) return
+    if (this.props.multiple || selections.length !== 1) return
     let value = selections[0].label
     if (value !== this.state.inputValue) this.setState({inputValue: value})
   }
@@ -137,11 +136,15 @@ export default class extends React.Component {
     let options = this._options(nextProps)
     return values.map((value) => {
       let hash = JSON.stringify(value)
-      let option = options.find((o) => o.hash == hash)
-      if (option == null) throw(
-        `Typeahead selection (${value}) for ${this.props.name} not included `+
-        `in the typeahead options`
-      )
+      let option = options.find((o) => o.hash === hash)
+
+      if (option == null) {
+        throw(
+          `Typeahead selection (${value}) for ${this.props.name} not included `+
+          `in the typeahead options`
+        )
+      }
+
       return option
     })
   }
