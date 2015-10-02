@@ -39,7 +39,11 @@ module.exports = {
   },
 
   savedNotification({layout, label, saved, className}) {
-    className = className || "frigb-saved-inline"
+    className = cx({
+      className: className !== undefined,
+      "frigb-saved-inline": label === undefined,
+    })
+
     let savedInline = savedText({saved, className})
 
     if (label === false && saved) return savedInline
