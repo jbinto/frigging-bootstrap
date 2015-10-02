@@ -38,16 +38,13 @@ module.exports = {
     return span({className, key: "saved"}, "saved")
   },
 
-  savedNotification({layout, label, saved, className}) {
+  savedNotification({label, saved, className}) {
     className = cx({
       className: className !== undefined,
       "frigb-saved-inline": label === undefined,
     })
 
-    let savedInline = savedText({saved, className})
-
-    if (label === false && saved) return savedInline
-    if (label && saved && layout === "horizontal") return savedInline
+    return savedText({saved, className})
   },
 
   inputContainerCx(props) {
