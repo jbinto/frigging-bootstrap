@@ -38,13 +38,15 @@ module.exports = {
     return span({className, key: "saved"}, "saved")
   },
 
-  savedNotification({label, saved, className}) {
+  savedNotification({parentProps, label, overrideSaved, className}) {
+    let isSaved = overrideSaved || parentProps.saved && parentProps.modified
+
     className = cx({
       className: className !== undefined,
       "frigb-saved-inline": label === undefined,
     })
 
-    return savedText({saved, className})
+    return savedText({isSaved, className})
   },
 
   inputContainerCx(props) {
