@@ -30,13 +30,13 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props, {className: ""}),
-        savedText({
-          saved: this.props.saved && this.props.modified,
-        }),
         div({className: "controls"},
           select(this._inputHtml()),
           errorList(this.props.errors),
-        )
+        ),
+        savedText({
+          saved: this.props.saved && this.props.modified,
+        }),
       )
     )
   }

@@ -5,8 +5,7 @@ let {
   sizeClassNames,
   formGroupCx,
   label,
-  savedNotification,
-  inputContainerCx
+  inputContainerCx,
 } = require("../util.js")
 let {div, input} = React.DOM
 let cx = require("classnames")
@@ -45,22 +44,25 @@ export default class extends React.Component {
   }
 
   _inputGroup() {
-    let notificationProps = {
-      parentProps: this.props,
+    let inputLabel = label(this.props)
+    let saved = savedText({
       saved: this.props.saved && this.props.modified,
-    }
+    })
+
     if (this.props.prefix || this.props.suffix) {
-      return div({className: "input-group"},
+      return inputLabel,
+      div({className: "input-group"},
         this._inputPrefix(),
         this._input(),
-        savedNotification(notificationProps),
+        saved,
         this._inputSuffix(),
       )
     }
     else {
       return div({},
+        inputLabel,
         this._input(),
-        savedNotification(notificationProps),
+        saved,
       )
     }
   }
@@ -68,12 +70,6 @@ export default class extends React.Component {
   render() {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
-        label(this.props),
-        savedText({
-          saved: this.props.saved &&
-          this.props.modified &&
-          this.props.layout === "vertical"
-        }),
         div({className: inputContainerCx(this.props)},
           this._inputGroup(),
           errorList(this.props.errors),

@@ -94,9 +94,6 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
-        savedText({
-          saved: this.props.saved && this.props.modified,
-        }),
         input(Object.assign({}, this.props.inputHtml, {
           valueLink: this.props.valueLink,
           ref: "frigColorInput",
@@ -106,6 +103,9 @@ export default class extends React.Component {
             "form-control",
           ),
         })),
+        savedText({
+          saved: this.props.saved && this.props.modified,
+        }),
         div({
           className: "frigb-color-block",
           style: { backgroundColor: this.state.colr.toHex() },

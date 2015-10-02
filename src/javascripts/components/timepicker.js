@@ -52,10 +52,10 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         div({},
           label(this.props)),
-          savedText({
-            saved: this.props.saved && this.props.modified,
-          }),
         this._input(),
+        savedText({
+          saved: this.props.saved && this.props.modified,
+        }),
         errorList(this.props.errors),
       ),
       this._timePopup(),
