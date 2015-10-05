@@ -98,15 +98,16 @@ export default class extends React.Component {
     }
     let filter = (o) => o.hash !== option.hash
     let persistedOptions = this.state.persistedOptions.filter(filter)
+    let requestChange = this.props.valueLink.requestChange
     this.setState({persistedOptions})
     if (this.props.multiple) {
       let value = this.props.valueLink.value.filter(
         (val) => JSON.stringify(val) !== option.hash
       )
-      this.props.valueLink.requestChange(value)
+      requestChange(value)
     }
     else {
-      this.props.valueLink.requestChange(undefined)
+      requestChange(undefined)
     }
   }
 
