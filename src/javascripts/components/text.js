@@ -34,7 +34,7 @@ export default class extends React.Component {
           textarea(this._inputHtml()),
         ),
         savedText({
-          saved: this.props.saved && this.props.modified,
+          saved: this.props.saved,
         }),
         errorList(this.props.errors),
       ),

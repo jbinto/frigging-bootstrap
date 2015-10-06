@@ -28,9 +28,8 @@ export default class extends React.Component {
             this.props.label ? ` ${this.props.label}` : "",
           ),
           savedText({
-            saved: this.props.saved &&
-            this.props.modified,
-            className: "frigb-checkbox"
+            saved: this.props.saved,
+            className: "frigb-checkbox",
           }),
           errorList(this.props.errors),
         ),

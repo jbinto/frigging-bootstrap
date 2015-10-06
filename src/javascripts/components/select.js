@@ -35,7 +35,7 @@ export default class extends React.Component {
           errorList(this.props.errors),
         ),
         savedText({
-          saved: this.props.saved && this.props.modified,
+          saved: this.props.saved,
         }),
       )
     )

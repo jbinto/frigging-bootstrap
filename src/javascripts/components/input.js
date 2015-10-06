@@ -46,7 +46,7 @@ export default class extends React.Component {
   _inputGroup() {
     let inputLabel = label(this.props)
     let saved = savedText({
-      saved: this.props.saved && this.props.modified,
+      saved: this.props.saved,
     })
 
     if (this.props.prefix || this.props.suffix) {

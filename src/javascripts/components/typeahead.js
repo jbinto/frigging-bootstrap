@@ -223,7 +223,7 @@ export default class extends React.Component {
         input(inputHtml),
       ),
       savedText({
-        saved: this.props.saved && this.props.modified,
+        saved: this.props.saved,
       }),
       this._suggestionsList(),
       errorList(this.state.errors),

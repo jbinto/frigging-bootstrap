@@ -54,7 +54,7 @@ export default class extends React.Component {
           label(this.props)),
         this._input(),
         savedText({
-          saved: this.props.saved && this.props.modified,
+          saved: this.props.saved,
         }),
         errorList(this.props.errors),
       ),

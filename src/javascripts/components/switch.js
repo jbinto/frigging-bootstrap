@@ -97,7 +97,7 @@ export default class extends React.Component {
       div({className: formGroupCx(this.props)},
         label(this.props),
         savedText({
-          saved: this.props.saved && this.props.modified,
+          saved: this.props.saved,
         }),
         div({className: inputContainerCx(this.props)},
           div({className: this._switchCx(), style: this._switchStyle()},

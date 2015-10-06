@@ -104,7 +104,7 @@ export default class extends React.Component {
           ),
         })),
         savedText({
-          saved: this.props.saved && this.props.modified,
+          saved: this.props.saved,
         }),
         div({
           className: "frigb-color-block",

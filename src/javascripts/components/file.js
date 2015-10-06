@@ -88,7 +88,7 @@ export default class extends React.Component {
             this._image(),
             this._inputGroup(),
             savedText({
-              saved: this.props.saved && this.props.modified,
+              saved: this.props.saved,
             }),
           ),
         ),
