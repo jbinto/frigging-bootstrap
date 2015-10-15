@@ -25,6 +25,11 @@ export default class extends React.Component {
     return input(Object.assign({}, this.props.inputHtml, {
         valueLink: this.props.valueLink,
         className: this._inputCx(),
+        onFocus: () => {
+          return this.props.valueLink.requestChange(
+            this.props.valueLink.value || "12:00pm"
+          )
+        },
       })
     )
   }
