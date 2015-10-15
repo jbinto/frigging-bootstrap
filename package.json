@@ -3,7 +3,11 @@
   "version": "0.2.3",
   "private": false,
   "main": "dist/frigging-bootstrap.js",
-  "dependencies": {},
+  "peerDependencies": {
+    "classnames": "*",
+    "fuzzy": "*",
+    "colr": "*"
+  },
   "scripts": {
     "preversion": "FRIG_ENV=\"production\" FRIG_MODE=\"core\" webpack --progress",
     "version": "git add ./dist",
@@ -13,6 +17,7 @@
     "coffee-script": "1.9.3",
     "webpack": "*",
     "webpack-dev-server": "*",
+    "json5": "*",
     "css-loader": "*",
     "style-loader": "*",
     "stylus-loader": "*",
@@ -28,10 +33,8 @@
     "babel-eslint": "*",
     "react": "0.13.3",
     "bootstrap": "*",
-    "json5": "*",
     "font-awesome-webpack": "*",
     "classnames": "*",
-    "whatwg-fetch": "*",
     "fuzzy": "*",
     "colr": "*"
   },

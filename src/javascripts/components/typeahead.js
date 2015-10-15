@@ -1,4 +1,3 @@
-require("whatwg-fetch/fetch.js")
 let React = require("react")
 let cx = require("classnames")
 let fuzzy = require('fuzzy')
