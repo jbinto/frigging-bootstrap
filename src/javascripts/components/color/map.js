@@ -6,15 +6,19 @@ let {div} = React.DOM
 
 @draggable
 export default class extends React.Component {
-  _updatePosition(clientX, clientY) {
-    let rect = React.findDOMNode(this).getBoundingClientRect()
-    let x = (clientX - rect.left) / rect.width
-    let y = (rect.bottom - clientY) / rect.height
-    let saturation = this.getScaledValue(x)
-    let value = this.getScaledValue(y)
-    let colr = Colr.fromHsv(this.props.hsv.h, saturation, value)
+  static displayName = "ColorMap"
 
-    this.props.colrLink.requestChange(colr)
+  componentWillReceiveProps({clientX, clientY}){
+    if (clientX !== this.props.clientX && clientY !== this.props.clientY) {
+      let rect = React.findDOMNode(this).getBoundingClientRect()
+      let x = (clientX - rect.left) / rect.width
+      let y = (rect.bottom - clientY) / rect.height
+      let saturation = this.props.getScaledValue(x)
+      let value = this.props.getScaledValue(y)
+      let colr = Colr.fromHsv(this.props.hsv.h, saturation, value)
+
+      this.props.colrLink.requestChange(colr)
+    }
   }
 
   render() {
@@ -27,12 +31,12 @@ export default class extends React.Component {
       {
         className: cx({
             "frigb-map": true,
-            "frigb-active": this.props.activeLink.value,
+            "frigb-active": this.props.active,
             "frigb-dark": luminosity <= 128,
             "frigb-light": luminosity > 128,
         }),
-        onMouseDown: this.startUpdates.bind(this),
-        onTouchStart: this.startUpdates.bind(this),
+        onMouseDown: this.props.startDragging,
+        onTouchStart: this.props.startDragging,
       },
       div({
         className: "frigb-background",
@@ -43,8 +47,8 @@ export default class extends React.Component {
       div({
         className: "frigb-pointer",
         style: {
-          left: this.getPercentageValue(x),
-          bottom: this.getPercentageValue(y),
+          left: this.props.getPercentageValue(x),
+          bottom: this.props.getPercentageValue(y),
         },
       })
     )

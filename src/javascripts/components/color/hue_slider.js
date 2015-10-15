@@ -5,21 +5,24 @@ let { div } = React.DOM
 
 @draggable
 export default class extends React.Component {
+  static displayName = "HueSlider"
   static defaultProps = Object.assign(require("../../default_props.js"))
 
-  _updatePosition(clientX, clientY){
-    let rect = React.findDOMNode(this).getBoundingClientRect()
-    let hue = this.getScaledValue((rect.bottom - clientY) / rect.height)
-    let colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v)
+  componentWillReceiveProps({clientX, clientY}){
+    if (clientX !== this.props.clientX && clientY !== this.props.clientY) {
+      let rect = React.findDOMNode(this).getBoundingClientRect()
+      let hue = this.props.getScaledValue((rect.bottom - clientY) / rect.height)
+      let colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v)
 
-    this.props.colrLink.requestChange(colr)
+      this.props.colrLink.requestChange(colr)
+    }
   }
 
   render() {
     return div({
         className: "frigb-slider frigb-vertical",
-        onMouseDown: this.startUpdates.bind(this),
-        onTouchStart: this.startUpdates.bind(this),
+        onMouseDown: this.props.startDragging,
+        onTouchStart: this.props.startDragging,
       },
         div({
           className: "frigb-track",
@@ -27,7 +30,7 @@ export default class extends React.Component {
         div({
           className: "frigb-pointer",
           style: {
-            "bottom": this.getPercentageValue(this.props.hsv.h),
+            "bottom": this.props.getPercentageValue(this.props.hsv.h),
           },
         })
       )
