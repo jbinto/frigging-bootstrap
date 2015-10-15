@@ -45,7 +45,7 @@ module.exports = {
     let savedInline = savedText({saved, className})
 
     if (label === false && saved) return savedInline
-    if (label && saved && layout == "horizontal") return savedInline
+    if (label && saved && layout === "horizontal") return savedInline
   },
 
   inputContainerCx(props) {
@@ -57,8 +57,8 @@ module.exports = {
     for (let k in labelWidth) inputWidth[k] = (12 - labelWidth[k]) || 12
     let horizontalClasses = sizeClassNames(inputWidth, {offsets: false})
     return cx({
-      [horizontalClasses]: props.layout == "horizontal" && !props.block,
-      ["col-xs-12"]: props.layout == "horizontal" && props.block,
+      [horizontalClasses]: props.layout === "horizontal" && !props.block,
+      ["col-xs-12"]: props.layout === "horizontal" && props.block,
     })
   },
 

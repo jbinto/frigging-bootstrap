@@ -2,7 +2,7 @@ let React = require("react")
 let Colr = require('colr')
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
 let {savedNotification} = require("../util.js")
-let {div, input, span} = React.DOM
+let {div, input} = React.DOM
 let cx = require("classnames")
 let {Focusable} = require("frig").HigherOrderComponents
 
@@ -107,7 +107,7 @@ export default class extends React.Component {
         this._colorPopup(),
         savedNotification({
           parentProps: this.props,
-          className: "frigb-saved-inline frigb-colorpicker-inline"
+          className: "frigb-saved-inline frigb-colorpicker-inline",
         }),
         errorList(this.props.errors),
       )

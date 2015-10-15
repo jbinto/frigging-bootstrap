@@ -1,7 +1,7 @@
 let React = require("react")
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
 let {savedNotification} = require("../util.js")
-let {div, input, span, p} = React.DOM
+let {div, input} = React.DOM
 let {inputContainerCx} = require("../util.js")
 let cx = require("classnames")
 
@@ -18,7 +18,7 @@ export default class extends React.Component {
 
   _inputHtml() {
     return Object.assign({}, this.props.inputHtml, {
-      className: `${this.props.inputHtml.className || ""} form-control`.trim(),
+      className: cx(this.props.className, "form-control"),
       valueLink: this.props.valueLink,
     })
   }

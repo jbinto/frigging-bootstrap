@@ -15,6 +15,6 @@ module.exports = {
   // Label width for horizontal labels
   labelWidth: {
     xs: 12,
-    sm: 2
+    sm: 2,
   },
 }

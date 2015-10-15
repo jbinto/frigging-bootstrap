@@ -4,7 +4,7 @@ let {Focusable} = require("frig").HigherOrderComponents
 let popup = React.createFactory(require("./timepicker_popup"))
 let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
 let {savedNotification} = require("../util.js")
-let {div, input, span} = React.DOM
+let {div, input} = React.DOM
 
 @Focusable
 export default class extends React.Component {
