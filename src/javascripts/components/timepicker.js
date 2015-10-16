@@ -26,9 +26,9 @@ export default class extends React.Component {
         valueLink: this.props.valueLink,
         className: this._inputCx(),
         onFocus: () => {
-          return this.props.valueLink.requestChange(
-            this.props.valueLink.value || "12:00pm"
-          )
+          if (this.props.valueLink.value == null) {
+            return this.props.valueLink.requestChange("12:00pm")
+          }
         },
       })
     )
