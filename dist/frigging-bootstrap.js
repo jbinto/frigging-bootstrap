@@ -1310,23 +1310,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  _createClass(_default, [{
-	    key: "componentWillReceiveProps",
-	    value: function componentWillReceiveProps(_ref) {
-	      var clientX = _ref.clientX;
-	      var clientY = _ref.clientY;
-
-	      if (clientX !== this.props.clientX && clientY !== this.props.clientY) {
-	        var rect = React.findDOMNode(this).getBoundingClientRect();
-	        var x = (clientX - rect.left) / rect.width;
-	        var y = (rect.bottom - clientY) / rect.height;
-	        var saturation = this.props.getScaledValue(x);
-	        var value = this.props.getScaledValue(y);
-	        var colr = Colr.fromHsv(this.props.hsv.h, saturation, value);
-
-	        this.props.colrLink.requestChange(colr);
-	      }
-	    }
-	  }, {
 	    key: "render",
 	    value: function render() {
 	      var x = this.props.hsv.s;
@@ -1363,7 +1346,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }]);
 
 	  var _default2 = _default;
-	  _default = draggable(_default) || _default;
+	  _default = draggable({
+	    updateClientCoords: function updateClientCoords(_ref) {
+	      var clientX = _ref.clientX;
+	      var clientY = _ref.clientY;
+
+	      var rect = React.findDOMNode(this).getBoundingClientRect();
+	      var x = (clientX - rect.left) / rect.width;
+	      var y = (rect.bottom - clientY) / rect.height;
+	      var saturation = this.getScaledValue(x);
+	      var value = this.getScaledValue(y);
+	      var colr = Colr.fromHsv(this.props.hsv.h, saturation, value);
+
+	      this.props.colrLink.requestChange(colr);
+	    }
+	  })(_default) || _default;
 	  return _default;
 	})(React.Component);
 
@@ -1380,8 +1377,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
@@ -1392,124 +1387,127 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = __webpack_require__(7);
 
-	exports["default"] = function (componentClass) {
+	exports["default"] = function (_ref) {
+	  var updateClientCoords = _ref.updateClientCoords;
 
-	  return (function (_React$Component) {
-	    _inherits(_class, _React$Component);
+	  return function (componentClass) {
 
-	    function _class() {
-	      var _this = this;
+	    return (function (_React$Component) {
+	      _inherits(_class, _React$Component);
 
-	      _classCallCheck(this, _class);
+	      function _class() {
+	        var _this = this;
 
-	      _get(Object.getPrototypeOf(_class.prototype), "constructor", this).apply(this, arguments);
+	        _classCallCheck(this, _class);
 
-	      this.state = {
-	        dragging: false
-	      };
+	        _get(Object.getPrototypeOf(_class.prototype), "constructor", this).apply(this, arguments);
 
-	      this.getPercentageValue = function (value) {
-	        return value / _this.props.max * 100 + "%";
-	      };
-
-	      this.getScaledValue = function (value) {
-	        var min = 0;
-	        var max = 1;
-	        var clamp = value < min ? min : value > max ? max : value;
-	        return clamp * _this.props.max;
-	      };
-
-	      this.startDragging = function (e) {
-	        _this.setState(_extends({
-	          dragging: true
-	        }, _this._clientCoords(e)));
-	      };
-
-	      this._onMouseMove = function (e) {
-	        if (_this.state.dragging) {
-	          e.preventDefault();
-	          _this.setState(_this._clientCoords(e));
-	        }
-	      };
-
-	      this._onMouseUp = function (e) {
-	        _this.setState(_extends({
+	        this.state = {
 	          dragging: false
-	        }, _this._clientCoords(e)));
-	      };
-	    }
+	        };
 
-	    _createClass(_class, [{
-	      key: "componentDidMount",
-	      value: function componentDidMount() {
-	        document.addEventListener('mousemove', this._onMouseMove);
-	        document.addEventListener('touchmove', this._onMouseMove);
-	        document.addEventListener('mouseup', this._onMouseUp);
-	        document.addEventListener('touchend', this._onMouseUp);
-	      }
-	    }, {
-	      key: "componentWillUnmount",
-	      value: function componentWillUnmount() {
-	        document.removeEventListener('mousemove', this._onMouseMove);
-	        document.removeEventListener('touchmove', this._onMouseMove);
-	        document.removeEventListener('mouseup', this._onMouseUp);
-	        document.removeEventListener('touchend', this._onMouseUp);
-	      }
-	    }, {
-	      key: "_clientCoords",
-	      value: function _clientCoords(e) {
-	        var _ref = e.touches == null ? e : e.touches[0];
+	        this.getPercentageValue = function (value) {
+	          return value / _this.props.max * 100 + "%";
+	        };
 
-	        var clientX = _ref.clientX;
-	        var clientY = _ref.clientY;
+	        this.getScaledValue = function (value) {
+	          var min = 0;
+	          var max = 1;
+	          var clamp = value < min ? min : value > max ? max : value;
+	          return clamp * _this.props.max;
+	        };
 
-	        return { clientX: clientX, clientY: clientY };
-	      }
-	    }, {
-	      key: "_childProps",
-	      value: function _childProps() {
-	        var _state = this.state;
-	        var clientX = _state.clientX;
-	        var clientY = _state.clientY;
-	        var startDragging = this.startDragging;
-	        var getPercentageValue = this.getPercentageValue;
-	        var getScaledValue = this.getScaledValue;
-	        var active = this.active;
+	        this.startDragging = function (e) {
+	          _this.setState({
+	            dragging: true
+	          });
+	          _this._updateClientCoords(e);
+	        };
 
-	        return Object.assign({}, this.props, {
-	          clientX: clientX,
-	          clientY: clientY,
-	          active: active,
-	          startDragging: startDragging,
-	          getPercentageValue: getPercentageValue,
-	          getScaledValue: getScaledValue
-	        });
-	      }
-	    }, {
-	      key: "render",
-	      value: function render() {
-	        return React.createElement(componentClass, this._childProps());
-	      }
-	    }], [{
-	      key: "displayName",
-	      value: "Draggable",
-	      enumerable: true
-	    }, {
-	      key: "propTypes",
-	      value: {
-	        max: React.PropTypes.number
-	      },
-	      enumerable: true
-	    }, {
-	      key: "defaultProps",
-	      value: {
-	        max: 1
-	      },
-	      enumerable: true
-	    }]);
+	        this._onMouseMove = function (e) {
+	          if (_this.state.dragging) {
+	            e.preventDefault();
+	            _this._updateClientCoords(e);
+	          }
+	        };
 
-	    return _class;
-	  })(React.Component);
+	        this._onMouseUp = function (e) {
+	          if (_this.state.dragging) {
+	            _this.setState({
+	              dragging: false
+	            });
+	            _this._updateClientCoords(e);
+	          }
+	        };
+	      }
+
+	      _createClass(_class, [{
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	          document.addEventListener('mousemove', this._onMouseMove);
+	          document.addEventListener('touchmove', this._onMouseMove);
+	          document.addEventListener('mouseup', this._onMouseUp);
+	          document.addEventListener('touchend', this._onMouseUp);
+	        }
+	      }, {
+	        key: "componentWillUnmount",
+	        value: function componentWillUnmount() {
+	          document.removeEventListener('mousemove', this._onMouseMove);
+	          document.removeEventListener('touchmove', this._onMouseMove);
+	          document.removeEventListener('mouseup', this._onMouseUp);
+	          document.removeEventListener('touchend', this._onMouseUp);
+	        }
+	      }, {
+	        key: "_updateClientCoords",
+	        value: function _updateClientCoords(e) {
+	          var _ref2 = e.touches == null ? e : e.touches[0];
+
+	          var clientX = _ref2.clientX;
+	          var clientY = _ref2.clientY;
+
+	          updateClientCoords.bind(this)({ clientX: clientX, clientY: clientY });
+	        }
+	      }, {
+	        key: "_childProps",
+	        value: function _childProps() {
+	          var startDragging = this.startDragging;
+	          var getPercentageValue = this.getPercentageValue;
+	          var getScaledValue = this.getScaledValue;
+	          var active = this.active;
+
+	          return Object.assign({}, this.props, {
+	            active: active,
+	            startDragging: startDragging,
+	            getPercentageValue: getPercentageValue,
+	            getScaledValue: getScaledValue
+	          });
+	        }
+	      }, {
+	        key: "render",
+	        value: function render() {
+	          return React.createElement(componentClass, this._childProps());
+	        }
+	      }], [{
+	        key: "displayName",
+	        value: "Draggable",
+	        enumerable: true
+	      }, {
+	        key: "propTypes",
+	        value: {
+	          max: React.PropTypes.number
+	        },
+	        enumerable: true
+	      }, {
+	        key: "defaultProps",
+	        value: {
+	          max: 1
+	        },
+	        enumerable: true
+	      }]);
+
+	      return _class;
+	    })(React.Component);
+	  };
 	};
 
 	module.exports = exports["default"];
@@ -1547,20 +1545,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  _createClass(_default, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(_ref) {
-	      var clientX = _ref.clientX;
-	      var clientY = _ref.clientY;
-
-	      if (clientX !== this.props.clientX && clientY !== this.props.clientY) {
-	        var rect = React.findDOMNode(this).getBoundingClientRect();
-	        var hue = this.props.getScaledValue((rect.bottom - clientY) / rect.height);
-	        var colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v);
-
-	        this.props.colrLink.requestChange(colr);
-	      }
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return div({
@@ -1587,7 +1571,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }]);
 
 	  var _default2 = _default;
-	  _default = draggable(_default) || _default;
+	  _default = draggable({
+	    updateClientCoords: function updateClientCoords(_ref) {
+	      var clientX = _ref.clientX;
+	      var clientY = _ref.clientY;
+
+	      var rect = React.findDOMNode(this).getBoundingClientRect();
+	      var hue = this.getScaledValue((rect.bottom - clientY) / rect.height);
+	      var colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v);
+
+	      this.props.colrLink.requestChange(colr);
+	    }
+	  })(_default) || _default;
 	  return _default;
 	})(React.Component);
 
