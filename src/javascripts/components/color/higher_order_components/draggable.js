@@ -13,7 +13,9 @@ export default function(componentClass) {
       max: 1,
     }
 
-    state = { dragging: false }
+    state = {
+      dragging: false,
+    }
 
     componentDidMount() {
       document.addEventListener('mousemove', this._onMouseMove)
@@ -41,34 +43,29 @@ export default function(componentClass) {
     }
 
     startDragging = (e) => {
-      this.setState({dragging: true})
-      this._setCoordinates(e)
-    }
-
-    _getPosition(e) {
-      if (e.touches) e = e.touches[0]
-      return {x: e.clientX, y: e.clientY}
+      this.setState({
+        dragging: true,
+        ...this._clientCoords(e),
+      })
     }
 
     _onMouseMove = (e) => {
       if (this.state.dragging) {
         e.preventDefault()
-        this._setCoordinates(e)
+        this.setState(this._clientCoords(e))
       }
     }
 
-    _onMouseUp = () => {
-      if (this.state.dragging) {
-        this.setState({dragging: false})
-      }
-    }
-
-    _setCoordinates(e) {
-      let coords = this._getPosition(e)
+    _onMouseUp = (e) => {
       this.setState({
-        clientX: coords.x,
-        clientY: coords.y,
+        dragging: false,
+        ...this._clientCoords(e),
       })
+    }
+
+    _clientCoords(e) {
+      let {clientX, clientY} = (e.touches == null ? e : e.touches[0])
+      return {clientX, clientY}
     }
 
     _childProps() {

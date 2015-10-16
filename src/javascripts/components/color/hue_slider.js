@@ -1,6 +1,6 @@
 let React = require("react")
 let Colr = require('colr')
-let draggable = require('./higher_order_components/draggable')
+let draggable = require('./higher_order_components/draggable.js')
 let { div } = React.DOM
 
 @draggable
