@@ -52,7 +52,6 @@ export default function({updateClientCoords}) {
 
       _onMouseMove = (e) => {
         if (this.state.dragging) {
-          e.preventDefault()
           this._updateClientCoords(e)
         }
       }
@@ -67,6 +66,7 @@ export default function({updateClientCoords}) {
       }
 
       _updateClientCoords(e) {
+        e.preventDefault()
         let {clientX, clientY} = (e.touches == null ? e : e.touches[0])
         updateClientCoords.bind(this)({clientX, clientY})
       }
