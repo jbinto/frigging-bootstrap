@@ -2373,9 +2373,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "_input",
 	    value: function _input() {
+	      var _this = this;
+
 	      return input(Object.assign({}, this.props.inputHtml, {
 	        valueLink: this.props.valueLink,
-	        className: this._inputCx()
+	        className: this._inputCx(),
+	        onFocus: function onFocus() {
+	          if (_this.props.valueLink.value == null) {
+	            return _this.props.valueLink.requestChange("12:00pm");
+	          }
+	        }
 	      }));
 	    }
 	  }, {
