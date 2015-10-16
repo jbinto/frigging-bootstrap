@@ -9,8 +9,8 @@
     "colr": "*"
   },
   "scripts": {
-    "preversion": "FRIG_ENV=\"production\" FRIG_MODE=\"core\" webpack --progress",
-    "version": "git add ./dist",
+    "preversion": "./scripts/preversion.sh",
+    "version": "./scripts/version.sh",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {

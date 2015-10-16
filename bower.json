@@ -1,0 +1,22 @@
+{
+  "name": "frigging-bootstrap",
+  "version": "0.3.7",
+  "homepage": "https://github.com/frig-js/frigging-bootstrap",
+  "authors": [
+    "D1plo1d <d1plo1d@d1plo1d.com>"
+  ],
+  "description": "Simple but powerful forms for React inspired by SimpleForm.",
+  "main": "dist/frigging-bootstrap.js",
+  "keywords": [
+    "Frig",
+    "Forms",
+    "React",
+    "Bootstrap"
+  ],
+  "ignore": [
+    "*",
+    "!dist/",
+    "!dist/*"
+  ],
+  "license": "MIT"
+}
