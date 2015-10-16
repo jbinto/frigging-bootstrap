@@ -4,22 +4,20 @@ let cx = require("classnames")
 let draggable = require('./higher_order_components/draggable.js')
 let {div} = React.DOM
 
-@draggable
+@draggable({
+  updateClientCoords({clientX, clientY}) {
+    let rect = React.findDOMNode(this).getBoundingClientRect()
+    let x = (clientX - rect.left) / rect.width
+    let y = (rect.bottom - clientY) / rect.height
+    let saturation = this.getScaledValue(x)
+    let value = this.getScaledValue(y)
+    let colr = Colr.fromHsv(this.props.hsv.h, saturation, value)
+
+    this.props.colrLink.requestChange(colr)
+  }
+})
 export default class extends React.Component {
   static displayName = "ColorMap"
-
-  componentWillReceiveProps({clientX, clientY}){
-    if (clientX !== this.props.clientX && clientY !== this.props.clientY) {
-      let rect = React.findDOMNode(this).getBoundingClientRect()
-      let x = (clientX - rect.left) / rect.width
-      let y = (rect.bottom - clientY) / rect.height
-      let saturation = this.props.getScaledValue(x)
-      let value = this.props.getScaledValue(y)
-      let colr = Colr.fromHsv(this.props.hsv.h, saturation, value)
-
-      this.props.colrLink.requestChange(colr)
-    }
-  }
 
   render() {
     let x = this.props.hsv.s
