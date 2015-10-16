@@ -1426,7 +1426,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        this._onMouseMove = function (e) {
 	          if (_this.state.dragging) {
-	            e.preventDefault();
 	            _this._updateClientCoords(e);
 	          }
 	        };
@@ -1460,6 +1459,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }, {
 	        key: "_updateClientCoords",
 	        value: function _updateClientCoords(e) {
+	          e.preventDefault();
+
 	          var _ref2 = e.touches == null ? e : e.touches[0];
 
 	          var clientX = _ref2.clientX;
