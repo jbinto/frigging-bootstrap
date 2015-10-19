@@ -1,5 +1,5 @@
 var React = require("react")
-var {errorList, sizeClassNames, formGroupCx, savedText} = require("../util.js")
+var {errorList, sizeClassNames, formGroupCx, saveList} = require("../util.js")
 var {div, label, input, span} = React.DOM
 var cx = require("classnames")
 let booleanHOC = require("frig").HigherOrderComponents.Boolean
@@ -27,10 +27,7 @@ export default class extends React.Component {
             input(this._inputHtml()),
             this.props.label ? ` ${this.props.label}` : "",
           ),
-          savedText({
-            saved: this.props.saved,
-            className: "frigb-checkbox",
-          }),
+          saveList(this.props.saves, "frigb-checkbox"),
           errorList(this.props.errors),
         ),
       ),

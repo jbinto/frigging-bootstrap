@@ -3,7 +3,7 @@ let cx = require("classnames")
 let {Focusable} = require("frig").HigherOrderComponents
 let popup = React.createFactory(require("./timepicker_popup"))
 let {
-  savedText,
+  saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
@@ -53,9 +53,7 @@ export default class extends React.Component {
         div({},
           label(this.props)),
         this._input(),
-        savedText({
-          saved: this.props.saved,
-        }),
+        saveList(this.props.saves),
         errorList(this.props.errors),
       ),
       this._timePopup(),

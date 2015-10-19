@@ -1,6 +1,6 @@
 let React = require("react")
 let {
-  savedText,
+  saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
@@ -87,9 +87,7 @@ export default class extends React.Component {
           div({className: "image-upload"},
             this._image(),
             this._inputGroup(),
-            savedText({
-              saved: this.props.saved,
-            }),
+            saveList(this.props.saves),
           ),
         ),
         errorList(this.props.errors),

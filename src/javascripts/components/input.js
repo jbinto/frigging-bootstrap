@@ -1,6 +1,6 @@
 let React = require("react")
 let {
-  savedText,
+  saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
@@ -45,9 +45,7 @@ export default class extends React.Component {
 
   _inputGroup() {
     let inputLabel = label(this.props)
-    let saved = savedText({
-      saved: this.props.saved,
-    })
+    let saved = saveList(this.props.saves)
 
     if (this.props.prefix || this.props.suffix) {
       return inputLabel,

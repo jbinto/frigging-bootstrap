@@ -4,7 +4,7 @@ let fuzzy = require('fuzzy')
 let {div, a, input, i, ul, li} = React.DOM
 let BootstrapInput = require("./input.js")
 let FrigInput = React.createFactory(require("frig").Input)
-let {errorList, savedText} = require("../util")
+let {errorList, saveList} = require("../util")
 
 export default class extends React.Component {
 
@@ -222,9 +222,7 @@ export default class extends React.Component {
         this._selectionsList(),
         input(inputHtml),
       ),
-      savedText({
-        saved: this.props.saved,
-      }),
+      saveList(this.props.saves),
       this._suggestionsList(),
       errorList(this.state.errors),
     )

@@ -1,7 +1,7 @@
 let React = require("react")
 let Colr = require('colr')
 let {
-  savedText,
+  saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
@@ -103,9 +103,7 @@ export default class extends React.Component {
             "form-control",
           ),
         })),
-        savedText({
-          saved: this.props.saved,
-        }),
+        saveList(this.props.saves),
         div({
           className: "frigb-color-block",
           style: { backgroundColor: this.state.colr.toHex() },

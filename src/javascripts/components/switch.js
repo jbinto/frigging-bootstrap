@@ -2,7 +2,7 @@ let React = require("react")
 let cx = require("classnames")
 let booleanHOC = require("frig").HigherOrderComponents.Boolean
 let {
-  savedText,
+  saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
@@ -96,9 +96,7 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
-        savedText({
-          saved: this.props.saved,
-        }),
+        saveList(this.props.saves),
         div({className: inputContainerCx(this.props)},
           div({className: this._switchCx(), style: this._switchStyle()},
             this._input(),

@@ -2,7 +2,7 @@ let React = require("react")
 let cx = require("classnames")
 
 let {
-  savedText,
+  saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
@@ -34,9 +34,7 @@ export default class extends React.Component {
           select(this._inputHtml()),
           errorList(this.props.errors),
         ),
-        savedText({
-          saved: this.props.saved,
-        }),
+        saveList(this.props.saves),
       )
     )
   }

@@ -1,6 +1,6 @@
 let React = require("react")
 let {
-  savedText,
+  saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
@@ -33,9 +33,7 @@ export default class extends React.Component {
         div({className: "controls"},
           textarea(this._inputHtml()),
         ),
-        savedText({
-          saved: this.props.saved,
-        }),
+        saveList(this.props.saves),
         errorList(this.props.errors),
       ),
     )
