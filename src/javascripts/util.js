@@ -88,4 +88,4 @@ module.exports = {
 
 }
 
-var {savedText, sizeClassNames} = module.exports
+var {sizeClassNames} = module.exports
