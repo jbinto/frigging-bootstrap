@@ -33,12 +33,12 @@ module.exports = {
   },
 
   saveList(isSave) {
-    return module.exports.savedText({
+    return module.exports.save({
       saved: isSave,
     })
   },
 
-  savedText({saved, className}) {
+  save({saved, className}) {
     className = className || "frigb-saved pull-right"
     if (!saved) return ""
     return span({className, key: "saved"}, "saved")
