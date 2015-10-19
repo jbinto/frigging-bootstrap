@@ -32,6 +32,12 @@ module.exports = {
     return div({}, label(labelHtml, props.label))
   },
 
+  saveList(isSave) {
+    return module.exports.savedText({
+      saved: isSave,
+    })
+  },
+
   savedText({saved, className}) {
     className = className || "frigb-saved pull-right"
     if (!saved) return ""
