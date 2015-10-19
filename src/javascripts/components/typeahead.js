@@ -240,7 +240,7 @@ export default class extends React.Component {
         value: this._inputValue(),
         requestChange: (inputValue) => this.setState({inputValue}),
       },
-      saved: false,
+      saves: false,
       validate: false,
       ref: "frigInput",
       onComponentMount: () => {},
