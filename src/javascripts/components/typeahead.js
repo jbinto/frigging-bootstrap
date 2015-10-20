@@ -222,7 +222,7 @@ export default class extends React.Component {
         this._selectionsList(),
         input(inputHtml),
       ),
-      saveList(this.props.saves),
+      saveList(this.props.saved),
       this._suggestionsList(),
       errorList(this.state.errors),
     )
@@ -240,7 +240,7 @@ export default class extends React.Component {
         value: this._inputValue(),
         requestChange: (inputValue) => this.setState({inputValue}),
       },
-      saves: false,
+      saved: false,
       validate: false,
       ref: "frigInput",
       onComponentMount: () => {},

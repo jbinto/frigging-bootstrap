@@ -34,7 +34,7 @@ export default class extends React.Component {
           select(this._inputHtml()),
           errorList(this.props.errors),
         ),
-        saveList(this.props.saves),
+        saveList(this.props.saved),
       )
     )
   }

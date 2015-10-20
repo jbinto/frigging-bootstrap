@@ -53,7 +53,7 @@ export default class extends React.Component {
         div({},
           label(this.props)),
         this._input(),
-        saveList(this.props.saves),
+        saveList(this.props.saved),
         errorList(this.props.errors),
       ),
       this._timePopup(),

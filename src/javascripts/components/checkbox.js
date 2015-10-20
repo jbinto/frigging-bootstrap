@@ -27,7 +27,7 @@ export default class extends React.Component {
             input(this._inputHtml()),
             this.props.label ? ` ${this.props.label}` : "",
           ),
-          saveList(this.props.saves),
+          saveList(this.props.saved),
           errorList(this.props.errors),
         ),
       ),

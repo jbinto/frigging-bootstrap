@@ -33,7 +33,7 @@ export default class extends React.Component {
         div({className: "controls"},
           textarea(this._inputHtml()),
         ),
-        saveList(this.props.saves),
+        saveList(this.props.saved),
         errorList(this.props.errors),
       ),
     )

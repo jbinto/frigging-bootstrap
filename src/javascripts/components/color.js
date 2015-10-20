@@ -103,7 +103,7 @@ export default class extends React.Component {
             "form-control",
           ),
         })),
-        saveList(this.props.saves),
+        saveList(this.props.saved),
         div({
           className: "frigb-color-block",
           style: { backgroundColor: this.state.colr.toHex() },
