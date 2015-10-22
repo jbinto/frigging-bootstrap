@@ -1,11 +1,10 @@
 let React = require("react")
 let cx = require("classnames")
 let fuzzy = require('fuzzy')
-let {div, a, input, i, ul, li, span} = React.DOM
+let {div, a, input, i, ul, li} = React.DOM
 let BootstrapInput = require("./input.js")
 let FrigInput = React.createFactory(require("frig").Input)
-let {errorList, savedNotification} = require("../util")
-let {promisedTimeout} = require("frig").util
+let {errorList, saveList} = require("../util")
 
 export default class extends React.Component {
 
@@ -46,7 +45,7 @@ export default class extends React.Component {
   _updateInputValueFromProps(nextProps, prevProps = {valueLink: {}}) {
     if (nextProps.valueLink.value === (prevProps.valueLink||{}).value) return
     let selections = this._selections(nextProps)
-    if (this.props.multiple || selections.length != 1) return
+    if (this.props.multiple || selections.length !== 1) return
     let value = selections[0].label
     if (value !== this.state.inputValue) this.setState({inputValue: value})
   }
@@ -99,15 +98,16 @@ export default class extends React.Component {
     }
     let filter = (o) => o.hash !== option.hash
     let persistedOptions = this.state.persistedOptions.filter(filter)
+    let requestChange = this.props.valueLink.requestChange
     this.setState({persistedOptions})
     if (this.props.multiple) {
       let value = this.props.valueLink.value.filter(
         (val) => JSON.stringify(val) !== option.hash
       )
-      this.props.valueLink.requestChange(value)
+      requestChange(value)
     }
     else {
-      this.props.valueLink.requestChange(undefined)
+      requestChange(undefined)
     }
   }
 
@@ -137,11 +137,15 @@ export default class extends React.Component {
     let options = this._options(nextProps)
     return values.map((value) => {
       let hash = JSON.stringify(value)
-      let option = options.find((o) => o.hash == hash)
-      if (option == null) throw(
-        `Typeahead selection (${value}) for ${this.props.name} not included `+
-        `in the typeahead options`
-      )
+      let option = options.find((o) => o.hash === hash)
+
+      if (option == null) {
+        throw(
+          `Typeahead selection (${value}) for ${this.props.name} not included `+
+          `in the typeahead options`
+        )
+      }
+
       return option
     })
   }
@@ -218,7 +222,7 @@ export default class extends React.Component {
         this._selectionsList(),
         input(inputHtml),
       ),
-      savedNotification({parentProps: this.props}),
+      saveList(this.props.saved),
       this._suggestionsList(),
       errorList(this.state.errors),
     )
@@ -236,6 +240,7 @@ export default class extends React.Component {
         value: this._inputValue(),
         requestChange: (inputValue) => this.setState({inputValue}),
       },
+      saved: false,
       validate: false,
       ref: "frigInput",
       onComponentMount: () => {},

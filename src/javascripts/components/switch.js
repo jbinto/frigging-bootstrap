@@ -1,9 +1,14 @@
 let React = require("react")
 let cx = require("classnames")
 let booleanHOC = require("frig").HigherOrderComponents.Boolean
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {savedNotification} = require("../util.js")
-let {inputContainerCx} = require("../util.js")
+let {
+  saveList,
+  errorList,
+  sizeClassNames,
+  formGroupCx,
+  label,
+  inputContainerCx,
+} = require("../util.js")
 let {div, span} = React.DOM
 
 @booleanHOC
@@ -91,8 +96,8 @@ export default class extends React.Component {
     return div({className: cx(sizeClassNames(this.props))},
       div({className: formGroupCx(this.props)},
         label(this.props),
+        saveList(this.props.saved),
         div({className: inputContainerCx(this.props)},
-          savedNotification({parentProps: this.props}),
           div({className: this._switchCx(), style: this._switchStyle()},
             this._input(),
           ),
