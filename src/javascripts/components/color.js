@@ -1,11 +1,15 @@
 let React = require("react")
 let Colr = require('colr')
-let {errorList, sizeClassNames, formGroupCx, label} = require("../util.js")
-let {savedNotification} = require("../util.js")
+let {
+  saveList,
+  errorList,
+  sizeClassNames,
+  formGroupCx,
+  label,
+} = require("../util.js")
 let {div, input} = React.DOM
 let cx = require("classnames")
 let {Focusable} = require("frig").HigherOrderComponents
-
 let colorMap = React.createFactory(require("./color/map"))
 let hue_slider =  React.createFactory(require("./color/hue_slider"))
 
@@ -99,16 +103,13 @@ export default class extends React.Component {
             "form-control",
           ),
         })),
+        saveList(this.props.saved),
         div({
           className: "frigb-color-block",
           style: { backgroundColor: this.state.colr.toHex() },
           onClick: this._onColorBlockClick.bind(this),
         }),
         this._colorPopup(),
-        savedNotification({
-          parentProps: this.props,
-          className: "frigb-saved-inline frigb-colorpicker-inline",
-        }),
         errorList(this.props.errors),
       )
     )

@@ -28,24 +28,20 @@ module.exports = {
     labelHtml.className = cx(labelHtml.className, {
       [horizontalClasses]: props.layout === "horizontal",
     })
-    return div({},
-      label(labelHtml, props.label),
-      savedText({saved: props.saved && props.layout === "vertical"}),
-    )
+
+    return div({}, label(labelHtml, props.label))
   },
 
-  savedText({saved, className}) {
+  saveList(isSave) {
+    return module.exports.save({
+      saved: isSave,
+    })
+  },
+
+  save({saved, className}) {
     className = className || "frigb-saved pull-right"
     if (!saved) return ""
     return span({className, key: "saved"}, "saved")
-  },
-
-  savedNotification({layout, label, saved, className}) {
-    className = className || "frigb-saved-inline"
-    let savedInline = savedText({saved, className})
-
-    if (label === false && saved) return savedInline
-    if (label && saved && layout === "horizontal") return savedInline
   },
 
   inputContainerCx(props) {
@@ -92,4 +88,4 @@ module.exports = {
 
 }
 
-var {savedText, sizeClassNames} = module.exports
+var {sizeClassNames} = module.exports
