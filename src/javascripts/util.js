@@ -1,6 +1,7 @@
-var React = require("react")
-var {div, span, label} = React.DOM
-var cx = require("classnames")
+let React = require("react")
+let {div, span, label} = React.DOM
+let cx = require("classnames")
+let transitionGroup = React.createFactory(React.addons.CSSTransitionGroup)
 
 module.exports = {
   errorList(errors) {
@@ -9,8 +10,19 @@ module.exports = {
   },
 
   error(msg, i=0) {
-    return span({className: "help-block", key: `error-${i}`},
-      React.DOM.i({className: "fa fa-exclamation-circle"}, ` ${msg}`),
+    let transtionAttrs = {
+      transitionName: "errorLabel",
+      transitionAppear: true,
+      transitionEnterTimeout: 0,
+      transitionLeaveTimeout: 0,
+    }
+    return transitionGroup(transtionAttrs,
+      span({className: "help-block", key: `error-${i}`},
+        React.DOM.i({
+          className: "fa fa-exclamation-circle",
+          key: `error-errorLabel-${i}`,
+        }, ` ${msg}`),
+      )
     )
   },
 
