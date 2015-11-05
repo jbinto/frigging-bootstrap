@@ -35,6 +35,7 @@
     "bootstrap": "*",
     "font-awesome-webpack": "*",
     "classnames": "*",
+    "react-addons-css-transition-group": "*",
     "fuzzy": "*",
     "colr": "*"
   },
