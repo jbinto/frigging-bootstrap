@@ -103,13 +103,13 @@ export default class extends React.Component {
             "form-control",
           ),
         })),
-        saveList(this.props.saved),
         div({
           className: "frigb-color-block",
           style: { backgroundColor: this.state.colr.toHex() },
           onClick: this._onColorBlockClick.bind(this),
         }),
         this._colorPopup(),
+        saveList(this.props.saved),
         errorList(this.props.errors),
       )
     )
