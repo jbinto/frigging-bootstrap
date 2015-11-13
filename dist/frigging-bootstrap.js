@@ -366,14 +366,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	'use strict';
 
 	(function () {
 		'use strict';
 
-		function classNames() {
+		var hasOwn = ({}).hasOwnProperty;
 
+		function classNames() {
 			var classes = '';
 
 			for (var i = 0; i < arguments.length; i++) {
@@ -382,13 +384,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
+				if (argType === 'string' || argType === 'number') {
 					classes += ' ' + arg;
 				} else if (Array.isArray(arg)) {
 					classes += ' ' + classNames.apply(null, arg);
-				} else if ('object' === argType) {
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
+						if (hasOwn.call(arg, key) && arg[key]) {
 							classes += ' ' + key;
 						}
 					}
@@ -401,7 +403,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
 		} else if (true) {
-			// AMD. Register as an anonymous module.
+			// register as 'classnames', consistent with npm package name
 			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
 			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -1297,9 +1299,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _inherits(_default, _React$Component);
 
 	  function _default() {
-	    _classCallCheck(this, _default);
+	    _classCallCheck(this, _default2);
 
-	    _get(Object.getPrototypeOf(_default.prototype), "constructor", this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(_default2.prototype), "constructor", this).apply(this, arguments);
 	  }
 
 	  _createClass(_default, [{
@@ -1338,6 +1340,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    enumerable: true
 	  }]);
 
+	  var _default2 = _default;
+	  _default = draggable({
+	    updateClientCoords: function updateClientCoords(_ref) {
+	      var clientX = _ref.clientX;
+	      var clientY = _ref.clientY;
+
+	      var rect = React.findDOMNode(this).getBoundingClientRect();
+	      var x = (clientX - rect.left) / rect.width;
+	      var y = (rect.bottom - clientY) / rect.height;
+	      var saturation = this.getScaledValue(x);
+	      var value = this.getScaledValue(y);
+	      var colr = Colr.fromHsv(this.props.hsv.h, saturation, value);
+
+	      this.props.colrLink.requestChange(colr);
+	    }
+	  })(_default) || _default;
 	  return _default;
 	})(React.Component);
 
@@ -1517,9 +1535,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _inherits(_default, _React$Component);
 
 	  function _default() {
-	    _classCallCheck(this, _default);
+	    _classCallCheck(this, _default2);
 
-	    _get(Object.getPrototypeOf(_default.prototype), 'constructor', this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(_default2.prototype), 'constructor', this).apply(this, arguments);
 	  }
 
 	  _createClass(_default, [{
@@ -1548,6 +1566,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    enumerable: true
 	  }]);
 
+	  var _default2 = _default;
+	  _default = draggable({
+	    updateClientCoords: function updateClientCoords(_ref) {
+	      var clientX = _ref.clientX;
+	      var clientY = _ref.clientY;
+
+	      var rect = React.findDOMNode(this).getBoundingClientRect();
+	      var hue = this.getScaledValue((rect.bottom - clientY) / rect.height);
+	      var colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v);
+
+	      this.props.colrLink.requestChange(colr);
+	    }
+	  })(_default) || _default;
 	  return _default;
 	})(React.Component);
 
