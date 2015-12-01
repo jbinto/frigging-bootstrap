@@ -4,6 +4,9 @@
   "private": false,
   "main": "dist/frigging-bootstrap.js",
   "peerDependencies": {
+    "frig": "*",
+    "react": "*",
+    "react-addons-css-transition-group": "*",
     "classnames": "*",
     "fuzzy": "*",
     "colr": "*"

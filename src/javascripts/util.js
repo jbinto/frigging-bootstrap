@@ -1,7 +1,9 @@
 let React = require("react")
 let {div, span, label} = React.DOM
 let cx = require("classnames")
-let transitionGroup = React.createFactory(React.addons.CSSTransitionGroup)
+let transitionGroup = React.createFactory(
+  require("react-addons-css-transition-group")
+)
 
 module.exports = {
   errorList(errors) {
