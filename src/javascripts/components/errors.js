@@ -11,7 +11,7 @@ export default class extends React.Component {
     return div({},
       this.props.errors.map((error) => {
         return [
-          div({className: "col-xs-12"},
+          div({className: "col-xs-12", key: `error-${error}`},
             div({className: "frigb-error", ref: `error-${error}`},
               div({className: "alert alert-danger"},
                 i({className:"fa fa-exclamation-circle"}),
