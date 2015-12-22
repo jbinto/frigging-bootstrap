@@ -37,11 +37,11 @@
     "eslint-loader": "git+https://github.com/MoOx/eslint-loader.git#master",
     "eslint": "1.9.0",
     "babel-eslint": "*",
-    "react": "0.13.3",
     "bootstrap": "*",
     "font-awesome": "*",
     "font-awesome-webpack": "*",
     "classnames": "*",
+    "react": "*",
     "react-addons-css-transition-group": "*",
     "fuzzy": "*",
     "colr": "*"
