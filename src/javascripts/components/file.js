@@ -1,4 +1,5 @@
 let React = require("react")
+let ReactDOM = require("react-dom")
 let {
   saveList,
   errorList,
@@ -37,7 +38,7 @@ export default class extends React.Component {
   _loadFile() {
     this.fReader = new FileReader()
     this.fReader.onloadend = this._onFileLoad.bind(this)
-    let file = React.findDOMNode(this.refs.frigFile).files[0]
+    let file = ReactDOM.findDOMNode(this.refs.frigFile).files[0]
     this.fReader.readAsDataURL(file)
   }
 

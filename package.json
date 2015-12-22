@@ -7,6 +7,7 @@
     "frig": "*",
     "react": "*",
     "react-addons-css-transition-group": "*",
+    "react-dom": "*",
     "classnames": "*",
     "fuzzy": "*",
     "colr": "*"
@@ -36,13 +37,13 @@
     "jsx-loader": "*",
     "eslint-loader": "git+https://github.com/MoOx/eslint-loader.git#master",
     "eslint": "1.9.0",
-    "babel-eslint": "*",
     "bootstrap": "*",
     "font-awesome": "*",
     "font-awesome-webpack": "*",
     "classnames": "*",
     "react": "*",
     "react-addons-css-transition-group": "*",
+    "react-dom": "*",
     "fuzzy": "*",
     "colr": "*"
   },
