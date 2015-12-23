@@ -18,6 +18,7 @@
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
+    "frig": "*",
     "coffee-script": "1.9.3",
     "webpack": "*",
     "webpack-dev-server": "*",
