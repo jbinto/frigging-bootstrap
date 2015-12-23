@@ -1,4 +1,5 @@
 let React = require("react")
+let ReactDOM = require("react-dom")
 let Colr = require('colr')
 let {
   saveList,
@@ -69,7 +70,7 @@ export default class extends React.Component {
   }
 
   _onColorBlockClick() {
-    React.findDOMNode(this.refs.frigColorInput).select()
+    ReactDOM.findDOMNode(this.refs.frigColorInput).select()
   }
 
   _colorPopup() {

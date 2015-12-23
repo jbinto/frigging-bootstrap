@@ -1,4 +1,5 @@
 let React = require("react")
+let ReactDOM = require("react-dom")
 let cx = require("classnames")
 let fuzzy = require('fuzzy')
 let {div, a, input, i, ul, li} = React.DOM
@@ -184,12 +185,12 @@ export default class extends React.Component {
   // Transfers focus to the nested React.DOM.input component
   // (nested inside the FriggingBootstrapInput inside the FrigInput)
   _focusInput() {
-    React.findDOMNode(this._inputComponent).focus()
+    ReactDOM.findDOMNode(this._inputComponent).focus()
   }
 
   _onDocumentClick(e) {
     let target = (e.originalTarget) ? e.originalTarget : e.srcElement
-    let isInside = React.findDOMNode(this._wrapperComponent).contains(target)
+    let isInside = ReactDOM.findDOMNode(this._wrapperComponent).contains(target)
     if (!isInside) this.setState({focused: false})
   }
 
