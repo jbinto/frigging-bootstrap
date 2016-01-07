@@ -1,4 +1,5 @@
 let React = require("react")
+let Numeral = require("numeral")
 let cx = require("classnames")
 let {
   saveList,
@@ -13,16 +14,6 @@ export default class extends React.Component {
   displayName = "Frig.friggingBootstrap.Number"
 
   static defaultProps = Object.assign(require("../default_props.js"))
-
-  _isNumber(value) {
-    let number = parseFloat(value)
-    return !Number.isNaN(parseFloat(number)) && Number.isFinite(number)
-  }
-
-  _requestNumberChange(value) {
-    let currentNumber = this._isNumber(value) ? value : ""
-    this.props.valueLink.requestChange(currentNumber)
-  }
 
   _inputCx() {
     return cx(
@@ -40,6 +31,31 @@ export default class extends React.Component {
         },
       })
     )
+  }
+
+  _isNumber(value) {
+    let number = parseFloat(value)
+    return !Number.isNaN(parseFloat(number)) && Number.isFinite(number)
+  }
+
+  _requestNumberChange(value) {
+    let currentNumber = this._isNumber(value) ? value : ""
+    this.props.valueLink.requestChange(currentNumber)
+  }
+
+  _toNumeral(value) {
+    const n = Numeral(value)
+
+    // numeral.js converts empty strings into 0 for no reason, so if given
+    // value was not '0' or 0, treat it as null.
+    // or
+    // numeral.js can sometimes convert values (like '4.5.2') into NaN
+    // and we would rather null than NaN.
+    if (n.value() === 0 && (value !== 0 && value !== '0') || isNaN(n.value())) {
+      return null
+    }
+
+    return n
   }
 
   render() {
