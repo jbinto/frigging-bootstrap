@@ -13,7 +13,27 @@ let {div, input} = React.DOM
 export default class extends React.Component {
   displayName = "Frig.friggingBootstrap.Number"
 
-  static defaultProps = Object.assign(require("../default_props.js"))
+  static defaultProps = Object.assign(require("../default_props.js"), {
+    format: "0,0[.][00]",
+  })
+
+  componentDidMount() {
+    if(this.props.valueLink.value) this._formatNumber()
+  }
+
+  _formatNumber() {
+    if (!this.props.format) return
+
+    let currentNumber = this._toNumeral(this.props.valueLink.value) || ""
+
+    this.props.valueLink.requestChange(
+      currentNumber ? currentNumber.format(this.props.format) : ""
+    )
+  }
+
+  _onBlur() {
+    this._formatNumber()
+  }
 
   _inputCx() {
     return cx(
@@ -24,11 +44,9 @@ export default class extends React.Component {
 
   _input() {
     return input(Object.assign({}, this.props.inputHtml, {
+        onBlur: this._onBlur.bind(this),
         className: this._inputCx(),
-        valueLink: {
-          value: this.props.valueLink.value,
-          requestChange: this._requestNumberChange.bind(this),
-        },
+        valueLink: this.props.valueLink,
       })
     )
   }
@@ -36,11 +54,6 @@ export default class extends React.Component {
   _isNumber(value) {
     let number = parseFloat(value)
     return !Number.isNaN(parseFloat(number)) && Number.isFinite(number)
-  }
-
-  _requestNumberChange(value) {
-    let currentNumber = this._isNumber(value) ? value : ""
-    this.props.valueLink.requestChange(currentNumber)
   }
 
   _toNumeral(value) {
