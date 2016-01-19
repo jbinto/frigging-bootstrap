@@ -10,7 +10,8 @@
     "react-dom": "*",
     "classnames": "*",
     "fuzzy": "*",
-    "colr": "*"
+    "colr": "*",
+    "numeral": "*"
   },
   "scripts": {
     "preversion": "./scripts/preversion.sh",
@@ -29,6 +30,7 @@
     "stylus-loader": "*",
     "extract-text-webpack-plugin": "*",
     "file-loader": "*",
+    "babel-eslint": "4.1.6",
     "babel-loader": "5.3.3",
     "babel-core": "5.8.33",
     "coffee-loader": "*",
@@ -46,10 +48,11 @@
     "react-addons-css-transition-group": "*",
     "react-dom": "*",
     "fuzzy": "*",
-    "colr": "*"
+    "colr": "*",
+    "numeral": "*"
   },
   "engines": {
-    "node": "~0.12.x",
-    "npm": "2.7.x"
+    "node": ">=0.12.0",
+    "npm": ">=2.7.0"
   }
 }
