@@ -17,10 +17,6 @@ export default class extends React.Component {
     format: "0,0[.][00]",
   })
 
-  componentDidMount() {
-    if(this.props.valueLink.value) this._formatNumber()
-  }
-
   _formatNumber() {
     if (!this.props.format) return
 
