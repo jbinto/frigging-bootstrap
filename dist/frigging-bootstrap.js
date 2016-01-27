@@ -1992,11 +1992,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  _createClass(_default, [{
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      if (this.props.valueLink.value) this._formatNumber();
-	    }
-	  }, {
 	    key: "_formatNumber",
 	    value: function _formatNumber() {
 	      if (!this.props.format) return;
