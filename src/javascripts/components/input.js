@@ -1,19 +1,16 @@
-let React = require("react")
-let {
+import React from "react"
+import cx from "classnames"
+import {
   saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
   label,
   inputContainerCx,
-} = require("../util.js")
-let {div, input} = React.DOM
-let cx = require("classnames")
+} from "../util.js"
 
-
-export default class extends React.Component {
-
-  displayName = "Frig.friggingBootstrap.Input"
+export default class Input extends React.Component {
+  displayName = "FriggingBootstrap.Input"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
     // Bootstrap input addon texts
@@ -66,13 +63,15 @@ export default class extends React.Component {
   }
 
   render() {
-    return div({className: cx(sizeClassNames(this.props))},
-      div({className: formGroupCx(this.props)},
-        div({className: inputContainerCx(this.props)},
-          this._inputGroup(),
-          errorList(this.props.errors),
-        ),
-      ),
+    return (
+      <div className={cx(sizeClassNames(this.props))}>
+        <div className={formGroupCx(this.props)}>
+          <div className={inputContainerCx(this.props)}>
+            {this._inputGroup()}
+            {errorList(this.props.errors)}
+          </div>
+        </div>
+      </div>
     )
   }
 

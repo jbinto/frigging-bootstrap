@@ -1,9 +1,8 @@
-let React = require("react")
-let ReactDOM = require("react-dom")
-let Colr = require('colr')
-let cx = require("classnames")
-let draggable = require('./higher_order_components/draggable.js')
-let {div} = React.DOM
+import React from "react"
+import ReactDOM from "react-dom"
+import Colr from 'colr'
+import cx from "classnames"
+import draggable from './higher_order_components/draggable.js'
 
 @draggable({
   updateClientCoords({clientX, clientY}) {
@@ -26,30 +25,31 @@ export default class extends React.Component {
     let hue = Colr.fromHsv(this.props.hsv.h, 100, 100).toHex()
     let luminosity = this.props.colrLink.value.toGrayscale()
 
-    return div(
-      {
-        className: cx({
-            "frigb-map": true,
-            "frigb-active": this.props.active,
-            "frigb-dark": luminosity <= 128,
-            "frigb-light": luminosity > 128,
-        }),
-        onMouseDown: this.props.startDragging,
-        onTouchStart: this.props.startDragging,
-      },
-      div({
-        className: "frigb-background",
-        style: {
-          backgroundColor: hue,
-        },
-      }),
-      div({
-        className: "frigb-pointer",
-        style: {
-          left: this.props.getPercentageValue(x),
-          bottom: this.props.getPercentageValue(y),
-        },
-      })
+    return (
+      <div
+        className={cx({
+          "frigb-map": true,
+          "frigb-active": this.props.active,
+          "frigb-dark": luminosity <= 128,
+          "frigb-light": luminosity > 128,
+        })}
+        onMouseDown={this.props.startDragging}
+        onTouchStart={this.props.startDragging}
+      >
+        <div
+          className="frigb-background"
+          style={{
+            backgroundColor: hue,
+          }}
+        />
+        <div
+          className="frigb-pointer"
+          style={{
+            left: this.props.getPercentageValue(x),
+            bottom: this.props.getPercentageValue(y),
+          }}
+        />
+      </div>
     )
   }
 

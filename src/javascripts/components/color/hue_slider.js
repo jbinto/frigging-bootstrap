@@ -18,20 +18,22 @@ export default class extends React.Component {
   static defaultProps = Object.assign(require("../../default_props.js"))
 
   render() {
-    return div({
-        className: "frigb-slider frigb-vertical",
-        onMouseDown: this.props.startDragging,
-        onTouchStart: this.props.startDragging,
-      },
-        div({
-          className: "frigb-track",
-        }),
-        div({
-          className: "frigb-pointer",
-          style: {
+    return (
+      <div
+        className="frigb-slider frigb-vertical"
+        onMouseDown={this.props.startDragging}
+        onTouchStart={this.props.startDragging}
+      >
+        <div
+          className="frigb-track"
+        />
+        <div
+          className="frigb-pointer"
+          style={{
             "bottom": this.props.getPercentageValue(this.props.hsv.h),
-          },
-        })
-      )
-    }
+          }}
+        />
+      </div>
+    )
+  }
 }

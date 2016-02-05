@@ -1,7 +1,7 @@
-let React = require("react")
+import React from "react"
 
 export default function({updateClientCoords}) {
-  return function(componentClass) {
+  return function(ComponentClass) {
 
     return class extends React.Component {
       static displayName = "Draggable"
@@ -82,7 +82,7 @@ export default function({updateClientCoords}) {
       }
 
       render() {
-        return React.createElement(componentClass, this._childProps())
+        return <ComponentClass {...this._childProps()}/>
       }
 
     }

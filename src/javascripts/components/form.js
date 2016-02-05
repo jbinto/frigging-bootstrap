@@ -1,7 +1,7 @@
 let React = require("react")
-let {form} = React.DOM
 
-export default class FriggingBootstrapForm extends React.Component {
+export default class Form extends React.Component {
+  displayName = "FriggingBootstrap.Form"
 
   static defaultProps = {
     layout: require("../default_props.js").layout,
@@ -15,7 +15,11 @@ export default class FriggingBootstrapForm extends React.Component {
   }
 
   render() {
-    return form(this._formHtml(), this.props.children)
+    return (
+      <form {...this._formHtml()}>
+        {this.props.children}
+      </form>
+    )
   }
 
 }

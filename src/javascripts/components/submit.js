@@ -1,11 +1,9 @@
-var React = require("react")
-var {div, button} = React.DOM
-var {sizeClassNames} = require("../util.js")
-var cx = require("classnames")
+import React from "react"
+import {sizeClassNames} from "../util.js"
+import cx from "classnames"
 
-export default class extends React.Component {
-
-  displayName = "Frig.friggingBootstrap.Submit"
+export default class Submit extends React.Component {
+  displayName = "FriggingBootstrap.Submit"
 
   static defaultProps = Object.assign({}, require("../default_props.js"), {
     bsStyle: "default",
@@ -17,7 +15,7 @@ export default class extends React.Component {
     let optionalClasses = {
       "btn-block": this.props.block,
       [`btn-${this.props.bsSize}`]: this.props.bsSize != null,
-      "pull-right": this.props.align == "right",
+      "pull-right": this.props.align === "right",
     }
     return cx(
       this.props.className,
@@ -43,12 +41,14 @@ export default class extends React.Component {
   }
 
   render() {
-    return div({className: cx(sizeClassNames(this.props))},
-      div({className: "form-group"},
-        div({className: this._submitContainerCx()},
-          button(this._inputHtml(), this.props.title),
-        ),
-      ),
+    return (
+      <div className={cx(sizeClassNames(this.props))}>
+        <div className="form-group">
+          <div className={this._submitContainerCx()}>
+            <button {...this._inputHtml()}>{this.props.title}</button>
+          </div>
+        </div>
+      </div>
     )
   }
 

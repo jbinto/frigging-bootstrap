@@ -1,18 +1,15 @@
-let React = require("react")
-let ReactDOM = require("react-dom")
-let {
+import React from "react"
+import {
   saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
   label,
-} = require("../util.js")
-let {div, input, img} = React.DOM
-let cx = require("classnames")
+} from "../util.js"
+import cx from "classnames"
 
-export default class extends React.Component {
-
-  displayName = "Frig.friggingBootstrap.FileInput"
+export default class FileInput extends React.Component {
+  displayName = "FriggingBootstrap.FileInput"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
     prefix:          undefined,
@@ -24,7 +21,7 @@ export default class extends React.Component {
   }
 
   _input() {
-    return input(Object.assign({}, this.props.inputHtml, {
+    let inputProps = Object.assign({}, this.props.inputHtml, {
       className: cx(this.props.className, "form-control"),
       type: "file",
       accept: "image/png,image/gif,image/jpeg",
@@ -32,7 +29,8 @@ export default class extends React.Component {
       valueLink: {
         requestChange: this._loadFile.bind(this),
       },
-    }))
+    })
+    return <input {...inputProps}/>
   }
 
   _loadFile() {
@@ -49,12 +47,14 @@ export default class extends React.Component {
 
   _image() {
     if (this.props.valueLink.value == null) return ""
-    return img({
-      className: "thumbnail",
-      height: "125",
-      width: "125",
-      src: this.props.valueLink.value,
-    })
+    return (
+      <img
+        className="thumbnail"
+        height="125"
+        width="125"
+        src={this.props.valueLink.value}
+      />
+    )
   }
 
   _inputPrefix() {
@@ -69,10 +69,12 @@ export default class extends React.Component {
 
   _inputGroup() {
     if (this.props.prefix || this.props.suffix) {
-      return div({className: "input-group"},
-        this._inputPrefix(),
-        this._input(),
-        this._inputSuffix(),
+      return (
+        <div className="input-group">
+          {this._inputPrefix()}
+          {this._input()}
+          {this._inputSuffix()}
+        </div>
       )
     }
     else {
@@ -81,18 +83,20 @@ export default class extends React.Component {
   }
 
   render() {
-    return div({className: cx(sizeClassNames(this.props))},
-      div({className: formGroupCx(this.props)},
-        label(this.props),
-        div({className: "controls"},
-          div({className: "image-upload"},
-            this._image(),
-            this._inputGroup(),
-            saveList(this.props.saved),
-          ),
-        ),
-        errorList(this.props.errors),
-      ),
+    return (
+      <div className={cx(sizeClassNames(this.props))}>
+        <div className={formGroupCx(this.props)}>
+          {label(this.props)}
+          <div className="controls">
+            <div className="image-upload">
+              {this._image()}
+              {this._inputGroup()}
+              {saveList(this.props.saved)}
+            </div>
+          </div>
+          {errorList(this.props.errors)}
+        </div>
+      </div>
     )
   }
 

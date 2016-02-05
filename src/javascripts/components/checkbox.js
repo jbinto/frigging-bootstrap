@@ -1,13 +1,16 @@
-var React = require("react")
-var {errorList, sizeClassNames, formGroupCx, saveList} = require("../util.js")
-var {div, label, input} = React.DOM
-var cx = require("classnames")
-let booleanHOC = require("frig").HigherOrderComponents.Boolean
+import React from "react"
+import cx from "classnames"
+import {HigherOrderComponents} from "frig"
+import {
+  errorList,
+  sizeClassNames,
+  formGroupCx,
+  saveList,
+} from "../util.js"
 
-@booleanHOC
-export default class extends React.Component {
-
-  displayName = "Frig.friggingBootstrap.Checkbox"
+@HigherOrderComponents.Boolean
+export default class Checkbox extends React.Component {
+  displayName = "FriggingBootstrap.Checkbox"
 
   static defaultProps = require("../default_props.js")
 
@@ -20,17 +23,19 @@ export default class extends React.Component {
   }
 
   render() {
-    return div({className: "form-group"},
-      div({className: cx(sizeClassNames(this.props))},
-        div({className: formGroupCx(this.props)},
-          label(this.props.labelHtml,
-            input(this._inputHtml()),
-            this.props.label ? ` ${this.props.label}` : "",
-          ),
-          saveList(this.props.saved),
-          errorList(this.props.errors),
-        ),
-      ),
+    return (
+      <div className="form-group">
+        <div className={cx(sizeClassNames(this.props))}>
+          <div className={formGroupCx(this.props)}>
+            <label {...this.props.labelHtml}>
+              <input {...this._inputHtml()}/>
+              {this.props.label ? ` ${this.props.label}` : ""}
+            </label>
+            {saveList(this.props.saved)}
+            {errorList(this.props.errors)}
+          </div>
+        </div>
+      </div>
     )
   }
 

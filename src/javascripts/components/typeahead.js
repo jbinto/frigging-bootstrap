@@ -1,15 +1,13 @@
-let React = require("react")
-let ReactDOM = require("react-dom")
-let cx = require("classnames")
-let fuzzy = require('fuzzy')
-let {div, a, input, i, ul, li} = React.DOM
-let BootstrapInput = require("./input.js")
-let FrigInput = React.createFactory(require("frig").Input)
-let {errorList, saveList} = require("../util")
+import React from "react"
+import ReactDOM from "react-dom"
+import cx from "classnames"
+import fuzzy from 'fuzzy'
+import BootstrapInput from "./input.js"
+import {Input} from "frig"
+import {errorList, saveList} from "../util"
 
-export default class extends React.Component {
-
-  displayName = "Frig.friggingBootstrap.Typeahead"
+export default class Typeahead extends React.Component {
+  displayName = "FriggingBootstrap.Typeahead"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
     minLength: 3,
@@ -170,14 +168,16 @@ export default class extends React.Component {
     let index = 0
     // if there are selected items and multiple is true return the actual list
     return this._selections().map((o) => {
-      return div({className, key: `selection-${index++}`},
-        o.label,
-        " ",
-        i({
-          className: "fa fa-times",
-          onClick: this._deselect.bind(this, o),
-          title: "Remove from list",
-        }),
+      return (
+        <div className={className} key={`selection-${index++}`}>
+          {o.label}
+          {" "}
+          <i
+            className="fa fa-times"
+            onClick={this._deselect.bind(this, o)}
+            title="Remove from list"
+          />
+        </div>
       )
     })
   }
@@ -202,8 +202,12 @@ export default class extends React.Component {
     return div({className: wrapperCx},
       ul({className: "dropdown-menu frigb-ta-suggestions col-xs-12"},
         suggestions.map((o) => {
-          return li({key: `option-${o.hash}`},
-            a({href: "#", onClick: this._select.bind(this, o)}, o.label),
+          return (
+            <li key={`option-${o.hash}`}>
+              <a href="#" onClick={this._select.bind(this, o)}>
+                {o.label}
+              </a>
+            </li>
           )
         })
       ),
@@ -218,14 +222,16 @@ export default class extends React.Component {
       onFocus: () => this.setState({focused: true}),
     })
     inputHtml.onKeyDown = this._onKeyDown.bind(this)
-    return div({className: "frigb-ta", ref: (c) => this._wrapperComponent = c},
-      div({className, onClick: this._focusInput.bind(this)},
-        this._selectionsList(),
-        input(inputHtml),
-      ),
-      saveList(this.props.saved),
-      this._suggestionsList(),
-      errorList(this.state.errors),
+    return (
+      <div className="frigb-ta" ref={(c) => this._wrapperComponent = c}>
+        <div className={className} onClick={this._focusInput.bind(this)}>
+          {this._selectionsList()}
+          {input(inputHtml)}
+        </div>
+        {saveList(this.props.saved)}
+        {this._suggestionsList()}
+        {errorList(this.state.errors)}
+      </div>
     )
   }
 
@@ -247,7 +253,7 @@ export default class extends React.Component {
       onComponentMount: () => {},
       onComponentUnmount: () => {},
     }
-    return FrigInput(Object.assign({}, this.props, inputPropOverrides))
+    return <Input {...Object.assign({}, this.props, inputPropOverrides)}/>
   }
 
 }

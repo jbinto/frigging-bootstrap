@@ -1,20 +1,18 @@
-let React = require("react")
-let cx = require("classnames")
-let {Focusable} = require("frig").HigherOrderComponents
-let popup = React.createFactory(require("./timepicker_popup"))
-let {
+import React from "react"
+import cx from "classnames"
+import {HigherOrderComponents} from "frig"
+import TimepickerPopup from "./timepicker_popup"
+import {
   saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
   label,
-} = require("../util.js")
-let {div, input} = React.DOM
+} from "../util.js"
 
-@Focusable
-export default class extends React.Component {
-
-  displayName = "Frig.friggingBootstrap.TimePicker"
+@HigherOrderComponents.Focusable
+export default class TimePicker extends React.Component {
+  displayName = "FriggingBootstrap.TimePicker"
 
   static defaultProps = Object.assign(require("../default_props.js"))
 
@@ -42,21 +40,22 @@ export default class extends React.Component {
   _timePopup() {
     if(this.props.focused === false) return
 
-    return popup({
-      valueLink: this.props.valueLink,
-    })
+    return <TimepickerPopup valueLink={this.props.valueLink}/>
   }
 
   render() {
-    return div({className: cx(sizeClassNames(this.props))},
-      div({className: formGroupCx(this.props)},
-        div({},
-          label(this.props)),
-        this._input(),
-        saveList(this.props.saved),
-        errorList(this.props.errors),
-      ),
-      this._timePopup(),
+    return (
+      <div className={cx(sizeClassNames(this.props))}>
+        <div className={formGroupCx(this.props)}>
+          <div>
+            {label(this.props)}
+          </div>
+          {this._input()}
+          {saveList(this.props.saved)}
+          {errorList(this.props.errors)}
+        </div>
+        {this._timePopup()}
+      </div>
     )
   }
 

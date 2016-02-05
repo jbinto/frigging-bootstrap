@@ -1,17 +1,15 @@
-let React = require("react")
-let {
+import React from "react"
+import {
   saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
   label,
-} = require("../util.js")
-let {div, textarea} = React.DOM
-let cx = require("classnames")
+} from "../util.js"
+import cx from "classnames"
 
-export default class extends React.Component {
-
-  displayName = "Frig.friggingBootstrap.Text"
+export default class Text extends React.Component {
+  displayName = "FriggingBootstrap.Text"
 
   static defaultProps = Object.assign(require("../default_props.js"))
 
@@ -27,15 +25,17 @@ export default class extends React.Component {
   }
 
   render() {
-    return div({className: cx(sizeClassNames(this.props))},
-      div({className: formGroupCx(this.props)},
-        label(this.props),
-        div({className: "controls"},
-          textarea(this._inputHtml()),
-        ),
-        saveList(this.props.saved),
-        errorList(this.props.errors),
-      ),
+    return (
+      <div className={cx(sizeClassNames(this.props))}>
+        <div className={formGroupCx(this.props)}>
+          {label(this.props)}
+          <div className="controls">
+            <textarea {...this._inputHtml()}/>
+          </div>
+          {saveList(this.props.saved)}
+          {errorList(this.props.errors)}
+        </div>
+      </div>
     )
   }
 

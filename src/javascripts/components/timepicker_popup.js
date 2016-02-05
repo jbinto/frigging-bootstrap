@@ -1,11 +1,10 @@
-let React = require("react")
-let BootstrapInput = require("./input.js")
-let FrigInput = React.createFactory(require("frig").Input)
-let BootstrapSwitch = require("./switch.js")
-let {div} = React.DOM
+import React from "react"
+import BootstrapInput from "./input.js"
+import {Input} from "frig"
+import BootstrapSwitch from "./switch.js"
 
-export default class extends React.Component {
-  displayName = "Frig.friggingBootstrap.TimePickerPopup"
+export default class TimePickerPopup extends React.Component {
+  displayName = "FriggingBootstrap.TimePickerPopup"
 
   static defaultProps = Object.assign(require("../default_props.js"))
 
@@ -104,75 +103,83 @@ export default class extends React.Component {
     this.props.valueLink.requestChange(s)
   }
 
-  render() {
-    let inputPropOverrides = {
+  _inputPropOverrides() {
+    return {
       component: BootstrapInput,
       required: false,
       xs: 4,
     }
+  }
 
-    return div({className: "frigb-popup-container popover bottom"},
-      div({className: "arrow"}),
-      div({className: "row"},
-        FrigInput(
-          Object.assign(
-            {},
-            this.props,
-            inputPropOverrides, {
-              name: "hours",
-              inputHtml: {
-                type: "number",
-                step: 1,
-              },
-              valueLink: {
-                value: this._getHour(),
-                requestChange: this._onHourChange.bind(this),
-              },
-            }
-          )
-        ),
+  _hourProps() {
+    return Object.assign(
+      {},
+      this.props,
+      this._inputPropOverrides(), {
+        name: "hours",
+        inputHtml: {
+          type: "number",
+          step: 1,
+        },
+        valueLink: {
+          value: this._getHour(),
+          requestChange: this._onHourChange.bind(this),
+        },
+      }
+    )
+  }
 
-        FrigInput(
-          Object.assign(
-            {},
-            this.props,
-            inputPropOverrides, {
-              name: "minutes",
-              valueLink: {
-                value: this._getMinutes(),
-                requestChange: this._onMinutesChange.bind(this),
-              },
-              inputHtml: {
-                type: "number",
-                step: 15,
-              },
-            }
-          )
-        ),
+  _minuteProps() {
+    return Object.assign(
+      {},
+      this.props,
+      this._inputPropOverrides(), {
+        name: "minutes",
+        valueLink: {
+          value: this._getMinutes(),
+          requestChange: this._onMinutesChange.bind(this),
+        },
+        inputHtml: {
+          type: "number",
+          step: 15,
+        },
+      }
+    )
+  }
 
-        FrigInput(
-          Object.assign(
-            {},
-            this.props, {
-              component: BootstrapSwitch,
-              required: false,
-              xs: 4,
-              name: "meridiem",
-              onText: "AM",
-              onColor: "warning",
-              offText: "PM",
-              offColor: "primary",
-              valueLink: {
-                value: this._isMeridiemAM(),
-                requestChange: this._onMeridiemChange.bind(this),
-              },
-              inputHtml: {
-                type: "switch",
-              },
-            }
-          )
-        ),
-      )
+  _meridiemProps() {
+    return Object.assign(
+      {},
+      this.props, {
+        component: BootstrapSwitch,
+        required: false,
+        xs: 4,
+        name: "meridiem",
+        onText: "AM",
+        onColor: "warning",
+        offText: "PM",
+        offColor: "primary",
+        valueLink: {
+          value: this._isMeridiemAM(),
+          requestChange: this._onMeridiemChange.bind(this),
+        },
+        inputHtml: {
+          type: "switch",
+        },
+      }
+    )
+  }
+
+  render() {
+    return (
+      <div className="frigb-popup-container popover bottom">
+        <div className="arrow"/>
+        <div className="row">
+          <Input {...this._hourProps()}/>
+          <Input {...this._minuteProps()}/>
+          <Input {...this._meridiemProps()}/>
+        </div>
+      </div>
     )
   }
 

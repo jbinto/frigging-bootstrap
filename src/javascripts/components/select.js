@@ -8,12 +8,10 @@ let {
   formGroupCx,
   label,
 } = require("../util.js")
-let {div} = React.DOM
 let select = React.createFactory(require("frig").ValueLinkedSelect)
 
-export default class extends React.Component {
-
-  displayName = "Frig.friggingBootstrap.Select"
+export default class Select extends React.Component {
+  displayName = "FriggingBootstrap.Select"
 
   static defaultProps = require("../default_props.js")
 
@@ -27,15 +25,17 @@ export default class extends React.Component {
   }
 
   render() {
-    return div({className: cx(sizeClassNames(this.props))},
-      div({className: formGroupCx(this.props)},
-        label(this.props, {className: ""}),
-        div({className: "controls"},
-          select(this._inputHtml()),
-          errorList(this.props.errors),
-        ),
-        saveList(this.props.saved),
-      )
+    return (
+      <div className={cx(sizeClassNames(this.props))}>
+        <div className={formGroupCx(this.props)}>
+          {label(this.props, {className:""})}
+          <div className="controls">
+            {select(this._inputHtml())}
+            {errorList(this.props.errors)}
+          </div>
+          {saveList(this.props.saved)}
+        </div>
+      </div>
     )
   }
 

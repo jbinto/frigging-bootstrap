@@ -1,23 +1,21 @@
-let React = require("react")
-let ReactDOM = require("react-dom")
-let Colr = require('colr')
-let {
+import React from "react"
+import ReactDOM from "react-dom"
+import Colr from 'colr'
+import {
   saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
   label,
-} = require("../util.js")
-let {div, input} = React.DOM
-let cx = require("classnames")
-let {Focusable} = require("frig").HigherOrderComponents
-let colorMap = React.createFactory(require("./color/map"))
-let hue_slider =  React.createFactory(require("./color/hue_slider"))
+} from "../util.js"
+import cx from "classnames"
+import {HigherOrderComponents} from "frig"
+import colorMap from "./color/map"
+import hue_slider from "./color/hue_slider"
 
-@Focusable
-export default class extends React.Component {
-
-  static displayName = "Frig.friggingBootstrap.Color"
+@HigherOrderComponents.Focusable
+export default class Color extends React.Component {
+  static displayName = "FriggingBootstrap.Color"
 
   static defaultProps = Object.assign(require("../default_props.js"))
 
@@ -92,27 +90,29 @@ export default class extends React.Component {
   }
 
   render() {
-    return div({className: cx(sizeClassNames(this.props))},
-      div({className: formGroupCx(this.props)},
-        label(this.props),
-        input(Object.assign({}, this.props.inputHtml, {
-          valueLink: this.props.valueLink,
-          ref: "frigColorInput",
-          className: cx(
-            this.props.inputHtml.className,
-            "frigb-color-input",
-            "form-control",
-          ),
-        })),
-        div({
-          className: "frigb-color-block",
-          style: { backgroundColor: this.state.colr.toHex() },
-          onClick: this._onColorBlockClick.bind(this),
-        }),
-        this._colorPopup(),
-        saveList(this.props.saved),
-        errorList(this.props.errors),
-      )
+    return (
+      <div className={cx(sizeClassNames(this.props))}>
+        <div className={formGroupCx(this.props)}>
+          {label(this.props)}
+          <input {...Object.assign({}, this.props.inputHtml, {
+            valueLink: this.props.valueLink,
+            ref: "frigColorInput",
+            className: cx(
+              this.props.inputHtml.className,
+              "frigb-color-input",
+              "form-control",
+            ),
+          })}/>
+          <div
+            className="frigb-color-block"
+            style={{backgroundColor: this.state.colr.toHex()}}
+            onClick={this._onColorBlockClick.bind(this)}
+          />
+          {this._colorPopup()}
+          {saveList(this.props.saved)}
+          {errorList(this.props.errors)}
+        </div>
+      </div>
     )
   }
 

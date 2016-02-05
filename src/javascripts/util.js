@@ -1,9 +1,5 @@
-let React = require("react")
-let {div, span, label} = React.DOM
-let cx = require("classnames")
-let ReactCSSTransitionGroup = React.createFactory(
-  require("react-addons-css-transition-group")
-)
+import cx from "classnames"
+import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 
 module.exports = {
   errorList(errors) {
@@ -20,13 +16,18 @@ module.exports = {
       transitionLeaveTimeout: 0,
       key: `error-transition-${i}`,
     }
-    return ReactCSSTransitionGroup(transtionAttrs,
-      span({className: "help-block", key: `error-${i}`},
-        React.DOM.i({
-          className: "fa fa-exclamation-circle",
-          key: `error-label-${i}`,
-        }, ` ${msg}`),
-      )
+    return (
+      <ReactCSSTransitionGroup {...transtionAttrs}>
+        <span className="help-block" key={`error-${i}`}>
+          <i
+            className="fa fa-exclamation-circle"
+            key={`error-label-${i}`}
+          >
+            {" "}
+            {msg}
+          </i>
+        </span>
+      </ReactCSSTransitionGroup>
     )
   },
 
@@ -34,7 +35,7 @@ module.exports = {
     let horizontalClasses = sizeClassNames(props.labelWidth, {offsets: false})
     if (!props.label || props.block) {
       if (props.layout === "horizontal" && !props.block) {
-        return div({className: horizontalClasses})
+        return <div className={horizontalClasses}/>
       }
       else {
         return ""
@@ -45,7 +46,13 @@ module.exports = {
       [horizontalClasses]: props.layout === "horizontal",
     })
 
-    return div({}, label(labelHtml, props.label))
+    return (
+      <div>
+        <label {...labelHtml}>
+          {props.label}
+        </label>
+      </div>
+    )
   },
 
   saveList(isSave) {
@@ -57,7 +64,7 @@ module.exports = {
   save({saved, className}) {
     className = className || "frigb-saved pull-right"
     if (!saved) return ""
-    return span({className, key: "saved"}, "saved")
+    return <span className={className} key="saved">saved</span>
   },
 
   inputContainerCx(props) {

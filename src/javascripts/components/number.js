@@ -1,17 +1,16 @@
-let React = require("react")
-let Numeral = require("numeral")
-let cx = require("classnames")
-let {
+import React from "react"
+import Numeral from "numeral"
+import cx from "classnames"
+import {
   saveList,
   errorList,
   sizeClassNames,
   formGroupCx,
   label,
-} = require("../util.js")
-let {div, input} = React.DOM
+} from "../util.js"
 
-export default class extends React.Component {
-  displayName = "Frig.friggingBootstrap.Number"
+export default class Number extends React.Component {
+  displayName = "FriggingBootstrap.Number"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
     format: "0,0[.][00]",
@@ -68,14 +67,17 @@ export default class extends React.Component {
   }
 
   render() {
-    return div({className: cx(sizeClassNames(this.props))},
-      div({className: formGroupCx(this.props)},
-        div({},
-          label(this.props)),
-        this._input(),
-        saveList(this.props.saved),
-        errorList(this.props.errors),
-      ),
+    return (
+      <div className={cx(sizeClassNames(this.props))}>
+        <div className={formGroupCx(this.props)}>
+          <div>
+            {label(this.props)}
+          </div>
+          {this._input()}
+          {saveList(this.props.saved)}
+          {errorList(this.props.errors)}
+        </div>
+      </div>
     )
   }
 
