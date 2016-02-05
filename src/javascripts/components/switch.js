@@ -80,13 +80,13 @@ export default class Switch extends React.Component {
         }}
       >
         <span className={this._onSpanCx()} style={handleStyle}>
-          this.props.onText
+          {this.props.onText}
         </span>
         <span className="bootstrap-switch-label" style={handleStyle}>
-          "\u00a0"
+          {" "}
         </span>
         <span className={this._offSpanCx()} style={handleStyle}>
-          this.props.offText
+          {this.props.offText}
         </span>
       </div>
     )

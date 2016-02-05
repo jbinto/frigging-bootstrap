@@ -16,7 +16,7 @@ export default class Input extends React.Component {
     // Bootstrap input addon texts
     prefix: undefined,
     suffix: undefined,
-    inputWrapper: input,
+    inputWrapper: (inputProps) => <input {...inputProps}/>,
   })
 
   _inputHtml() {
@@ -45,19 +45,23 @@ export default class Input extends React.Component {
     let saved = saveList(this.props.saved)
 
     if (this.props.prefix || this.props.suffix) {
-      return inputLabel,
-      div({className: "input-group"},
-        this._inputPrefix(),
-        this._input(),
-        saved,
-        this._inputSuffix(),
-      )
+      return [
+        inputLabel,
+        <div className="input-group">
+          {this._inputPrefix()}
+          {this._input()}
+          {saved}
+          {this._inputSuffix()}
+        </div>,
+      ]
     }
     else {
-      return div({},
-        inputLabel,
-        this._input(),
-        saved,
+      return (
+        <div>
+          {inputLabel}
+          {this._input()}
+          {saved}
+        </div>
       )
     }
   }
