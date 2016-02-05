@@ -38,11 +38,12 @@ export default class Number extends React.Component {
   }
 
   _input() {
-    return input(Object.assign({}, this.props.inputHtml, {
+    return (
+      <input {...Object.assign({}, this.props.inputHtml, {
         onBlur: this._onBlur.bind(this),
         className: this._inputCx(),
         valueLink: this.props.valueLink,
-      })
+      })} />
     )
   }
 
