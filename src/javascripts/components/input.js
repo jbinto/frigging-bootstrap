@@ -37,7 +37,7 @@ export default class Input extends React.Component {
 
   _inputSuffix() {
     if (this.props.suffix == null) return ""
-    div({className: "input-group-addon"}, this.props.suffix)
+    return <div className="input-group-addon">{this.props.suffix}</div>
   }
 
   _inputGroup() {
