@@ -16,18 +16,21 @@ export default class Number extends React.Component {
     format: "0,0[.][00]",
   })
 
-  _formatNumber() {
-    if (!this.props.format) return
+  _formatNumber(currentNumber) {
+    if (!this.props.format) return currentNumber
 
-    let currentNumber = this._toNumeral(this.props.valueLink.value) || ""
-
-    this.props.valueLink.requestChange(
-      currentNumber ? currentNumber.format(this.props.format) : ""
-    )
+    return currentNumber ? currentNumber.format(this.props.format) : ""
   }
 
-  _onBlur() {
-    this._formatNumber()
+  _onChange(value) {
+    console.log(value)
+    value = value.replace(/,/g, "")
+    if (this.props.format) {
+      value = this._toNumeral(value) || ""
+    }
+    console.log(value)
+    this.props.valueLink.requestChange(value)
+    this.formattedValue = this._formatNumber(value)
   }
 
   _inputCx() {
@@ -40,9 +43,11 @@ export default class Number extends React.Component {
   _input() {
     return (
       <input {...Object.assign({}, this.props.inputHtml, {
-        onBlur: this._onBlur.bind(this),
         className: this._inputCx(),
-        valueLink: this.props.valueLink,
+        valueLink: {
+          value: (this.formattedValue || this.props.valueLink.value),
+          requestChange: this._onChange.bind(this)
+        }
       })} />
     )
   }
