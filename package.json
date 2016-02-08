@@ -46,9 +46,9 @@
     "font-awesome": "*",
     "font-awesome-webpack": "*",
     "classnames": "*",
-    "react": "*",
+    "react": ">=0.14.3",
+    "react-dom": ">=0.14.3",
     "react-addons-css-transition-group": "*",
-    "react-dom": "*",
     "fuzzy": "*",
     "colr": "*",
     "numeral": "*"
