@@ -10,8 +10,14 @@ export default class Form extends React.Component {
   _formHtml() {
     let className = this.props.layout ? `form-${this.props.layout}` : ""
     return Object.assign({}, this.props.formHtml, {
+      ref: "form",
       className: `${this.props.formHtml.className||""} ${className}`.trim(),
     })
+  }
+
+  formData() {
+    let formElement = ReactDOM.findDOMNode(this.refs.form)
+    return new FormData(formElement)
   }
 
   render() {
