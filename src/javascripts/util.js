@@ -1,5 +1,8 @@
 import cx from "classnames"
+/*eslint-disable no-unused-vars */
+import React from "react"
 import ReactCSSTransitionGroup from "react-addons-css-transition-group"
+/*eslint-enable no-unused-vars */
 
 module.exports = {
   errorList(errors) {
@@ -7,7 +10,7 @@ module.exports = {
     return (errors || []).map( (msg) => module.exports.error(msg, i++))
   },
 
-  error(msg, i=0) {
+  error(msg, i=0) { //eslint-disable-line react/display-name
     let transtionAttrs = {
       transitionName: "errorLabel",
       transitionAppear: true,
