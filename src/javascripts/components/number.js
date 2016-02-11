@@ -22,15 +22,20 @@ export default class Number extends React.Component {
     return currentNumber ? currentNumber.format(this.props.format) : ""
   }
 
-  _onChange(value) {
-    console.log(value)
+  _onBlur() {
+    let value = this.props.valueLink.value
     value = value.replace(/,/g, "")
-    if (this.props.format) {
-      value = this._toNumeral(value) || ""
-    }
-    console.log(value)
+    value = this._toNumeral(value) || ""
+
     this.props.valueLink.requestChange(value)
+
     this.formattedValue = this._formatNumber(value)
+  }
+
+  _onChange(value) {
+    this.formattedValue = value
+    value = value.replace(/,/g, "")
+    this.props.valueLink.requestChange(value)
   }
 
   _inputCx() {
@@ -44,6 +49,7 @@ export default class Number extends React.Component {
     return (
       <input {...Object.assign({}, this.props.inputHtml, {
         className: this._inputCx(),
+        onBlur: this._onBlur.bind(this),
         valueLink: {
           value: (this.formattedValue || this.props.valueLink.value),
           requestChange: this._onChange.bind(this)
