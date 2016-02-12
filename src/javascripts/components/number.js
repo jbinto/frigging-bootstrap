@@ -10,24 +10,35 @@ import {
 } from "../util.js"
 
 export default class Number extends React.Component {
+  state = {
+    formattedValue: ""
+  }
   displayName = "FriggingBootstrap.Number"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
     format: "0,0[.][00]",
   })
 
-  _formatNumber() {
-    if (!this.props.format) return
+  _formatNumber(currentNumber) {
+    if (!this.props.format) return currentNumber
 
-    let currentNumber = this._toNumeral(this.props.valueLink.value) || ""
-
-    this.props.valueLink.requestChange(
-      currentNumber ? currentNumber.format(this.props.format) : ""
-    )
+    return currentNumber ? currentNumber.format(this.props.format) : ""
   }
 
   _onBlur() {
-    this._formatNumber()
+    let value = this.props.valueLink.value
+    value = value.replace(/,/g, "")
+    value = this._toNumeral(value) || ""
+    value = this._formatNumber(value)
+
+    this.setState({formattedValue: value})
+  }
+
+  _onChange(value) {
+    this.setState({formattedValue: value})
+    value = value.replace(/,/g, "")
+
+    this.props.valueLink.requestChange(value)
   }
 
   _inputCx() {
@@ -40,9 +51,14 @@ export default class Number extends React.Component {
   _input() {
     return (
       <input {...Object.assign({}, this.props.inputHtml, {
-        onBlur: this._onBlur.bind(this),
         className: this._inputCx(),
-        valueLink: this.props.valueLink,
+        onBlur: this._onBlur.bind(this),
+        valueLink: {
+          value: (this.state.formattedValue || this._formatNumber(
+            this._toNumeral(this.props.valueLink.value) || "")
+          ),
+          requestChange: this._onChange.bind(this)
+        }
       })} />
     )
   }
