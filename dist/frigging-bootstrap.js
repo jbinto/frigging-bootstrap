@@ -2170,22 +2170,36 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    _get(Object.getPrototypeOf(Number.prototype), "constructor", this).apply(this, arguments);
 
+	    this.state = {
+	      formattedValue: ""
+	    };
 	    this.displayName = "FriggingBootstrap.Number";
 	  }
 
 	  _createClass(Number, [{
 	    key: "_formatNumber",
-	    value: function _formatNumber() {
-	      if (!this.props.format) return;
+	    value: function _formatNumber(currentNumber) {
+	      if (!this.props.format) return currentNumber;
 
-	      var currentNumber = this._toNumeral(this.props.valueLink.value) || "";
-
-	      this.props.valueLink.requestChange(currentNumber ? currentNumber.format(this.props.format) : "");
+	      return currentNumber ? currentNumber.format(this.props.format) : "";
 	    }
 	  }, {
 	    key: "_onBlur",
 	    value: function _onBlur() {
-	      this._formatNumber();
+	      var value = this.props.valueLink.value;
+	      value = value.replace(/,/g, "");
+	      value = this._toNumeral(value) || "";
+	      value = this._formatNumber(value);
+
+	      this.setState({ formattedValue: value });
+	    }
+	  }, {
+	    key: "_onChange",
+	    value: function _onChange(value) {
+	      this.setState({ formattedValue: value });
+	      value = value.replace(/,/g, "");
+
+	      this.props.valueLink.requestChange(value);
 	    }
 	  }, {
 	    key: "_inputCx",
@@ -2196,9 +2210,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: "_input",
 	    value: function _input() {
 	      return _react2["default"].createElement("input", Object.assign({}, this.props.inputHtml, {
-	        onBlur: this._onBlur.bind(this),
 	        className: this._inputCx(),
-	        valueLink: this.props.valueLink
+	        onBlur: this._onBlur.bind(this),
+	        valueLink: {
+	          value: this.state.formattedValue || this._formatNumber(this._toNumeral(this.props.valueLink.value) || ""),
+	          requestChange: this._onChange.bind(this)
+	        }
 	      }));
 	    }
 	  }, {
