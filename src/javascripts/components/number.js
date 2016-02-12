@@ -10,6 +10,9 @@ import {
 } from "../util.js"
 
 export default class Number extends React.Component {
+  state = {
+    formattedValue: ""
+  }
   displayName = "FriggingBootstrap.Number"
 
   static defaultProps = Object.assign(require("../default_props.js"), {
@@ -26,15 +29,15 @@ export default class Number extends React.Component {
     let value = this.props.valueLink.value
     value = value.replace(/,/g, "")
     value = this._toNumeral(value) || ""
+    value = this._formatNumber(value)
 
-    this.props.valueLink.requestChange(value)
-
-    this.formattedValue = this._formatNumber(value)
+    this.setState({formattedValue: value})
   }
 
   _onChange(value) {
-    this.formattedValue = value
+    this.setState({formattedValue: value})
     value = value.replace(/,/g, "")
+
     this.props.valueLink.requestChange(value)
   }
 
@@ -51,7 +54,9 @@ export default class Number extends React.Component {
         className: this._inputCx(),
         onBlur: this._onBlur.bind(this),
         valueLink: {
-          value: (this.formattedValue || this.props.valueLink.value),
+          value: (this.state.formattedValue || this._formatNumber(
+            this._toNumeral(this.props.valueLink.value) || "")
+          ),
           requestChange: this._onChange.bind(this)
         }
       })} />
