@@ -9,7 +9,7 @@ export default class Errors extends React.Component {
     return (
       <div>
         {
-          this.props.errors.map((error) => {
+          (this.props.errors||[]).map((error) => {
             return (
               <div className="col-xs-12" key={`error-${error}`}>
                 <div className="frigb-error" ref={`error-${error}`}>
