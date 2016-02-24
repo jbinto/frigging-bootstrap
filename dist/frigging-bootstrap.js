@@ -1739,7 +1739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return React.createElement(
 	        "div",
 	        null,
-	        this.props.errors.map(function (error) {
+	        (this.props.errors || []).map(function (error) {
 	          return React.createElement(
 	            "div",
 	            { className: "col-xs-12", key: "error-" + error },
@@ -3274,7 +3274,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function render() {
 	      return _react2["default"].createElement(
 	        "div",
-	        { className: (0, _classnames2["default"])((0, _utilJs.sizeClassNames)(this.props)) },
+	        { className: (0, _classnames2["default"])((0, _utilJs.sizeClassNames)(this.props)), tabIndex: 0 },
 	        _react2["default"].createElement(
 	          "div",
 	          { className: (0, _utilJs.formGroupCx)(this.props) },
