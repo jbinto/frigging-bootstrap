@@ -94,7 +94,7 @@ export default class Switch extends React.Component {
 
   render() {
     return (
-      <div className={cx(sizeClassNames(this.props))}>
+      <div className={cx(sizeClassNames(this.props))} tabIndex={0}>
         <div className={formGroupCx(this.props)}>
           {label(this.props)}
           {saveList(this.props.saved)}
