@@ -32,7 +32,8 @@ export default class Submit extends React.Component {
   }
 
   _submitContainerCx() {
-    let {layout, block} = this.props
+    const {block} = this.props
+    const {layout} = this.context.frigForm
     if (layout !== "horizontal") return ""
     return cx({
       "col-sm-9 col-sm-offset-3": block === false,
