@@ -2,10 +2,9 @@ let React = require("react")
 let ReactDOM = require("react-dom")
 let Colr = require('colr')
 let draggable = require('./higher_order_components/draggable.js')
-let { div } = React.DOM
 
 @draggable({
-  updateClientCoords({clientX, clientY}) {
+  updateClientCoords({clientY}) {
     let rect = ReactDOM.findDOMNode(this).getBoundingClientRect()
     let hue = this.getScaledValue((rect.bottom - clientY) / rect.height)
     let colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v)
