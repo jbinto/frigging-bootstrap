@@ -11,6 +11,12 @@ export default class Submit extends React.Component {
     block: false,
   })
 
+  static contextTypes = {
+    frigForm: React.PropTypes.shape({
+      layout: React.PropTypes.string.isRequired,
+    }).isRequired,
+  }
+
   _inputCx() {
     let optionalClasses = {
       "btn-block": this.props.block,
