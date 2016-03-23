@@ -1,20 +1,20 @@
-let React = require("react")
-let ReactDOM = require("react-dom")
-let Colr = require('colr')
-let draggable = require('./higher_order_components/draggable.js')
+import React from "react"
+import ReactDOM from "react-dom"
+import Colr from "colr"
+import draggable from "./higher_order_components/draggable.js"
 
 @draggable({
   updateClientCoords({clientY}) {
-    let rect = ReactDOM.findDOMNode(this).getBoundingClientRect()
-    let hue = this.getScaledValue((rect.bottom - clientY) / rect.height)
-    let colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v)
+    const rect = ReactDOM.findDOMNode(this).getBoundingClientRect()
+    const hue = this.getScaledValue((rect.bottom - clientY) / rect.height)
+    const colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v)
 
     this.props.colrLink.requestChange(colr)
   },
 })
 export default class extends React.Component {
   static displayName = "HueSlider"
-  static defaultProps = Object.assign(require("../../default_props.js"))
+  static defaultProps = require("../../default_props.js")
 
   render() {
     return (

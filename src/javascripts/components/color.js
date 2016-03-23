@@ -10,8 +10,8 @@ import {
 } from "../util.js"
 import cx from "classnames"
 import {HigherOrderComponents} from "frig"
-import colorMap from "./color/map"
-import hue_slider from "./color/hue_slider"
+import ColorMap from "./color/map"
+import HueSlider from "./color/hue_slider"
 
 @HigherOrderComponents.Focusable
 export default class Color extends React.Component {
@@ -73,19 +73,21 @@ export default class Color extends React.Component {
 
   _colorPopup() {
     if (this.props.focused === false) return undefined
-    return div({className: "controls frigb-colorpicker"},
-      div({ className: "frigb-hue-slider" },
-        hue_slider({
-          max: 360,
-          colrLink: this._colrLink(),
-          hsv: this._hsv(),
-        })
-      ),
-      colorMap({
-        max: 100,
-        colrLink: this._colrLink(),
-        hsv: this._hsv(),
-      })
+    return (
+      <div className="controls frigb-colorpicker">
+        <div className="frigb-hue-slider">
+          <HueSlider
+            max={360}
+            colrLink={this._colrLink()}
+            hsv={this._hsv()}
+          />
+        </div>
+        <ColorMap
+          max={100}
+          colrLink={this._colrLink()}
+          hsv={this._hsv()}
+        />
+      </div>
     )
   }
 

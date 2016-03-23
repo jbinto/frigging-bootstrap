@@ -1,29 +1,30 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import Colr from 'colr'
+import Colr from "colr"
 import cx from "classnames"
-import draggable from './higher_order_components/draggable.js'
+import draggable from "./higher_order_components/draggable.js"
 
 @draggable({
   updateClientCoords({clientX, clientY}) {
-    let rect = ReactDOM.findDOMNode(this).getBoundingClientRect()
-    let x = (clientX - rect.left) / rect.width
-    let y = (rect.bottom - clientY) / rect.height
-    let saturation = this.getScaledValue(x)
-    let value = this.getScaledValue(y)
-    let colr = Colr.fromHsv(this.props.hsv.h, saturation, value)
+    const rect = ReactDOM.findDOMNode(this).getBoundingClientRect()
+    const x = (clientX - rect.left) / rect.width
+    const y = (rect.bottom - clientY) / rect.height
+    const saturation = this.getScaledValue(x)
+    const value = this.getScaledValue(y)
+    const colr = Colr.fromHsv(this.props.hsv.h, saturation, value)
 
     this.props.colrLink.requestChange(colr)
   },
 })
 export default class extends React.Component {
   static displayName = "ColorMap"
+  static defaultProps = require("../../default_props.js")
 
   render() {
-    let x = this.props.hsv.s
-    let y = this.props.hsv.v
-    let hue = Colr.fromHsv(this.props.hsv.h, 100, 100).toHex()
-    let luminosity = this.props.colrLink.value.toGrayscale()
+    const x = this.props.hsv.s
+    const y = this.props.hsv.v
+    const hue = Colr.fromHsv(this.props.hsv.h, 100, 100).toHex()
+    const luminosity = this.props.colrLink.value.toGrayscale()
 
     return (
       <div
@@ -52,5 +53,4 @@ export default class extends React.Component {
       </div>
     )
   }
-
 }
