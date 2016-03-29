@@ -11,6 +11,12 @@ export default class Submit extends React.Component {
     block: false,
   })
 
+  static contextTypes = {
+    frigForm: React.PropTypes.shape({
+      layout: React.PropTypes.string.isRequired,
+    }).isRequired,
+  }
+
   _inputCx() {
     let optionalClasses = {
       "btn-block": this.props.block,
@@ -32,7 +38,8 @@ export default class Submit extends React.Component {
   }
 
   _submitContainerCx() {
-    let {layout, block} = this.props
+    const {block} = this.props
+    const {layout} = this.context.frigForm
     if (layout !== "horizontal") return ""
     return cx({
       "col-sm-9 col-sm-offset-3": block === false,

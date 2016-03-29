@@ -1641,7 +1641,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ReactDOM = __webpack_require__(14);
 	var Colr = __webpack_require__(15);
 	var draggable = __webpack_require__(18);
-	var div = React.DOM.div;
 
 	var _default = (function (_React$Component) {
 	  _inherits(_default, _React$Component);
@@ -1686,7 +1685,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var _default2 = _default;
 	  _default = draggable({
 	    updateClientCoords: function updateClientCoords(_ref) {
-	      var clientX = _ref.clientX;
 	      var clientY = _ref.clientY;
 
 	      var rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
@@ -3107,9 +3105,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: "_submitContainerCx",
 	    value: function _submitContainerCx() {
-	      var _props = this.props;
-	      var layout = _props.layout;
-	      var block = _props.block;
+	      var block = this.props.block;
+	      var layout = this.context.frigForm.layout;
 
 	      if (layout !== "horizontal") return "";
 	      return (0, _classnames2["default"])({
@@ -3145,6 +3142,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      bsSize: undefined,
 	      block: false
 	    }),
+	    enumerable: true
+	  }, {
+	    key: "contextTypes",
+	    value: {
+	      frigForm: _react2["default"].PropTypes.shape({
+	        layout: _react2["default"].PropTypes.string.isRequired
+	      }).isRequired
+	    },
 	    enumerable: true
 	  }]);
 
