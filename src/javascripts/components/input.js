@@ -12,6 +12,29 @@ import {
 export default class Input extends React.Component {
   displayName = "FriggingBootstrap.Input"
 
+  static propTypes = {
+    inputHtml: React.PropTypes.shape({
+      type: React.PropTypes.string.isRequired,
+    }).isRequired,
+    inputWrapper: React.PropTypes.func.isRequired,
+
+    valueLink: React.PropTypes.shape({
+      value: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number,
+        React.PropTypes.bool,
+      ]),
+      requestChange: React.PropTypes.func,
+    }).isRequired,
+
+    className: React.PropTypes.string,
+    prefix: React.PropTypes.string,
+    suffix: React.PropTypes.string,
+
+    saved: React.PropTypes.bool,
+    errors: React.PropTypes.array,
+  }
+
   static defaultProps = Object.assign(require("../default_props.js"), {
     // Bootstrap input addon texts
     prefix: undefined,
