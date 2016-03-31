@@ -17,6 +17,7 @@ module.exports = {
   Color,
   FormErrorList,
   File,
+  Form,
   Input,
   Number,
   Select,
