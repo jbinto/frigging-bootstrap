@@ -1,6 +1,6 @@
 {
   "name": "frigging-bootstrap",
-  "version": "0.9.3",
+  "version": "0.9.3-jb30",
   "private": false,
   "main": "dist/frigging-bootstrap.js",
   "peerDependencies": {

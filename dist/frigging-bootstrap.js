@@ -7,7 +7,7 @@
 		exports["FriggingBootstrap"] = factory(require("react"), require("frig"), require("react-addons-css-transition-group"), require("react-dom"));
 	else
 		root["FriggingBootstrap"] = factory(root["React"], root["Frig"], root["React.addons.CSSTransitionGroup"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_14__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_13__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -56,14 +56,78 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 	__webpack_require__(1);
 
+	var _componentsCheckboxJs = __webpack_require__(5);
+
+	var _componentsCheckboxJs2 = _interopRequireDefault(_componentsCheckboxJs);
+
+	var _componentsColorJs = __webpack_require__(12);
+
+	var _componentsColorJs2 = _interopRequireDefault(_componentsColorJs);
+
+	var _componentsErrorsJs = __webpack_require__(19);
+
+	var _componentsErrorsJs2 = _interopRequireDefault(_componentsErrorsJs);
+
+	var _componentsFileJs = __webpack_require__(20);
+
+	var _componentsFileJs2 = _interopRequireDefault(_componentsFileJs);
+
+	var _componentsFormJs = __webpack_require__(21);
+
+	var _componentsFormJs2 = _interopRequireDefault(_componentsFormJs);
+
+	var _componentsInputJs = __webpack_require__(22);
+
+	var _componentsInputJs2 = _interopRequireDefault(_componentsInputJs);
+
+	var _componentsNumberJs = __webpack_require__(23);
+
+	var _componentsNumberJs2 = _interopRequireDefault(_componentsNumberJs);
+
+	var _componentsSelectJs = __webpack_require__(25);
+
+	var _componentsSelectJs2 = _interopRequireDefault(_componentsSelectJs);
+
+	var _componentsSubmitJs = __webpack_require__(26);
+
+	var _componentsSubmitJs2 = _interopRequireDefault(_componentsSubmitJs);
+
+	var _componentsSwitchJs = __webpack_require__(27);
+
+	var _componentsSwitchJs2 = _interopRequireDefault(_componentsSwitchJs);
+
+	var _componentsTextJs = __webpack_require__(28);
+
+	var _componentsTextJs2 = _interopRequireDefault(_componentsTextJs);
+
+	var _componentsTimepickerJs = __webpack_require__(29);
+
+	var _componentsTimepickerJs2 = _interopRequireDefault(_componentsTimepickerJs);
+
+	var _require = __webpack_require__(9);
+
+	var errorList = _require.errorList;
+	var saveList = _require.saveList;
+
 	module.exports = {
-
-	  component: function component(name) {
-	    return __webpack_require__(5)("./" + name + ".js");
-	  }
-
+	  Checkbox: _componentsCheckboxJs2["default"],
+	  Color: _componentsColorJs2["default"],
+	  FormErrorList: _componentsErrorsJs2["default"],
+	  File: _componentsFileJs2["default"],
+	  Form: _componentsFormJs2["default"],
+	  Input: _componentsInputJs2["default"],
+	  Number: _componentsNumberJs2["default"],
+	  Select: _componentsSelectJs2["default"],
+	  Submit: _componentsSubmitJs2["default"],
+	  Switch: _componentsSwitchJs2["default"],
+	  Text: _componentsTextJs2["default"],
+	  Timepicker: _componentsTimepickerJs2["default"],
+	  errorList: errorList,
+	  saveList: saveList
 	};
 
 /***/ },
@@ -77,42 +141,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 3 */,
 /* 4 */,
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var map = {
-		"./checkbox.js": 6,
-		"./color.js": 13,
-		"./color/higher_order_components/draggable.js": 18,
-		"./color/hue_slider.js": 19,
-		"./color/map.js": 17,
-		"./errors.js": 20,
-		"./file.js": 21,
-		"./form.js": 22,
-		"./input.js": 23,
-		"./number.js": 24,
-		"./select.js": 26,
-		"./submit.js": 27,
-		"./switch.js": 28,
-		"./text.js": 29,
-		"./timepicker.js": 30,
-		"./timepicker_popup.js": 31
-	};
-	function webpackContext(req) {
-		return __webpack_require__(webpackContextResolve(req));
-	};
-	function webpackContextResolve(req) {
-		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
-	};
-	webpackContext.keys = function webpackContextKeys() {
-		return Object.keys(map);
-	};
-	webpackContext.resolve = webpackContextResolve;
-	module.exports = webpackContext;
-	webpackContext.id = 5;
-
-
-/***/ },
-/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -131,17 +159,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _frig = __webpack_require__(9);
+	var _frig = __webpack_require__(8);
 
-	var _utilJs = __webpack_require__(10);
+	var _utilJs = __webpack_require__(9);
 
 	var Checkbox = (function (_React$Component) {
 	  _inherits(Checkbox, _React$Component);
@@ -189,7 +217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: __webpack_require__(12),
+	    value: __webpack_require__(11),
 	    enumerable: true
 	  }]);
 
@@ -202,13 +230,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -263,13 +291,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	})();
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_9__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -278,17 +306,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
 	/*eslint-disable no-unused-vars */
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactAddonsCssTransitionGroup = __webpack_require__(11);
+	var _reactAddonsCssTransitionGroup = __webpack_require__(10);
 
 	var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 
@@ -471,13 +499,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	var sizeClassNames = module.exports.sizeClassNames;
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -504,7 +532,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -523,31 +551,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(14);
+	var _reactDom = __webpack_require__(13);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _colr = __webpack_require__(15);
+	var _colr = __webpack_require__(14);
 
 	var _colr2 = _interopRequireDefault(_colr);
 
-	var _utilJs = __webpack_require__(10);
+	var _utilJs = __webpack_require__(9);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _frig = __webpack_require__(9);
+	var _frig = __webpack_require__(8);
 
-	var _colorMap = __webpack_require__(17);
+	var _colorMap = __webpack_require__(16);
 
 	var _colorMap2 = _interopRequireDefault(_colorMap);
 
-	var _colorHue_slider = __webpack_require__(19);
+	var _colorHue_slider = __webpack_require__(18);
 
 	var _colorHue_slider2 = _interopRequireDefault(_colorHue_slider);
 
@@ -620,15 +648,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: "_colorPopup",
 	    value: function _colorPopup() {
 	      if (this.props.focused === false) return undefined;
-	      return div({ className: "controls frigb-colorpicker" }, div({ className: "frigb-hue-slider" }, (0, _colorHue_slider2["default"])({
-	        max: 360,
-	        colrLink: this._colrLink(),
-	        hsv: this._hsv()
-	      })), (0, _colorMap2["default"])({
-	        max: 100,
-	        colrLink: this._colrLink(),
-	        hsv: this._hsv()
-	      }));
+	      return _react2["default"].createElement(
+	        "div",
+	        { className: "controls frigb-colorpicker" },
+	        _react2["default"].createElement(
+	          "div",
+	          { className: "frigb-hue-slider" },
+	          _react2["default"].createElement(_colorHue_slider2["default"], {
+	            max: 360,
+	            colrLink: this._colrLink(),
+	            hsv: this._hsv()
+	          })
+	        ),
+	        _react2["default"].createElement(_colorMap2["default"], {
+	          max: 100,
+	          colrLink: this._colrLink(),
+	          hsv: this._hsv()
+	        })
+	      );
 	    }
 	  }, {
 	    key: "render",
@@ -662,7 +699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    enumerable: true
 	  }, {
 	    key: "defaultProps",
-	    value: Object.assign(__webpack_require__(12)),
+	    value: Object.assign(__webpack_require__(11)),
 
 	    // Color information is stored in state (as well as being received in props)
 	    // because the HSV format we use looses some accuracy when converted to the
@@ -684,13 +721,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -699,7 +736,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * DEPENDENCIES
 	 */
 
-	var convert = __webpack_require__(16);
+	var convert = __webpack_require__(15);
 
 	/*
 	 * CONSTRUCTOR
@@ -1062,7 +1099,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Colr;
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1358,7 +1395,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1377,23 +1414,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(14);
+	var _reactDom = __webpack_require__(13);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _colr = __webpack_require__(15);
+	var _colr = __webpack_require__(14);
 
 	var _colr2 = _interopRequireDefault(_colr);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _higher_order_componentsDraggableJs = __webpack_require__(18);
+	var _higher_order_componentsDraggableJs = __webpack_require__(17);
 
 	var _higher_order_componentsDraggableJs2 = _interopRequireDefault(_higher_order_componentsDraggableJs);
 
@@ -1445,6 +1482,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: "displayName",
 	    value: "ColorMap",
 	    enumerable: true
+	  }, {
+	    key: "defaultProps",
+	    value: __webpack_require__(11),
+	    enumerable: true
 	  }]);
 
 	  var _default2 = _default;
@@ -1470,7 +1511,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1489,7 +1530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -1620,6 +1661,100 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(6);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(13);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _colr = __webpack_require__(14);
+
+	var _colr2 = _interopRequireDefault(_colr);
+
+	var _higher_order_componentsDraggableJs = __webpack_require__(17);
+
+	var _higher_order_componentsDraggableJs2 = _interopRequireDefault(_higher_order_componentsDraggableJs);
+
+	var _default = (function (_React$Component) {
+	  _inherits(_default, _React$Component);
+
+	  function _default() {
+	    _classCallCheck(this, _default2);
+
+	    _get(Object.getPrototypeOf(_default2.prototype), "constructor", this).apply(this, arguments);
+	  }
+
+	  _createClass(_default, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2["default"].createElement(
+	        "div",
+	        {
+	          className: "frigb-slider frigb-vertical",
+	          onMouseDown: this.props.startDragging,
+	          onTouchStart: this.props.startDragging
+	        },
+	        _react2["default"].createElement("div", {
+	          className: "frigb-track"
+	        }),
+	        _react2["default"].createElement("div", {
+	          className: "frigb-pointer",
+	          style: {
+	            "bottom": this.props.getPercentageValue(this.props.hsv.h)
+	          }
+	        })
+	      );
+	    }
+	  }], [{
+	    key: "displayName",
+	    value: "HueSlider",
+	    enumerable: true
+	  }, {
+	    key: "defaultProps",
+	    value: __webpack_require__(11),
+	    enumerable: true
+	  }]);
+
+	  var _default2 = _default;
+	  _default = (0, _higher_order_componentsDraggableJs2["default"])({
+	    updateClientCoords: function updateClientCoords(_ref) {
+	      var clientY = _ref.clientY;
+
+	      var rect = _reactDom2["default"].findDOMNode(this).getBoundingClientRect();
+	      var hue = this.getScaledValue((rect.bottom - clientY) / rect.height);
+	      var colr = _colr2["default"].fromHsv(hue, this.props.hsv.s, this.props.hsv.v);
+
+	      this.props.colrLink.requestChange(colr);
+	    }
+	  })(_default) || _default;
+	  return _default;
+	})(_react2["default"].Component);
+
+	exports["default"] = _default;
+	module.exports = exports["default"];
+
+/***/ },
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1637,88 +1772,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var React = __webpack_require__(7);
-	var ReactDOM = __webpack_require__(14);
-	var Colr = __webpack_require__(15);
-	var draggable = __webpack_require__(18);
-
-	var _default = (function (_React$Component) {
-	  _inherits(_default, _React$Component);
-
-	  function _default() {
-	    _classCallCheck(this, _default2);
-
-	    _get(Object.getPrototypeOf(_default2.prototype), "constructor", this).apply(this, arguments);
-	  }
-
-	  _createClass(_default, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "div",
-	        {
-	          className: "frigb-slider frigb-vertical",
-	          onMouseDown: this.props.startDragging,
-	          onTouchStart: this.props.startDragging
-	        },
-	        React.createElement("div", {
-	          className: "frigb-track"
-	        }),
-	        React.createElement("div", {
-	          className: "frigb-pointer",
-	          style: {
-	            "bottom": this.props.getPercentageValue(this.props.hsv.h)
-	          }
-	        })
-	      );
-	    }
-	  }], [{
-	    key: "displayName",
-	    value: "HueSlider",
-	    enumerable: true
-	  }, {
-	    key: "defaultProps",
-	    value: Object.assign(__webpack_require__(12)),
-	    enumerable: true
-	  }]);
-
-	  var _default2 = _default;
-	  _default = draggable({
-	    updateClientCoords: function updateClientCoords(_ref) {
-	      var clientY = _ref.clientY;
-
-	      var rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
-	      var hue = this.getScaledValue((rect.bottom - clientY) / rect.height);
-	      var colr = Colr.fromHsv(hue, this.props.hsv.s, this.props.hsv.v);
-
-	      this.props.colrLink.requestChange(colr);
-	    }
-	  })(_default) || _default;
-	  return _default;
-	})(React.Component);
-
-	exports["default"] = _default;
-	module.exports = exports["default"];
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var React = __webpack_require__(7);
+	var React = __webpack_require__(6);
 
 	var Errors = (function (_React$Component) {
 	  _inherits(Errors, _React$Component);
@@ -1734,10 +1788,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _createClass(Errors, [{
 	    key: "render",
 	    value: function render() {
+	      var errors = this.props.errors;
+
 	      return React.createElement(
 	        "div",
 	        null,
-	        (this.props.errors || []).map(function (error) {
+	        errors.map(function (error) {
 	          return React.createElement(
 	            "div",
 	            { className: "col-xs-12", key: "error-" + error },
@@ -1763,7 +1819,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: __webpack_require__(12),
+	    value: __webpack_require__(11),
+	    enumerable: true
+	  }, {
+	    key: "propTypes",
+	    value: {
+	      errors: React.PropTypes.array.isRequired
+	    },
 	    enumerable: true
 	  }]);
 
@@ -1774,7 +1836,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1793,13 +1855,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _utilJs = __webpack_require__(10);
+	var _utilJs = __webpack_require__(9);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1912,7 +1974,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: Object.assign(__webpack_require__(12), {
+	    value: Object.assign(__webpack_require__(11), {
 	      prefix: undefined,
 	      suffix: undefined
 	    }),
@@ -1926,7 +1988,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1943,7 +2005,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var React = __webpack_require__(7);
+	var React = __webpack_require__(6);
 
 	var Form = (function (_React$Component) {
 	  _inherits(Form, _React$Component);
@@ -1983,7 +2045,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }], [{
 	    key: "defaultProps",
 	    value: {
-	      layout: __webpack_require__(12).layout
+	      layout: __webpack_require__(11).layout
 	    },
 	    enumerable: true
 	  }]);
@@ -1995,7 +2057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2014,15 +2076,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _utilJs = __webpack_require__(10);
+	var _utilJs = __webpack_require__(9);
 
 	var Input = (function (_React$Component) {
 	  _inherits(Input, _React$Component);
@@ -2108,8 +2170,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	      );
 	    }
 	  }], [{
+	    key: "propTypes",
+	    value: {
+	      inputHtml: _react2["default"].PropTypes.shape({
+	        type: _react2["default"].PropTypes.string.isRequired
+	      }).isRequired,
+	      inputWrapper: _react2["default"].PropTypes.func.isRequired,
+
+	      valueLink: _react2["default"].PropTypes.shape({
+	        value: _react2["default"].PropTypes.string,
+	        requestChange: _react2["default"].PropTypes.func
+	      }).isRequired,
+
+	      className: _react2["default"].PropTypes.string,
+	      prefix: _react2["default"].PropTypes.string,
+	      suffix: _react2["default"].PropTypes.string,
+
+	      saved: _react2["default"].PropTypes.array,
+	      errors: _react2["default"].PropTypes.array
+	    },
+	    enumerable: true
+	  }, {
 	    key: "defaultProps",
-	    value: Object.assign(__webpack_require__(12), {
+	    value: Object.assign(__webpack_require__(11), {
 	      // Bootstrap input addon texts
 	      prefix: undefined,
 	      suffix: undefined,
@@ -2127,7 +2210,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2146,19 +2229,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _numeral = __webpack_require__(25);
+	var _numeral = __webpack_require__(24);
 
 	var _numeral2 = _interopRequireDefault(_numeral);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _utilJs = __webpack_require__(10);
+	var _utilJs = __webpack_require__(9);
 
 	var Number = (function (_React$Component) {
 	  _inherits(Number, _React$Component);
@@ -2260,7 +2343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: Object.assign(__webpack_require__(12), {
+	    value: Object.assign(__webpack_require__(11), {
 	      format: "0,0[.][00]"
 	    }),
 	    enumerable: true
@@ -2273,7 +2356,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -2958,7 +3041,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}).call(undefined);
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2975,10 +3058,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var React = __webpack_require__(7);
-	var cx = __webpack_require__(8);
+	var React = __webpack_require__(6);
+	var cx = __webpack_require__(7);
 
-	var _require = __webpack_require__(10);
+	var _require = __webpack_require__(9);
 
 	var saveList = _require.saveList;
 	var errorList = _require.errorList;
@@ -2986,7 +3069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var formGroupCx = _require.formGroupCx;
 	var label = _require.label;
 
-	var select = React.createFactory(__webpack_require__(9).ValueLinkedSelect);
+	var select = React.createFactory(__webpack_require__(8).ValueLinkedSelect);
 
 	var Select = (function (_React$Component) {
 	  _inherits(Select, _React$Component);
@@ -3031,7 +3114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: __webpack_require__(12),
+	    value: __webpack_require__(11),
 	    enumerable: true
 	  }]);
 
@@ -3042,7 +3125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3063,13 +3146,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _utilJs = __webpack_require__(10);
+	var _utilJs = __webpack_require__(9);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -3137,7 +3220,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: Object.assign({}, __webpack_require__(12), {
+	    value: Object.assign({}, __webpack_require__(11), {
 	      bsStyle: "default",
 	      bsSize: undefined,
 	      block: false
@@ -3160,7 +3243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3181,17 +3264,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _frig = __webpack_require__(9);
+	var _frig = __webpack_require__(8);
 
-	var _utilJs = __webpack_require__(10);
+	var _utilJs = __webpack_require__(9);
 
 	var Switch = (function (_React$Component) {
 	  _inherits(Switch, _React$Component);
@@ -3300,7 +3383,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: Object.assign(__webpack_require__(12), {
+	    value: Object.assign(__webpack_require__(11), {
 	      onColor: "primary",
 	      onText: "ON",
 	      offColor: "default",
@@ -3321,7 +3404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3340,13 +3423,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _utilJs = __webpack_require__(10);
+	var _utilJs = __webpack_require__(9);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -3395,7 +3478,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: Object.assign(__webpack_require__(12)),
+	    value: Object.assign(__webpack_require__(11)),
 	    enumerable: true
 	  }]);
 
@@ -3406,7 +3489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3425,21 +3508,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(8);
+	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _frig = __webpack_require__(9);
+	var _frig = __webpack_require__(8);
 
-	var _timepicker_popup = __webpack_require__(31);
+	var _timepicker_popup = __webpack_require__(30);
 
 	var _timepicker_popup2 = _interopRequireDefault(_timepicker_popup);
 
-	var _utilJs = __webpack_require__(10);
+	var _utilJs = __webpack_require__(9);
 
 	var TimePicker = (function (_React$Component) {
 	  _inherits(TimePicker, _React$Component);
@@ -3503,7 +3586,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: Object.assign(__webpack_require__(12)),
+	    value: Object.assign(__webpack_require__(11)),
 	    enumerable: true
 	  }]);
 
@@ -3516,7 +3599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3537,17 +3620,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _react = __webpack_require__(7);
+	var _react = __webpack_require__(6);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _inputJs = __webpack_require__(23);
+	var _inputJs = __webpack_require__(22);
 
 	var _inputJs2 = _interopRequireDefault(_inputJs);
 
-	var _frig = __webpack_require__(9);
+	var _frig = __webpack_require__(8);
 
-	var _switchJs = __webpack_require__(28);
+	var _switchJs = __webpack_require__(27);
 
 	var _switchJs2 = _interopRequireDefault(_switchJs);
 
@@ -3784,7 +3867,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }], [{
 	    key: "defaultProps",
-	    value: Object.assign(__webpack_require__(12)),
+	    value: Object.assign(__webpack_require__(11)),
 	    enumerable: true
 	  }]);
 
