@@ -1,7 +1,5 @@
 import React from "react"
-import BootstrapInput from "./input.js"
-import {Input} from "frig"
-import BootstrapSwitch from "./switch.js"
+import {UnboundInput} from "frig"
 
 export default class TimePickerPopup extends React.Component {
   displayName = "FriggingBootstrap.TimePickerPopup"
@@ -12,6 +10,7 @@ export default class TimePickerPopup extends React.Component {
   _getHour(minutesSinceMidnight = this._minutesSinceMidnight()) {
     let hour = this._hoursSinceMeridiem(minutesSinceMidnight)
     if (hour === 0) hour = 12
+
     return hour
   }
 
@@ -105,7 +104,7 @@ export default class TimePickerPopup extends React.Component {
 
   _inputPropOverrides() {
     return {
-      component: BootstrapInput,
+      type: "string",
       required: false,
       xs: 4,
     }
@@ -117,13 +116,11 @@ export default class TimePickerPopup extends React.Component {
       this.props,
       this._inputPropOverrides(), {
         name: "hours",
+        value: this._getHour(),
+        onChange: this._onHourChange.bind(this),
         inputHtml: {
           type: "number",
           step: 1,
-        },
-        valueLink: {
-          value: this._getHour(),
-          requestChange: this._onHourChange.bind(this),
         },
       }
     )
@@ -135,10 +132,8 @@ export default class TimePickerPopup extends React.Component {
       this.props,
       this._inputPropOverrides(), {
         name: "minutes",
-        valueLink: {
-          value: this._getMinutes(),
-          requestChange: this._onMinutesChange.bind(this),
-        },
+        value: this._getMinutes(),
+        onChange: this._onMinutesChange.bind(this),
         inputHtml: {
           type: "number",
           step: 15,
@@ -151,7 +146,7 @@ export default class TimePickerPopup extends React.Component {
     return Object.assign(
       {},
       this.props, {
-        component: BootstrapSwitch,
+        type: "switch",
         required: false,
         xs: 4,
         name: "meridiem",
@@ -159,13 +154,8 @@ export default class TimePickerPopup extends React.Component {
         onColor: "warning",
         offText: "PM",
         offColor: "primary",
-        valueLink: {
-          value: this._isMeridiemAM(),
-          requestChange: this._onMeridiemChange.bind(this),
-        },
-        inputHtml: {
-          type: "switch",
-        },
+        value: this._isMeridiemAM(),
+        onChange: this._onMeridiemChange.bind(this),
       }
     )
   }
@@ -175,9 +165,9 @@ export default class TimePickerPopup extends React.Component {
       <div className="frigb-popup-container popover bottom">
         <div className="arrow"/>
         <div className="row">
-          <Input {...this._hourProps()}/>
-          <Input {...this._minuteProps()}/>
-          <Input {...this._meridiemProps()}/>
+          <UnboundInput {...this._hourProps()}/>
+          <UnboundInput {...this._minuteProps()}/>
+          <UnboundInput {...this._meridiemProps()}/>
         </div>
       </div>
     )

@@ -24,6 +24,7 @@
     "webpack-dev-server": "*",
     "json5": "*",
     "less": "*",
+    "stylus": "*",
     "css-loader": "*",
     "style-loader": "*",
     "stylus-loader": "*",
