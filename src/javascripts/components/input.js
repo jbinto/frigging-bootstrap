@@ -1,5 +1,5 @@
-import React from "react"
-import cx from "classnames"
+import React from 'react'
+import cx from 'classnames'
 import {
   saveList,
   errorList,
@@ -7,10 +7,10 @@ import {
   formGroupCx,
   label,
   inputContainerCx,
-} from "../util.js"
+} from '../util.js'
 
 export default class Input extends React.Component {
-  displayName = "FriggingBootstrap.Input"
+  static displayName = 'FriggingBootstrap.Input'
 
   static propTypes = {
     inputHtml: React.PropTypes.shape({
@@ -35,23 +35,23 @@ export default class Input extends React.Component {
     errors: React.PropTypes.array,
   }
 
-  static defaultProps = Object.assign(require("../default_props.js"), {
+  static defaultProps = Object.assign(require('../default_props.js'), {
     // Bootstrap input addon texts
     prefix: undefined,
     suffix: undefined,
-    inputWrapper: (inputProps) => <input {...inputProps}/>,
+    inputWrapper: (inputProps) => <input {...inputProps} />,
   })
 
   _inputHtml() {
     return Object.assign({}, this.props.inputHtml, {
-      className: cx(this.props.className, "form-control"),
+      className: cx(this.props.className, 'form-control'),
       valueLink: this.props.valueLink,
     })
   }
 
   _inputPrefix() {
-    if (this.props.prefix == null) return ""
-    return div({className: "input-group-addon"}, this.props.prefix)
+    if (this.props.prefix == null) return ''
+    return <div className="input-group-addon">{this.props.prefix}</div>
   }
 
   _input() {
@@ -59,7 +59,7 @@ export default class Input extends React.Component {
   }
 
   _inputSuffix() {
-    if (this.props.suffix == null) return ""
+    if (this.props.suffix == null) return ''
     return <div className="input-group-addon">{this.props.suffix}</div>
   }
 
@@ -78,15 +78,14 @@ export default class Input extends React.Component {
         </div>,
       ]
     }
-    else {
-      return (
-        <div>
-          {inputLabel}
-          {this._input()}
-          {saved}
-        </div>
-      )
-    }
+
+    return (
+      <div>
+        {inputLabel}
+        {this._input()}
+        {saved}
+      </div>
+    )
   }
 
   render() {
