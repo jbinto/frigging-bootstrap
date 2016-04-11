@@ -1,15 +1,26 @@
-import React from "react"
-import {sizeClassNames} from "../util.js"
-import cx from "classnames"
+import React from 'react'
+import { sizeClassNames } from '../util.js'
+import cx from 'classnames'
 
 export default class Submit extends React.Component {
-  displayName = "FriggingBootstrap.Submit"
+  static displayName = 'FriggingBootstrap.Submit'
 
-  static defaultProps = Object.assign({}, require("../default_props.js"), {
-    bsStyle: "default",
+  static defaultProps = Object.assign({}, require('../default_props.js'), {
+    bsStyle: 'default',
     bsSize: undefined,
     block: false,
   })
+
+
+  static propTypes = {
+    inputHtml: React.PropTypes.object.isRequired,
+    align: React.PropTypes.string,
+    bsSize: React.PropTypes.string,
+    bsStyle: React.PropTypes.string,
+    className: React.PropTypes.string,
+    title: React.PropTypes.string,
+    block: React.PropTypes.bool,
+  }
 
   static contextTypes = {
     frigForm: React.PropTypes.shape({
@@ -18,10 +29,10 @@ export default class Submit extends React.Component {
   }
 
   _inputCx() {
-    let optionalClasses = {
-      "btn-block": this.props.block,
+    const optionalClasses = {
+      'btn-block': this.props.block,
       [`btn-${this.props.bsSize}`]: this.props.bsSize != null,
-      "pull-right": this.props.align === "right",
+      'pull-right': this.props.align === 'right',
     }
     return cx(
       this.props.className,
@@ -33,17 +44,17 @@ export default class Submit extends React.Component {
   _inputHtml() {
     return Object.assign({}, this.props.inputHtml, {
       className: this._inputCx(),
-      type: "submit",
+      type: 'submit',
     })
   }
 
   _submitContainerCx() {
-    const {block} = this.props
-    const {layout} = this.context.frigForm
-    if (layout !== "horizontal") return ""
+    const { block } = this.props
+    const { layout } = this.context.frigForm
+    if (layout !== 'horizontal') return ''
     return cx({
-      "col-sm-9 col-sm-offset-3": block === false,
-      "col-sm-12": block === true,
+      'col-sm-9 col-sm-offset-3': block === false,
+      'col-sm-12': block === true,
     })
   }
 
@@ -52,7 +63,7 @@ export default class Submit extends React.Component {
       <div className={cx(sizeClassNames(this.props))}>
         <div className="form-group">
           <div className={this._submitContainerCx()}>
-            <button {...this._inputHtml()}>{this.props.title}</button>
+            <button {...this._inputHtml()}>{ this.props.title }</button>
           </div>
         </div>
       </div>
