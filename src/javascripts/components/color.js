@@ -1,5 +1,5 @@
-import React from "react"
-import ReactDOM from "react-dom"
+import React from 'react'
+import ReactDOM from 'react-dom'
 import Colr from 'colr'
 import {
   saveList,
@@ -7,17 +7,43 @@ import {
   sizeClassNames,
   formGroupCx,
   label,
-} from "../util.js"
-import cx from "classnames"
-import {HigherOrderComponents} from "frig"
-import ColorMap from "./color/map"
-import HueSlider from "./color/hue_slider"
+} from '../util.js'
+import cx from 'classnames'
+import { HigherOrderComponents } from 'frig'
+import ColorMap from './color/map'
+import HueSlider from './color/hue_slider'
 
 @HigherOrderComponents.Focusable
 export default class Color extends React.Component {
-  static displayName = "FriggingBootstrap.Color"
+  static displayName = 'FriggingBootstrap.Color'
 
-  static defaultProps = Object.assign(require("../default_props.js"))
+  static defaultProps = Object.assign(require('../default_props.js'))
+
+  static propTypes = {
+    inputHtml: React.PropTypes.shape({
+      className: React.PropTypes.string,
+      type: React.PropTypes.string.isRequired,
+    }).isRequired,
+
+    valueLink: React.PropTypes.shape({
+      value: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number,
+        React.PropTypes.bool,
+      ]),
+      requestChange: React.PropTypes.func,
+    }).isRequired,
+
+    focused: React.PropTypes.bool,
+
+    saved: React.PropTypes.bool,
+    errors: React.PropTypes.array,
+  }
+
+  constructor() {
+    super()
+    this._onColorBlockClick = this._onColorBlockClick.bind(this)
+  }
 
   // Color information is stored in state (as well as being received in props)
   // because the HSV format we use looses some accuracy when converted to the
@@ -27,7 +53,7 @@ export default class Color extends React.Component {
   // As an example if you were to set the saturation to 0 then the RGB color
   // would set hue and value to zero as well (#000) loosing that hue and value
   // context we need for the color map.
-  state = {colr: Colr.fromHex("#fff")}
+  state = { colr: Colr.fromHex('#fff') }
 
   componentWillMount() {
     this._updateColrCache(this.props)
@@ -38,22 +64,22 @@ export default class Color extends React.Component {
   }
 
   _updateColrCache(nextProps) {
-    let nextColr = this._generateColr(nextProps.valueLink.value)
-    if( this.state.colr.toHex() === nextColr.toHex()) return
-    this.setState({colr: nextColr})
+    const nextColr = this._generateColr(nextProps.valueLink.value)
+    if (this.state.colr.toHex() === nextColr.toHex()) return
+    this.setState({ colr: nextColr })
   }
 
   _generateColr(hex) {
-    hex = hex || "#fff"
-    if (!hex.match(/^#?([a-f0-9]{3}|[a-f0-9]{6})$/i)) hex = "#fff"
-    return Colr.fromHex(hex)
+    let colour = hex || '#fff'
+    if (!colour.match(/^#?([a-f0-9]{3}|[a-f0-9]{6})$/i)) colour = '#fff'
+    return Colr.fromHex(colour)
   }
 
   _requestColrChange(colr) {
     // Update state and then props so that the cache invalidation for incomming
     // props (_updateColrCache) always sees the latest state.
-    let updateProps = () => this.props.valueLink.requestChange(colr.toHex())
-    this.setState({colr: colr}, updateProps)
+    const updateProps = () => this.props.valueLink.requestChange(colr.toHex())
+    this.setState({ colr }, updateProps)
   }
 
   _colrLink() {
@@ -92,23 +118,24 @@ export default class Color extends React.Component {
   }
 
   render() {
+    const inputProps = Object.assign({}, this.props.inputHtml, {
+      valueLink: this.props.valueLink,
+      ref: 'frigColorInput',
+      className: cx(
+        this.props.inputHtml.className,
+        'frigb-color-input',
+        'form-control',
+      ),
+    })
     return (
       <div className={cx(sizeClassNames(this.props))}>
         <div className={formGroupCx(this.props)}>
           {label(this.props)}
-          <input {...Object.assign({}, this.props.inputHtml, {
-            valueLink: this.props.valueLink,
-            ref: "frigColorInput",
-            className: cx(
-              this.props.inputHtml.className,
-              "frigb-color-input",
-              "form-control",
-            ),
-          })}/>
+          <input {...inputProps} />
           <div
             className="frigb-color-block"
-            style={{backgroundColor: this.state.colr.toHex()}}
-            onClick={this._onColorBlockClick.bind(this)}
+            style={{ backgroundColor: this.state.colr.toHex() }}
+            onClick={this._onColorBlockClick}
           />
           {this._colorPopup()}
           {saveList(this.props.saved)}
