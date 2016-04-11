@@ -1,12 +1,13 @@
-import React from "react"
+import React from 'react'
 
-export default function({updateClientCoords}) {
-  return function(ComponentClass) {
-
+export default function Draggable({ updateClientCoords }) {
+  return (ComponentClass) => { // eslint-disable-line arrow-body-style
     return class extends React.Component {
-      static displayName = "Draggable"
+      static displayName = 'Draggable'
 
       static propTypes = {
+        clientY: React.PropTypes.number,
+        clientX: React.PropTypes.number,
         max: React.PropTypes.number,
       }
 
@@ -33,13 +34,14 @@ export default function({updateClientCoords}) {
       }
 
       getPercentageValue = (value) => {
-        return (value / this.props.max) * 100 + "%"
+        const percentage = (value / this.props.max) * 100
+        return `${percentage}%`
       }
 
       getScaledValue = (value) => {
-        let min = 0
-        let max = 1
-        let clamp = value < min ? min : (value > max ? max : value)
+        let clamp = value
+        if (value < 0) clamp = 0
+        if (value > 1) clamp = 1
         return clamp * this.props.max
       }
 
@@ -67,12 +69,12 @@ export default function({updateClientCoords}) {
 
       _updateClientCoords(e) {
         e.preventDefault()
-        let {clientX, clientY} = (e.touches == null ? e : e.touches[0])
-        updateClientCoords.bind(this)({clientX, clientY})
+        const { clientX, clientY } = (e.touches == null ? e : e.touches[0])
+        updateClientCoords.bind(this)({ clientX, clientY })
       }
 
       _childProps() {
-        let {startDragging, getPercentageValue, getScaledValue, active} = this
+        const { startDragging, getPercentageValue, getScaledValue, active } = this
         return Object.assign({}, this.props, {
           active,
           startDragging,
@@ -82,9 +84,8 @@ export default function({updateClientCoords}) {
       }
 
       render() {
-        return <ComponentClass {...this._childProps()}/>
+        return <ComponentClass {...this._childProps()} />
       }
-
     }
   }
 }
