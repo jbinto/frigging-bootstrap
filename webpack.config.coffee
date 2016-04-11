@@ -87,7 +87,10 @@ module.exports =
       {
         test: /\.jsx?$/
         exclude: /^(node_modules|dist|scripts)/
-        loader: "babel?stage=0"
+        loader: "babel"
+        query: {
+          presets: ['es2015', 'react', 'stage-1']
+        }
       }
       {
         test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
