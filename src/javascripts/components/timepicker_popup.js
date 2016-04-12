@@ -1,10 +1,21 @@
-import React from "react"
-import {UnboundInput} from "frig"
+import React from 'react'
+import { UnboundInput } from 'frig'
 
 export default class TimePickerPopup extends React.Component {
-  displayName = "FriggingBootstrap.TimePickerPopup"
+  static displayName = 'FriggingBootstrap.TimePickerPopup'
 
-  static defaultProps = Object.assign(require("../default_props.js"))
+  static defaultProps = Object.assign(require('../default_props.js'))
+
+  static propTypes = {
+    valueLink: React.PropTypes.shape({
+      value: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number,
+        React.PropTypes.bool,
+      ]),
+      requestChange: React.PropTypes.func,
+    }).isRequired,
+  }
 
   // Returns the number of hours from 12 to 1 to 11
   _getHour(minutesSinceMidnight = this._minutesSinceMidnight()) {
@@ -16,47 +27,47 @@ export default class TimePickerPopup extends React.Component {
 
   // Returns the minutes portion of the valueLink's time value from 0 to 59
   _getMinutes(minutesSinceMidnight = this._minutesSinceMidnight()) {
-    if (minutesSinceMidnight < 0) minutesSinceMidnight = minutesSinceMidnight*-1
+    if (minutesSinceMidnight < 0) return minutesSinceMidnight * (-1)
 
     return minutesSinceMidnight % 60
   }
 
   _isMeridiemAM() {
-    let [, , isAM] = this._getValuesFromTimepicker()
+    const [, , isAM] = this._getValuesFromTimepicker()
 
     return isAM
   }
 
   _onHourChange(hour) {
-    let val = this._calculateHourChange(hour)
+    const val = this._calculateHourChange(hour)
 
     this._setMinutesSinceMidnight(val)
   }
 
   _onMinutesChange(minutes) {
-    let val = this._calculateMinutesChange(minutes)
+    const val = this._calculateMinutesChange(minutes)
 
     this._setMinutesSinceMidnight(val)
   }
 
   _onMeridiemChange(isAM) {
-    let [hours] = this._getValuesFromTimepicker()
-    let val = this._calculateHourChange(hours)
+    const [hours] = this._getValuesFromTimepicker()
+    const val = this._calculateHourChange(hours)
 
     this._setMinutesSinceMidnight(val, isAM)
   }
 
   _calculateHourChange(hour) {
-    hour = (parseInt(hour)||0)
-    hour = hour % 12
+    let changeHour = (parseInt(hour, 10) || 0)
+    changeHour = changeHour % 12
 
-    return this._getMinutes() + hour * 60
+    return this._getMinutes() + changeHour * 60
   }
 
   _calculateMinutesChange(minutes) {
-    minutes = (parseInt(minutes)||0)
+    const changeMinutes = (parseInt(minutes, 10) || 0)
 
-    return minutes + this._hoursSinceMeridiem() * 60
+    return changeMinutes + this._hoursSinceMeridiem() * 60
   }
 
   _hoursSinceMeridiem(minutesSinceMidnight = this._minutesSinceMidnight()) {
@@ -64,12 +75,12 @@ export default class TimePickerPopup extends React.Component {
   }
 
   _getValuesFromTimepicker() {
-    let val = this.props.valueLink.value || ""
+    const val = this.props.valueLink.value || ''
 
     // Parsing the input string
-    let [hours, minutes] = val.split(":").map((s) => parseInt(s))
+    const [hours, minutes] = val.split(':').map((s) => parseInt(s, 10))
 
-    let isAM = /am$/i.test(val)
+    const isAM = /am$/i.test(val)
 
     return [hours, minutes, isAM]
   }
@@ -86,25 +97,26 @@ export default class TimePickerPopup extends React.Component {
   }
 
   _setMinutesSinceMidnight(m, isAM = this._isMeridiemAM()) {
-    m = m % (12 * 60)
+    const minutesSinceMidnight = m % (12 * 60)
+    let currentMeridiem = isAM
 
-    let hours = this._getHour(m)
-    let minutes = this._getMinutes(m)
-    let [, , currentMeridiem] = this._getValuesFromTimepicker()
+    let hours = this._getHour(minutesSinceMidnight)
+    let minutes = this._getMinutes(minutesSinceMidnight)
+    const [, , selectedMeridiem] = this._getValuesFromTimepicker()
 
-    if(hours < 0) hours = 11
-    if(hours === 12 && minutes === 0) isAM = !currentMeridiem
+    if (hours < 0) hours = 11
+    if (hours === 12 && minutes === 0) currentMeridiem = !selectedMeridiem
     minutes = minutes < 10 ? `0${minutes}` : minutes
 
-    let meridiem = isAM ? "AM" : "PM"
+    const meridiem = currentMeridiem ? 'AM' : 'PM'
 
-    let s = `${hours}:${minutes} ${meridiem}`
+    const s = `${hours}:${minutes} ${meridiem}`
     this.props.valueLink.requestChange(s)
   }
 
   _inputPropOverrides() {
     return {
-      type: "string",
+      type: 'string',
       required: false,
       xs: 4,
     }
@@ -115,11 +127,11 @@ export default class TimePickerPopup extends React.Component {
       {},
       this.props,
       this._inputPropOverrides(), {
-        name: "hours",
+        name: 'hours',
         value: this._getHour(),
         onChange: this._onHourChange.bind(this),
         inputHtml: {
-          type: "number",
+          type: 'number',
           step: 1,
         },
       }
@@ -131,11 +143,11 @@ export default class TimePickerPopup extends React.Component {
       {},
       this.props,
       this._inputPropOverrides(), {
-        name: "minutes",
+        name: 'minutes',
         value: this._getMinutes(),
         onChange: this._onMinutesChange.bind(this),
         inputHtml: {
-          type: "number",
+          type: 'number',
           step: 15,
         },
       }
@@ -146,14 +158,14 @@ export default class TimePickerPopup extends React.Component {
     return Object.assign(
       {},
       this.props, {
-        type: "switch",
+        type: 'switch',
         required: false,
         xs: 4,
-        name: "meridiem",
-        onText: "AM",
-        onColor: "warning",
-        offText: "PM",
-        offColor: "primary",
+        name: 'meridiem',
+        onText: 'AM',
+        onColor: 'warning',
+        offText: 'PM',
+        offColor: 'primary',
         value: this._isMeridiemAM(),
         onChange: this._onMeridiemChange.bind(this),
       }
@@ -163,11 +175,11 @@ export default class TimePickerPopup extends React.Component {
   render() {
     return (
       <div className="frigb-popup-container popover bottom">
-        <div className="arrow"/>
+        <div className="arrow" />
         <div className="row">
-          <UnboundInput {...this._hourProps()}/>
-          <UnboundInput {...this._minuteProps()}/>
-          <UnboundInput {...this._meridiemProps()}/>
+          <UnboundInput {...this._hourProps()} />
+          <UnboundInput {...this._minuteProps()} />
+          <UnboundInput {...this._meridiemProps()} />
         </div>
       </div>
     )
