@@ -112,14 +112,15 @@ const inputContainerCx = (props) => {
   })
 }
 
-const formGroupCx = (props, overrides = {}) => {
+const formGroupCx = (props) => {
   const isCheckbox = props.inputHtml.type === 'checkbox'
+
   return cx(Object.assign({
     'form-group': !isCheckbox,
     checkbox: isCheckbox,
     'has-error': props.errors != null,
     'has-success': props.modified && props.errors == null,
-  }, overrides))
+  }))
 }
 
 export {

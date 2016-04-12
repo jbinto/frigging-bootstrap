@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { expect } from 'chai'
-import { sizeClassNames } from '../src/js/util'
+import { sizeClassNames, formGroupCx } from '../src/js/util'
 
 describe('Util', () => {
   describe('sizeClassNames', () => {
@@ -57,6 +57,49 @@ describe('Util', () => {
       it('should return empty when offset is set to false', () => {
         const actual = sizeClassNames({}, { Offsets: false })
         expect(actual).to.equal('')
+      })
+    })
+  })
+
+  describe('formGroupCx', () => {
+    describe('using props', () => {
+      it('should return checkbox if inputHtml.type=checkbox', () => {
+        const props = {
+          inputHtml: {
+            type: 'checkbox',
+          },
+        }
+        const result = formGroupCx(props)
+        expect(result).to.equal('checkbox')
+      })
+      it('should return form-group if inputHtml.type!=checkbox', () => {
+        const props = {
+          inputHtml: {
+            type: 'input',
+          },
+        }
+        const result = formGroupCx(props)
+        expect(result).to.equal('form-group')
+      })
+      it('should set has-error if props.errors is not undefined', () => {
+        const props = {
+          inputHtml: {
+            type: 'input',
+          },
+          errors: ['errors'],
+        }
+        const result = formGroupCx(props)
+        expect(result).to.equal('form-group has-error')
+      })
+      it('should set has-success if modified and no errors', () => {
+        const props = {
+          inputHtml: {
+            type: 'checkbox',
+          },
+          modified: true,
+        }
+        const result = formGroupCx(props)
+        expect(result).to.equal('checkbox has-success')
       })
     })
   })
