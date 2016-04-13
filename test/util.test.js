@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { expect } from 'chai'
-import { sizeClassNames, formGroupCx } from '../src/js/util'
+import { sizeClassNames, formGroupCx, inputContainerCx } from '../src/js/util'
 
 describe('Util', () => {
   describe('sizeClassNames', () => {
@@ -55,7 +55,7 @@ describe('Util', () => {
       })
 
       it('should return empty when offset is set to false', () => {
-        const actual = sizeClassNames({}, { Offsets: false })
+        const actual = sizeClassNames({}, { offsets: false })
         expect(actual).to.equal('')
       })
     })
@@ -100,6 +100,88 @@ describe('Util', () => {
         }
         const result = formGroupCx(props)
         expect(result).to.equal('checkbox has-success')
+      })
+    })
+  })
+
+  describe('inputContainerCx', () => {
+    describe('using props', () => {
+      const props = {
+        inputHtml: { type: 'input' },
+        layout: 'horizontal',
+      }
+
+      it('should return empty string on blank prop', () => {
+        const result = inputContainerCx({})
+        expect(result).to.equal('')
+      })
+
+      describe('block', () => {
+        it('should have block=false return empty string', () => {
+          const inputProps = Object.assign({}, props, {
+            block: false,
+          })
+
+          const result = inputContainerCx(inputProps)
+          expect(result).to.equal('')
+        })
+        it('should have block=true return col-xs-12', () => {
+          const inputProps = Object.assign({}, props, {
+            block: true,
+          })
+
+          const result = inputContainerCx(inputProps)
+          expect(result).to.equal('col-xs-12')
+        })
+      })
+
+      describe('labelWidth with block', () => {
+        it('ignores labelWidth when block=true (always returns xs-12)', () => {
+          const inputProps = Object.assign({}, props, {
+            labelWidth: { md: 8 },
+            block: true,
+          })
+          const result = inputContainerCx(inputProps)
+          expect(result).to.equal('col-xs-12')
+        })
+      })
+
+      describe('labelWidth', () => {
+        it('when labelWidth={xs:9}, should return col-xs-3 (12-9=3)', () => {
+          const inputProps = Object.assign({}, props, {
+            labelWidth: { xs: 9 },
+            block: false,
+          })
+
+          const result = inputContainerCx(inputProps)
+          expect(result).to.equal('col-xs-3')
+        })
+
+        it('when labelWidth={xs:12}, should return col-xs-12 (12-12=0)', () => {
+          const inputProps = Object.assign({}, props, {
+            labelWidth: { xs: 12 },
+            block: false,
+          })
+
+          const result = inputContainerCx(inputProps)
+          expect(result).to.equal('col-xs-12')
+        })
+      })
+
+      describe('when layout is vertical', () => {
+        const badProps = Object.assign({}, props, {
+          layout: 'vertical',
+        })
+
+        it('should return blank always', () => {
+          const inputProps = Object.assign({}, badProps, {
+            labelWidth: { xs: 12 },
+            block: false,
+          })
+
+          const result = inputContainerCx(inputProps)
+          expect(result).to.equal('')
+        })
       })
     })
   })
