@@ -48,6 +48,7 @@ const sizeClassNames = (props = {}, opts = { offsets: true }) => {
   }
   return cx(classes)
 }
+
 // TODO: convert React Components to Capital Letters
 const label = (props, overrides = {}) => {
   let horizontalClasses = sizeClassNames(props.labelWidth, { offsets: false })
