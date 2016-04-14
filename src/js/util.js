@@ -49,34 +49,39 @@ const sizeClassNames = (props = {}, opts = { offsets: true }) => {
   return cx(classes)
 }
 
-// TODO: convert React Components to Capital Letters
-const label = (props, overrides = {}) => {
-  let horizontalClasses = sizeClassNames(props.labelWidth, { offsets: false })
-  if (!props.label || props.block) {
-    if (props.layout === 'horizontal' && !props.block) {
-      return <div className={horizontalClasses} />
-    }
-
-    return ''
+class Label extends React.Component {
+  static propTypes = {
+    label: React.PropTypes.string.isRequired,
+    labelWidth: React.PropTypes.number.isRequired,
+    layout: React.PropTypes.string.isRequired,
+    block: React.PropTypes.bool,
   }
-  const labelHtml = Object.assign({}, props, overrides)
-  labelHtml.className = cx(labelHtml.className, {
-    [horizontalClasses]: props.layout === 'horizontal',
-  })
 
-  return (
-    <div>
-      <label {...labelHtml}>
-        {props.label}
-      </label>
-    </div>
-  )
-}
-label.propTypes = {
-  label: React.PropTypes.string.isRequired,
-  labelWidth: React.PropTypes.number.isRequired,
-  layout: React.PropTypes.string.isRequired,
-  block: React.PropTypes.bool,
+  render() {
+    const props = this.props
+    const overrides = {}
+
+    let horizontalClasses = sizeClassNames(props.labelWidth, { offsets: false })
+    if (!props.label || props.block) {
+      if (props.layout === 'horizontal' && !props.block) {
+        return <div className={horizontalClasses} />
+      }
+
+      return ''
+    }
+    const labelHtml = Object.assign({}, props, overrides)
+    labelHtml.className = cx(labelHtml.className, {
+      [horizontalClasses]: props.layout === 'horizontal',
+    })
+
+    return (
+      <div>
+        <label {...labelHtml}>
+          {props.label}
+        </label>
+      </div>
+    )
+  }
 }
 
 const saveList = (isSave) =>
@@ -126,7 +131,7 @@ export {
   error,
   errorList,
   sizeClassNames,
-  label,
+  Label,
   saveList,
   save,
   inputContainerCx,
