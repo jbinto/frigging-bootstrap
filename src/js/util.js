@@ -118,11 +118,6 @@ class Label extends React.Component {
   }
 }
 
-const saveList = (isSave) =>
-  module.exports.save({
-    saved: isSave,
-  })
-
 class Save extends React.Component {
   static propTypes = {
     saved: React.PropTypes.bool.isRequired,
@@ -174,7 +169,6 @@ export {
   errorList,
   sizeClassNames,
   Label,
-  saveList,
   Save,
   inputContainerCx,
   formGroupCx,
