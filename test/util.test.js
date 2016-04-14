@@ -233,7 +233,8 @@ describe('Util', () => {
         })
 
         describe('with labelWidth', () => {
-          // one and a half: label is empty., layout is horizontal, labelWidth is defined => return empty div WITH horiz classes
+          // one and a half: label is empty., layout is horizontal,
+          // labelWidth is defined => return empty div WITH horiz classes
           it('renders div with className=col-xs-12', () => {
             const wrapper = mount(<Label layout="horizontal" labelWidth={{ xs: 8 }} />)
             expect(wrapper.find('div').hasClass('col-xs-8')).to.be.true()
