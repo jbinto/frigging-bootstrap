@@ -2,11 +2,26 @@ import cx from 'classnames'
 import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-const errorList = (errors) => {
-  let i = 0
-  return (errors || []).map((msg) =>
-    <Error msg={msg} i={i++} />
-  )
+class ErrorList extends React.Component {
+  static propTypes = {
+    errors: React.PropTypes.arrayOf(
+      React.PropTypes.string
+    ).isRequired,
+  }
+
+  render() {
+    const { errors } = this.props
+    if (!errors) {
+      return null
+    }
+    return (
+      <div>
+        {errors.map((msg, i) =>
+          <Error msg={msg} i={i} />
+        )}
+      </div>
+    )
+  }
 }
 
 class Error extends React.Component {
@@ -166,7 +181,7 @@ const formGroupCx = (props) => {
 export {
   Error,
   ErrorBody,
-  errorList,
+  ErrorList,
   sizeClassNames,
   Label,
   Save,
