@@ -2,7 +2,13 @@
 
 import React from 'react'
 import { expect } from 'chai'
-import { sizeClassNames, formGroupCx, inputContainerCx, Label } from '../src/js/util'
+import {
+  sizeClassNames,
+  formGroupCx,
+  inputContainerCx,
+  Label,
+  ErrorBody
+} from '../src/js/util'
 import { mount } from 'enzyme'
 
 describe('Util', () => {
@@ -245,6 +251,13 @@ describe('Util', () => {
           expect(labelWrapper.hasClass('col-xs-12')).to.be.false()
         })
       })
+    })
+  })
+
+  describe('<ErrorBody />', () => {
+    it('render a message "Error"', () => {
+      const wrapper = mount(<ErrorBody msg="Error" />)
+      expect(wrapper.text()).to.match(/Error/)
     })
   })
 })
