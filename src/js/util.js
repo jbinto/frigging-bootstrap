@@ -7,28 +7,55 @@ const errorList = (errors) => {
   return (errors || []).map((msg) => module.exports.error(msg, i++))
 }
 
-const error = (msg, i = 0) => { // eslint-disable-line react/display-name
-  const transtionAttrs = {
-    transitionName: 'errorLabel',
-    transitionAppear: true,
-    transitionAppearTimeout: 0,
-    transitionEnterTimeout: 0,
-    transitionLeaveTimeout: 0,
-    key: `error-transition-${i}`,
+class Error extends React.Component {
+  static propTypes = {
+    msg: React.PropTypes.string.isRequired,
+    i: React.PropTypes.number,
   }
-  return (
-    <ReactCSSTransitionGroup {...transtionAttrs}>
-      <span className="help-block" key={`error-${i}`}>
+
+  static defaultProps = {
+    i: 0,
+  }
+
+  render() {
+    const transtionAttrs = {
+      transitionName: 'errorLabel',
+      transitionAppear: true,
+      transitionAppearTimeout: 0,
+      transitionEnterTimeout: 0,
+      transitionLeaveTimeout: 0,
+      key: `error-transition-${this.props.i}`,
+    }
+    return (
+      <ReactCSSTransitionGroup {...transtionAttrs}>
+        <ErrorBody {...this.props} />
+      </ReactCSSTransitionGroup>
+    )
+  }
+}
+
+class ErrorBody extends React.Component {
+  static propTypes = {
+    msg: React.PropTypes.string.isRequired,
+    i: React.PropTypes.number,
+  }
+
+  static defaultProps = {
+    i: 0,
+  }
+
+  render() {
+    return (
+      <span className="help-block" key={`error-${this.props.i}`}>
         <i
           className="fa fa-exclamation-circle"
-          key={`error-label-${i}`}
-        >
-          {' '}
-          {msg}
-        </i>
+          key={`error-label-${this.props.i}`}
+        ></i>
+        {' '}
+        {this.props.msg}
       </span>
-    </ReactCSSTransitionGroup>
-  )
+    )
+  }
 }
 
 const sizeClassNames = (props = {}, opts = { offsets: true }) => {
@@ -133,7 +160,8 @@ const formGroupCx = (props) => {
 }
 
 export {
-  error,
+  Error,
+  ErrorBody,
   errorList,
   sizeClassNames,
   Label,
