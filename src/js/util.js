@@ -121,14 +121,21 @@ const saveList = (isSave) =>
     saved: isSave,
   })
 
-const save = ({ saved, className = 'frigb-saved pull-right' }) => {
-  if (!saved) return ''
-  return <span className={className} key="saved">saved</span>
-}
+class Save extends React.Component {
+  static propTypes = {
+    saved: React.PropTypes.bool.isRequired,
+    className: React.PropTypes.string.isRequired,
+  }
 
-save.propTypes = {
-  saved: React.PropTypes.bool.isRequired,
-  className: React.PropTypes.string.isRequired,
+  static defaultProps = {
+    className: 'frigb-saved pull-right',
+  }
+
+  render() {
+    const { saved, className } = this.props
+    if (!saved) return null
+    return <span className={className} key="saved">saved</span>
+  }
 }
 
 const inputContainerCx = (props) => {
@@ -166,7 +173,7 @@ export {
   sizeClassNames,
   Label,
   saveList,
-  save,
+  Save,
   inputContainerCx,
   formGroupCx,
   sizeClassNames,

@@ -7,7 +7,8 @@ import {
   formGroupCx,
   inputContainerCx,
   Label,
-  ErrorBody
+  ErrorBody,
+  Save,
 } from '../src/js/util'
 import { mount } from 'enzyme'
 
@@ -258,6 +259,21 @@ describe('Util', () => {
     it('render a message "Error"', () => {
       const wrapper = mount(<ErrorBody msg="Error" />)
       expect(wrapper.text()).to.match(/Error/)
+    })
+  })
+
+  describe('<Save />', () => {
+    it('render saved', () => {
+      const wrapper = mount(<Save saved />)
+      expect(wrapper.text()).to.match(/saved/)
+    })
+    it('render a classname', () => {
+      const wrapper = mount(<Save saved className="zyx" />)
+      expect(wrapper.find('span').hasClass('zyx')).to.be.true()
+    })
+    it('if saved={false} render empty string', () => {
+      const wrapper = mount(<Save />)
+      expect(wrapper.html()).to.be.null()
     })
   })
 })
