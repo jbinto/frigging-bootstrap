@@ -4,7 +4,9 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 const errorList = (errors) => {
   let i = 0
-  return (errors || []).map((msg) => module.exports.error(msg, i++))
+  return (errors || []).map((msg) =>
+    <Error msg={msg} i={i++} />
+  )
 }
 
 class Error extends React.Component {

@@ -9,6 +9,7 @@ import {
   Label,
   ErrorBody,
   Save,
+  errorList,
 } from '../src/js/util'
 import { mount } from 'enzyme'
 
@@ -190,6 +191,22 @@ describe('Util', () => {
           const result = inputContainerCx(inputProps)
           expect(result).to.equal('')
         })
+      })
+    })
+  })
+
+  describe('errorList', () => {
+    it('when called with no args, returns empty array', () => {
+      expect(errorList()).to.be.deep.equal([])
+    })
+    it('when called with string[], return Error[]', () => {
+      const errorTexts = ['error 1', 'error 2', 'error 3']
+      const errors = errorList(errorTexts)
+      errors.forEach((error, i) => {
+        const wrapper = mount(error)
+        const actual = wrapper.props().msg
+        const expected = errorTexts[i]
+        expect(actual).to.equal(expected)
       })
     })
   })
