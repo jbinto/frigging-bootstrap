@@ -14,7 +14,7 @@ export default class Form extends React.Component {
       className: React.PropTypes.string,
     }),
     layout: React.PropTypes.string,
-    children: React.PropTypes.arrayOf(React.PropTypes.element),
+    children: React.PropTypes.any.isRequired,
   }
 
   _formHtml() {

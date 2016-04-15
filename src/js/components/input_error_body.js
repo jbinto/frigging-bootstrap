@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class ErrorBody extends React.Component {
+export default class InputErrorBody extends React.Component {
   static propTypes = {
     msg: React.PropTypes.string.isRequired,
     i: React.PropTypes.number,

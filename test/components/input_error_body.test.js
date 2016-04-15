@@ -3,11 +3,11 @@
 import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
-import ErrorBody from '../../src/js/components/error_body'
+import InputErrorBody from '../../src/js/components/input_error_body'
 
-describe('<ErrorBody />', () => {
+describe('<InputErrorBody />', () => {
   it('renders the given props.msg', () => {
-    const wrapper = mount(<ErrorBody msg="abcdefg" />)
+    const wrapper = mount(<InputErrorBody msg="abcdefg" />)
     expect(wrapper.text()).to.match(/abcdefg/)
   })
 })

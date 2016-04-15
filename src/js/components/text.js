@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 
-import ErrorsList from './error_list'
+import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx } from '../util.js'
@@ -51,7 +51,7 @@ export default class Text extends React.Component {
             <textarea {...this._inputHtml()} />
           </div>
           <Saved saved={this.props.saved} />
-          <ErrorsList errors={this.props.errors} />
+          <InputErrorList errors={this.props.errors} />
         </div>
       </div>
     )

@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 
-import ErrorsList from './error_list'
+import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import {
@@ -95,7 +95,7 @@ export default class Input extends React.Component {
         <div className={formGroupCx(this.props)}>
           <div className={inputContainerCx(this.props)}>
             {this._inputGroup()}
-            <ErrorsList errors={this.props.errors} />
+            <InputErrorList errors={this.props.errors} />
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import ErrorBody from './error_body'
+import InputErrorBody from './input_error_body'
 
-export default class ErrorMessage extends React.Component {
+export default class InputError extends React.Component {
   static propTypes = {
     msg: React.PropTypes.string.isRequired,
     i: React.PropTypes.number,
@@ -23,7 +23,7 @@ export default class ErrorMessage extends React.Component {
     }
     return (
       <ReactCSSTransitionGroup {...transtionAttrs}>
-        <ErrorBody {...this.props} />
+        <InputErrorBody {...this.props} />
       </ReactCSSTransitionGroup>
     )
   }

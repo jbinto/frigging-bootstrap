@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import cx from 'classnames'
 
-import ErrorsList from './error_list'
+import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx } from '../util.js'
@@ -114,7 +114,7 @@ export default class FileInput extends React.Component {
               <Saved saved={this.props.saved} />
             </div>
           </div>
-          <ErrorsList errors={this.props.errors} />
+          <InputErrorList errors={this.props.errors} />
         </div>
       </div>
     )

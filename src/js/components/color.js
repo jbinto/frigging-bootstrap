@@ -5,7 +5,7 @@ import cx from 'classnames'
 import Colr from 'colr'
 import { HigherOrderComponents } from 'frig'
 
-import ErrorsList from './error_list'
+import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import ColorMap from './color/map'
@@ -138,7 +138,7 @@ export default class Color extends React.Component {
           />
           {this._colorPopup()}
           <Saved saved={this.props.saved} />
-          <ErrorsList errors={this.props.errors} />
+          <InputErrorList errors={this.props.errors} />
         </div>
       </div>
     )

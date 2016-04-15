@@ -3,7 +3,7 @@ import cx from 'classnames'
 
 import { ValueLinkedSelect } from 'frig'
 
-import ErrorsList from './error_list'
+import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx } from '../util.js'
@@ -50,7 +50,7 @@ export default class Select extends React.Component {
           <Label {...labelProps} />
           <div className="controls">
             <ValueLinkedSelect {...this._inputHtml()} />
-            <ErrorsList errors={this.props.errors} />
+            <InputErrorList errors={this.props.errors} />
           </div>
           <Saved saved={this.props.saved} />
         </div>

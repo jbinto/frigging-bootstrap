@@ -3,7 +3,7 @@ import cx from 'classnames'
 
 import { HigherOrderComponents } from 'frig'
 
-import ErrorsList from './error_list'
+import InputErrorList from './input_error_list'
 import Saved from './saved'
 import {
   sizeClassNames,
@@ -54,7 +54,7 @@ export default class Checkbox extends React.Component {
               {this.props.label ? ` ${this.props.label}` : ''}
             </label>
             <Saved saved={this.props.saved} />
-            <ErrorsList errors={this.props.errors} />
+            <InputErrorList errors={this.props.errors} />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Errors extends React.Component {
+export default class FormErrorList extends React.Component {
   static displayName = 'FriggingBootstrap.Errors'
 
   static defaultProps = require('../default_props.js')
