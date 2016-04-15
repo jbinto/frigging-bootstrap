@@ -16,11 +16,8 @@ export default class FileInput extends React.Component {
   })
 
   static propTypes = {
-    inputHtml: React.PropTypes.shape({
-      type: React.PropTypes.string.isRequired,
-    }).isRequired,
+    inputHtml: React.PropTypes.object,
     initialValue: React.PropTypes.string.isRequired,
-
     valueLink: React.PropTypes.shape({
       value: React.PropTypes.oneOfType([
         React.PropTypes.string,

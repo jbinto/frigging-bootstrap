@@ -19,11 +19,7 @@ export default class Color extends React.Component {
   static defaultProps = Object.assign(require('../default_props.js'))
 
   static propTypes = {
-    inputHtml: React.PropTypes.shape({
-      className: React.PropTypes.string,
-      type: React.PropTypes.string.isRequired,
-    }).isRequired,
-
+    inputHtml: React.PropTypes.object,
     valueLink: React.PropTypes.shape({
       value: React.PropTypes.oneOfType([
         React.PropTypes.string,

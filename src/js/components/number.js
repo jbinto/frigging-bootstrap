@@ -16,11 +16,7 @@ export default class Number extends React.Component {
   })
 
   static propTypes = {
-    inputHtml: React.PropTypes.shape({
-      type: React.PropTypes.string.isRequired,
-      className: React.PropTypes.string,
-    }).isRequired,
-
+    inputHtml: React.PropTypes.object,
     format: React.PropTypes.string,
 
     valueLink: React.PropTypes.shape({

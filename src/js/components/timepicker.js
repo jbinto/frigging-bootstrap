@@ -16,8 +16,8 @@ export default class TimePicker extends React.Component {
   static defaultProps = Object.assign(require('../default_props.js'))
 
   // TODO: standarized proptyles accross componets
-  propTypes = {
-    inputHtml: React.PropTypes.object.isRequired,
+  static propTypes = {
+    inputHtml: React.PropTypes.object,
     valueLink: React.PropTypes.shape({
       value: React.PropTypes.oneOfType([
         React.PropTypes.string,

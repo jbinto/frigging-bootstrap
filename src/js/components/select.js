@@ -16,9 +16,7 @@ export default class Select extends React.Component {
   })
 
   static propTypes = {
-    inputHtml: React.PropTypes.shape({
-      type: React.PropTypes.string.isRequired,
-    }).isRequired,
+    inputHtml: React.PropTypes.object,
     options: React.PropTypes.object,
     valueLink: React.PropTypes.shape({
       value: React.PropTypes.oneOfType([
