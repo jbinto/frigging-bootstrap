@@ -1,4 +1,5 @@
 import React from 'react'
+import ErrorMessage from './error_message'
 
 export class ErrorList extends React.Component {
   static propTypes = {
@@ -15,7 +16,7 @@ export class ErrorList extends React.Component {
     return (
       <div>
         {errors.map((msg, i) =>
-          <Error msg={msg} i={i} />
+          <ErrorMessage msg={msg} i={i} />
         )}
       </div>
     )

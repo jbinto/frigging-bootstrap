@@ -1,57 +1,4 @@
 import cx from 'classnames'
-import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-
-class Error extends React.Component {
-  static propTypes = {
-    msg: React.PropTypes.string.isRequired,
-    i: React.PropTypes.number,
-  }
-
-  static defaultProps = {
-    i: 0,
-  }
-
-  render() {
-    const transtionAttrs = {
-      transitionName: 'errorLabel',
-      transitionAppear: true,
-      transitionAppearTimeout: 0,
-      transitionEnterTimeout: 0,
-      transitionLeaveTimeout: 0,
-      key: `error-transition-${this.props.i}`,
-    }
-    return (
-      <ReactCSSTransitionGroup {...transtionAttrs}>
-        <ErrorBody {...this.props} />
-      </ReactCSSTransitionGroup>
-    )
-  }
-}
-
-class ErrorBody extends React.Component {
-  static propTypes = {
-    msg: React.PropTypes.string.isRequired,
-    i: React.PropTypes.number,
-  }
-
-  static defaultProps = {
-    i: 0,
-  }
-
-  render() {
-    return (
-      <span className="help-block" key={`error-${this.props.i}`}>
-        <i
-          className="fa fa-exclamation-circle"
-          key={`error-label-${this.props.i}`}
-        ></i>
-        {' '}
-        {this.props.msg}
-      </span>
-    )
-  }
-}
 
 const sizeClassNames = (props = {}, opts = { offsets: true }) => {
   const classes = {}
@@ -69,63 +16,6 @@ const sizeClassNames = (props = {}, opts = { offsets: true }) => {
     }
   }
   return cx(classes)
-}
-
-class Label extends React.Component {
-  static propTypes = {
-    labelWidth: React.PropTypes.number.isRequired,
-    layout: React.PropTypes.string.isRequired,
-    block: React.PropTypes.bool,
-    label: React.PropTypes.string,
-  }
-
-  static defaultProps = {
-    block: false,
-    label: '',
-  }
-
-  isEmpty() { return !this.props.label }
-
-  render() {
-    const horizontalClasses = sizeClassNames(
-      this.props.labelWidth, { offsets: false }
-    )
-
-    if (this.props.block) return null
-    if (this.props.layout === 'horizontal' && this.isEmpty()) {
-      return <div className={horizontalClasses} />
-    }
-
-    const labelHtml = Object.assign({}, this.props)
-    labelHtml.className = cx(labelHtml.className, {
-      [horizontalClasses]: this.props.layout === 'horizontal',
-    })
-
-    return (
-      <div>
-        <label {...labelHtml}>
-          {this.props.label}
-        </label>
-      </div>
-    )
-  }
-}
-
-class Save extends React.Component {
-  static propTypes = {
-    saved: React.PropTypes.bool.isRequired,
-    className: React.PropTypes.string.isRequired,
-  }
-
-  static defaultProps = {
-    className: 'frigb-saved pull-right',
-  }
-
-  render() {
-    const { saved, className } = this.props
-    if (!saved) return null
-    return <span className={className} key="saved">saved</span>
-  }
 }
 
 const inputContainerCx = (props) => {
@@ -157,12 +47,7 @@ const formGroupCx = (props) => {
 }
 
 export {
-  Error,
-  ErrorBody,
-  ErrorList,
   sizeClassNames,
-  Label,
-  Save,
   inputContainerCx,
   formGroupCx,
   sizeClassNames,
