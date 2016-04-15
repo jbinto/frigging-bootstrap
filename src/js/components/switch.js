@@ -1,14 +1,12 @@
 import React from 'react'
 import cx from 'classnames'
+
 import { HigherOrderComponents } from 'frig'
-import {
-  saveList,
-  errorList,
-  sizeClassNames,
-  formGroupCx,
-  label,
-  inputContainerCx,
-} from '../util.js'
+
+import ErrorsList from './error_list'
+import Saved from './saved'
+import Label from './label'
+import { sizeClassNames, formGroupCx, inputContainerCx } from '../util.js'
 
 @HigherOrderComponents.Boolean
 export default class Switch extends React.Component {
@@ -127,13 +125,13 @@ export default class Switch extends React.Component {
     return (
       <div className={cx(sizeClassNames(this.props))} tabIndex={0}>
         <div className={formGroupCx(this.props)}>
-          {label(this.props)}
-          {saveList(this.props.saved)}
+          <Label {...this.props} />
+          <Saved saved={this.props.saved} />
           <div className={inputContainerCx(this.props)}>
             <div className={this._switchCx()} style={this._switchStyle()}>
               {this._input()}
             </div>
-            {errorList(this.props.errors)}
+            <ErrorsList errors={this.props.errors} />
           </div>
         </div>
       </div>

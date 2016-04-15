@@ -1,17 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Colr from 'colr'
-import {
-  saveList,
-  errorList,
-  sizeClassNames,
-  formGroupCx,
-  label,
-} from '../util.js'
 import cx from 'classnames'
+
+import Colr from 'colr'
 import { HigherOrderComponents } from 'frig'
+
+import ErrorsList from './error_list'
+import Saved from './saved'
+import Label from './label'
 import ColorMap from './color/map'
 import HueSlider from './color/hue_slider'
+import { sizeClassNames, formGroupCx } from '../util.js'
 
 @HigherOrderComponents.Focusable
 export default class Color extends React.Component {
@@ -130,7 +129,7 @@ export default class Color extends React.Component {
     return (
       <div className={cx(sizeClassNames(this.props))}>
         <div className={formGroupCx(this.props)}>
-          {label(this.props)}
+          <Label {...this.props} />
           <input {...inputProps} />
           <div
             className="frigb-color-block"
@@ -138,8 +137,8 @@ export default class Color extends React.Component {
             onClick={this._onColorBlockClick}
           />
           {this._colorPopup()}
-          {saveList(this.props.saved)}
-          {errorList(this.props.errors)}
+          <Saved saved={this.props.saved} />
+          <ErrorsList errors={this.props.errors} />
         </div>
       </div>
     )

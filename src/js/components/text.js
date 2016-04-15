@@ -1,12 +1,10 @@
 import React from 'react'
-import {
-  saveList,
-  errorList,
-  sizeClassNames,
-  formGroupCx,
-  label,
-} from '../util.js'
 import cx from 'classnames'
+
+import ErrorsList from './error_list'
+import Saved from './saved'
+import Label from './label'
+import { sizeClassNames, formGroupCx } from '../util.js'
 
 export default class Text extends React.Component {
   static displayName = 'FriggingBootstrap.Text'
@@ -48,12 +46,12 @@ export default class Text extends React.Component {
     return (
       <div className={cx(sizeClassNames(this.props))}>
         <div className={formGroupCx(this.props)}>
-          {label(this.props)}
+          <Label {...this.props} />
           <div className="controls">
             <textarea {...this._inputHtml()} />
           </div>
-          {saveList(this.props.saved)}
-          {errorList(this.props.errors)}
+          <Saved saved={this.props.saved} />
+          <ErrorsList errors={this.props.errors} />
         </div>
       </div>
     )

@@ -1,11 +1,13 @@
 import React from 'react'
 import cx from 'classnames'
+
 import { HigherOrderComponents } from 'frig'
+
+import ErrorsList from './error_list'
+import Saved from './saved'
 import {
-  errorList,
   sizeClassNames,
   formGroupCx,
-  saveList,
 } from '../util.js'
 
 @HigherOrderComponents.Boolean
@@ -51,8 +53,8 @@ export default class Checkbox extends React.Component {
               <input {...this._inputHtml()} />
               {this.props.label ? ` ${this.props.label}` : ''}
             </label>
-            {saveList(this.props.saved)}
-            {errorList(this.props.errors)}
+            <Saved saved={this.props.saved} />
+            <ErrorsList errors={this.props.errors} />
           </div>
         </div>
       </div>

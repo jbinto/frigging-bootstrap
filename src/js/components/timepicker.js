@@ -1,14 +1,13 @@
 import React from 'react'
 import cx from 'classnames'
+
 import { HigherOrderComponents } from 'frig'
+
 import TimepickerPopup from './timepicker_popup'
-import {
-  saveList,
-  errorList,
-  sizeClassNames,
-  formGroupCx,
-  label,
-} from '../util.js'
+import ErrorsList from './error_list'
+import Saved from './saved'
+import Label from './label'
+import { sizeClassNames, formGroupCx } from '../util.js'
 
 @HigherOrderComponents.Focusable
 export default class TimePicker extends React.Component {
@@ -67,11 +66,11 @@ export default class TimePicker extends React.Component {
       <div className={cx(sizeClassNames(this.props))}>
         <div className={formGroupCx(this.props)}>
           <div>
-            {label(this.props)}
+            <Label {...this.props} />
           </div>
           {this._input()}
-          {saveList(this.props.saved)}
-          {errorList(this.props.errors)}
+          <Saved saved={this.props.saved} />
+          <ErrorsList errors={this.props.errors} />
         </div>
         {this._timePopup()}
       </div>

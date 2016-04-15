@@ -11,8 +11,8 @@ import Submit from './components/submit.js'
 import Switch from './components/switch.js'
 import Text from './components/text.js'
 import Timepicker from './components/timepicker.js'
-
-const { errorList, saveList } = require('./util')
+import ErrorsList from './components/error_list.js'
+import Saved from './components/saved.js'
 
 module.exports = {
   Checkbox,
@@ -27,6 +27,6 @@ module.exports = {
   Switch,
   Text,
   Timepicker,
-  errorList,
-  saveList,
+  ErrorsList,
+  Saved,
 }
