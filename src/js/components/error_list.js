@@ -1,7 +1,7 @@
 import React from 'react'
 import ErrorMessage from './error_message'
 
-export class ErrorList extends React.Component {
+export default class ErrorList extends React.Component {
   static propTypes = {
     errors: React.PropTypes.arrayOf(
       React.PropTypes.string
@@ -10,9 +10,7 @@ export class ErrorList extends React.Component {
 
   render() {
     const { errors } = this.props
-    if (!errors) {
-      return null
-    }
+    if (!errors) return null
     return (
       <div>
         {errors.map((msg, i) =>

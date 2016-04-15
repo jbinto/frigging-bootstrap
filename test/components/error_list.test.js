@@ -11,9 +11,9 @@ describe('<ErrorList />', () => {
     expect(wrapper.html()).to.be.null()
   })
 
-  it('renders an <Error> for each props.error', () => {
+  it('renders an <ErrorMessage> for each props.error', () => {
     const errorTexts = ['error 1', 'error 2', 'error 3']
     const wrapper = mount(<ErrorList errors={errorTexts} />)
-    expect(wrapper.find('Error')).to.have.length(3)
+    expect(wrapper.find('ErrorMessage')).to.have.length(3)
   })
 })
