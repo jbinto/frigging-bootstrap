@@ -2,7 +2,7 @@ import React from 'react'
 
 export default class Saved extends React.Component {
   static propTypes = {
-    saved: React.PropTypes.bool.isRequired,
+    saved: React.PropTypes.bool,
     className: React.PropTypes.string.isRequired,
   }
 

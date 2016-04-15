@@ -17,7 +17,6 @@ export default class FileInput extends React.Component {
 
   static propTypes = {
     inputHtml: React.PropTypes.object,
-    initialValue: React.PropTypes.string.isRequired,
     valueLink: React.PropTypes.shape({
       value: React.PropTypes.oneOfType([
         React.PropTypes.string,
@@ -33,10 +32,6 @@ export default class FileInput extends React.Component {
 
     saved: React.PropTypes.bool,
     errors: React.PropTypes.array,
-  }
-
-  componentWillMount() {
-    this.setState({ image: this.props.initialValue })
   }
 
   _input() {
