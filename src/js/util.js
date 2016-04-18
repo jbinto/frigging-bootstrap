@@ -50,5 +50,4 @@ export {
   sizeClassNames,
   inputContainerCx,
   formGroupCx,
-  sizeClassNames,
 }
