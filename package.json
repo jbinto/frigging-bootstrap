@@ -5,9 +5,9 @@
   "main": "dist/frigging-bootstrap.js",
   "peerDependencies": {
     "frig": "*",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
-    "react-addons-css-transition-group": "^0.14.7",
+    "react": "^0.14.7 || ^15.0.0-0",
+    "react-dom": "^0.14.7 || ^15.0.0-0",
+    "react-addons-css-transition-group": "^0.14.7 || ^15.0.0-0",
     "classnames": "^2.2.3",
     "colr": "^1.2.2",
     "numeral": "^1.5.3"
