@@ -11,9 +11,8 @@ export default class Submit extends React.Component {
     block: false,
   })
 
-
   static propTypes = {
-    inputHtml: React.PropTypes.object.isRequired,
+    inputHtml: React.PropTypes.object,
     align: React.PropTypes.string,
     bsSize: React.PropTypes.string,
     bsStyle: React.PropTypes.string,

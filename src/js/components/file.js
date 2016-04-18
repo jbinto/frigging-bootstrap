@@ -1,13 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {
-  saveList,
-  errorList,
-  sizeClassNames,
-  formGroupCx,
-  label,
-} from '../util.js'
 import cx from 'classnames'
+
+import InputErrorList from './input_error_list'
+import Saved from './saved'
+import Label from './label'
+import { sizeClassNames, formGroupCx } from '../util.js'
 
 export default class FileInput extends React.Component {
   static displayName = 'FriggingBootstrap.FileInput'
@@ -18,11 +16,7 @@ export default class FileInput extends React.Component {
   })
 
   static propTypes = {
-    inputHtml: React.PropTypes.shape({
-      type: React.PropTypes.string.isRequired,
-    }).isRequired,
-    initialValue: React.PropTypes.string.isRequired,
-
+    inputHtml: React.PropTypes.object,
     valueLink: React.PropTypes.shape({
       value: React.PropTypes.oneOfType([
         React.PropTypes.string,
@@ -38,10 +32,6 @@ export default class FileInput extends React.Component {
 
     saved: React.PropTypes.bool,
     errors: React.PropTypes.array,
-  }
-
-  componentWillMount() {
-    this.setState({ image: this.props.initialValue })
   }
 
   _input() {
@@ -108,15 +98,15 @@ export default class FileInput extends React.Component {
     return (
       <div className={cx(sizeClassNames(this.props))}>
         <div className={formGroupCx(this.props)}>
-          {label(this.props)}
+          <Label {...this.props} />
           <div className="controls">
             <div className="image-upload">
               {this._image()}
               {this._inputGroup()}
-              {saveList(this.props.saved)}
+              <Saved saved={this.props.saved} />
             </div>
           </div>
-          {errorList(this.props.errors)}
+          <InputErrorList errors={this.props.errors} />
         </div>
       </div>
     )

@@ -22,7 +22,7 @@ if (minify) {
 }
 
 module.exports = {
-  entry: './src/javascripts/index.js',
+  entry: './src/js/index.js',
   output: {
     path: 'dist',
     filename: `frigging-bootstrap${minExt}.js`,

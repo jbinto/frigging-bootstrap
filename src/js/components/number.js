@@ -1,13 +1,12 @@
 import React from 'react'
-import Numeral from 'numeral'
 import cx from 'classnames'
-import {
-  saveList,
-  errorList,
-  sizeClassNames,
-  formGroupCx,
-  label,
-} from '../util.js'
+
+import Numeral from 'numeral'
+
+import InputErrorList from './input_error_list'
+import Saved from './saved'
+import Label from './label'
+import { sizeClassNames, formGroupCx } from '../util.js'
 
 export default class Number extends React.Component {
   static displayName = 'FriggingBootstrap.Number'
@@ -17,11 +16,7 @@ export default class Number extends React.Component {
   })
 
   static propTypes = {
-    inputHtml: React.PropTypes.shape({
-      type: React.PropTypes.string.isRequired,
-      className: React.PropTypes.string,
-    }).isRequired,
-
+    inputHtml: React.PropTypes.object,
     format: React.PropTypes.string,
 
     valueLink: React.PropTypes.shape({
@@ -109,11 +104,11 @@ export default class Number extends React.Component {
       <div className={cx(sizeClassNames(this.props))}>
         <div className={formGroupCx(this.props)}>
           <div>
-            {label(this.props)}
+            <Label {...this.props} />
           </div>
           {this._input()}
-          {saveList(this.props.saved)}
-          {errorList(this.props.errors)}
+          <Saved saved={this.props.saved} />
+          <InputErrorList errors={this.props.errors} />
         </div>
       </div>
     )

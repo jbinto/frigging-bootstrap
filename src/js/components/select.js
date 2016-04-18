@@ -1,14 +1,12 @@
 import React from 'react'
 import cx from 'classnames'
-import {
-  saveList,
-  errorList,
-  sizeClassNames,
-  formGroupCx,
-  label,
-} from '../util.js'
 
 import { ValueLinkedSelect } from 'frig'
+
+import InputErrorList from './input_error_list'
+import Saved from './saved'
+import Label from './label'
+import { sizeClassNames, formGroupCx } from '../util.js'
 
 export default class Select extends React.Component {
   static displayName = 'FriggingBootstrap.Select'
@@ -18,10 +16,12 @@ export default class Select extends React.Component {
   })
 
   static propTypes = {
-    inputHtml: React.PropTypes.shape({
-      type: React.PropTypes.string.isRequired,
-    }).isRequired,
-    options: React.PropTypes.object,
+    inputHtml: React.PropTypes.object,
+    options: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object,
+      React.PropTypes.string,
+    ]),
     valueLink: React.PropTypes.shape({
       value: React.PropTypes.oneOfType([
         React.PropTypes.string,
@@ -45,17 +45,16 @@ export default class Select extends React.Component {
   }
 
   render() {
+    const labelProps = Object.assign({}, this.props, { className: '' })
     return (
       <div className={cx(sizeClassNames(this.props))}>
         <div className={formGroupCx(this.props)}>
-          {
-            label(this.props, { className: '' })
-          }
+          <Label {...labelProps} />
           <div className="controls">
             <ValueLinkedSelect {...this._inputHtml()} />
-            {errorList(this.props.errors)}
+            <InputErrorList errors={this.props.errors} />
           </div>
-          {saveList(this.props.saved)}
+          <Saved saved={this.props.saved} />
         </div>
       </div>
     )

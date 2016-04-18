@@ -1,11 +1,12 @@
 import React from 'react'
 import cx from 'classnames'
+
+import InputErrorList from './input_error_list'
+import Saved from './saved'
+import Label from './label'
 import {
-  saveList,
-  errorList,
   sizeClassNames,
   formGroupCx,
-  label,
   inputContainerCx,
 } from '../util.js'
 
@@ -64,8 +65,8 @@ export default class Input extends React.Component {
   }
 
   _inputGroup() {
-    let inputLabel = label(this.props)
-    let saved = saveList(this.props.saved)
+    let inputLabel = <Label {...this.props} />
+    let saved = <Saved saved={this.props.saved} />
 
     if (this.props.prefix || this.props.suffix) {
       return [
@@ -94,7 +95,7 @@ export default class Input extends React.Component {
         <div className={formGroupCx(this.props)}>
           <div className={inputContainerCx(this.props)}>
             {this._inputGroup()}
-            {errorList(this.props.errors)}
+            <InputErrorList errors={this.props.errors} />
           </div>
         </div>
       </div>
