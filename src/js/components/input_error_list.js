@@ -11,10 +11,9 @@ export default class InputErrorList extends React.Component {
     if (!errors) return null
     return (
       <div>
-        {errors.map((msg, i) => {
-          return <InputError msg={msg} i={i} key={i} />
+        {
+          errors.map((msg, i) => <InputError msg={msg} i={i} key={i} />)
         }
-        )}
       </div>
     )
   }
