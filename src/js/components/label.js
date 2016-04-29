@@ -7,7 +7,10 @@ export default class Label extends React.Component {
     labelWidth: React.PropTypes.object.isRequired,
     layout: React.PropTypes.string.isRequired,
     block: React.PropTypes.bool,
-    label: React.PropTypes.string,
+    label: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.element,
+    ]),
   }
 
   static defaultProps = {
