@@ -1688,7 +1688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  labelWidth: _react2.default.PropTypes.object.isRequired,
 	  layout: _react2.default.PropTypes.string.isRequired,
 	  block: _react2.default.PropTypes.bool,
-	  label: _react2.default.PropTypes.string
+	  label: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element])
 	}, _class.defaultProps = {
 	  block: false,
 	  label: ''
@@ -2623,7 +2623,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: '_onBlur',
 	    value: function _onBlur() {
 	      var value = this.props.valueLink.value;
-	      value = value.replace(/,/g, '');
+	      value = value.toString().replace(/,/g, '');
 	      value = this._toNumeral(value) || '';
 	      value = this._formatNumber(value);
 
