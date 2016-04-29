@@ -44,7 +44,7 @@ export default class Number extends React.Component {
 
   _onBlur() {
     let value = this.props.valueLink.value
-    value = value.replace(/,/g, '')
+    value = value.toString().replace(/,/g, '')
     value = this._toNumeral(value) || ''
     value = this._formatNumber(value)
 
