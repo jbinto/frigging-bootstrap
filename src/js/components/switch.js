@@ -41,7 +41,6 @@ export default class Switch extends React.Component {
       requestChange: React.PropTypes.func,
     }).isRequired,
 
-
     saved: React.PropTypes.bool,
     errors: React.PropTypes.array,
   }
