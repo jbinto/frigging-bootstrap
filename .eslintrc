@@ -4,5 +4,6 @@
   "rules": {
     "semi": [2, "never"],
     "eqeqeq": [2, "allow-null"],
+    "no-underscore-dangle": ["off"]
   }
 }
