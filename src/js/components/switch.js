@@ -7,13 +7,14 @@ import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx, inputContainerCx } from '../util.js'
+import defaultProps from '../default_props.js'
 import defaultPropTypes from '../default_prop_types.js'
 
 @HigherOrderComponents.Boolean
 export default class Switch extends React.Component {
   static displayName = 'FriggingBootstrap.Switch'
 
-  static defaultProps = Object.assign(require('../default_props.js'), {
+  static defaultProps = Object.assign(defaultProps, {
     onColor: 'primary',
     onText: 'ON',
     offColor: 'default',

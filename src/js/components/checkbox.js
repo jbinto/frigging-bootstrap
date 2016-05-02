@@ -9,13 +9,14 @@ import {
   sizeClassNames,
   formGroupCx,
 } from '../util.js'
+import defaultProps from '../default_props.js'
 import defaultPropTypes from '../default_prop_types.js'
 
 @HigherOrderComponents.Boolean
 export default class Checkbox extends React.Component {
   static displayName = 'FriggingBootstrap.Checkbox'
 
-  static defaultProps = require('../default_props.js')
+  static defaultProps = defaultProps
 
   static propTypes = defaultPropTypes
 

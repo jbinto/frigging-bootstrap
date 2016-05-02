@@ -9,6 +9,7 @@ import {
   formGroupCx,
   inputContainerCx,
 } from '../util.js'
+import defaultProps from '../default_props.js'
 import defaultPropTypes from '../default_prop_types.js'
 
 export default class Input extends React.Component {
@@ -22,7 +23,7 @@ export default class Input extends React.Component {
     }
   )
 
-  static defaultProps = Object.assign(require('../default_props.js'), {
+  static defaultProps = Object.assign(defaultProps, {
     // Bootstrap input addon texts
     prefix: undefined,
     suffix: undefined,

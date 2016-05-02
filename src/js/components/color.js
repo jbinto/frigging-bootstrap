@@ -11,13 +11,14 @@ import Label from './label'
 import ColorMap from './color/map'
 import HueSlider from './color/hue_slider'
 import { sizeClassNames, formGroupCx } from '../util.js'
+import defaultProps from '../default_props.js'
 import defaultPropTypes from '../default_prop_types.js'
 
 @HigherOrderComponents.Focusable
 export default class Color extends React.Component {
   static displayName = 'FriggingBootstrap.Color'
 
-  static defaultProps = Object.assign(require('../default_props.js'))
+  static defaultProps = defaultProps
 
   static propTypes = Object.assign({},
     defaultPropTypes, {

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Colr from 'colr'
 import draggable from './higher_order_components/draggable.js'
+import defaultProps from '../../default_props.js'
 
 @draggable({
   // See this for the below issue with eslint and higher order components - https://github.com/yannickcr/eslint-plugin-react/issues/322
@@ -15,7 +16,8 @@ import draggable from './higher_order_components/draggable.js'
 })
 export default class HueSlider extends React.Component {
   static displayName = 'HueSlider'
-  static defaultProps = require('../../default_props.js')
+
+  static defaultProps = defaultProps
 
   static propTypes = {
     hsv: React.PropTypes.shape({

@@ -8,17 +8,19 @@ import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx } from '../util.js'
+import defaultProps from '../default_props.js'
 import defaultPropTypes from '../default_prop_types.js'
 
 @HigherOrderComponents.Focusable
 export default class TimePicker extends React.Component {
   static displayName = 'FriggingBootstrap.TimePicker'
 
-  static defaultProps = Object.assign(require('../default_props.js'))
+  static defaultProps = defaultProps
 
   static propTypes = Object.assign({},
     defaultPropTypes, {
       focused: React.PropTypes.bool.isRequired,
+      inputHtml: React.PropTypes.object,
     }
   )
 
