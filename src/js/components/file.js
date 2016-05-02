@@ -12,10 +12,7 @@ import defaultPropTypes from '../default_prop_types.js'
 export default class FileInput extends React.Component {
   static displayName = 'FriggingBootstrap.FileInput'
 
-  static defaultProps = Object.assign(defaultProps, {
-    prefix: undefined,
-    suffix: undefined,
-  })
+  static defaultProps = defaultProps
 
   static propTypes = Object.assign({},
     defaultPropTypes, {
