@@ -36,7 +36,8 @@ const inputContainerCx = (props) => {
 }
 
 const formGroupCx = (props) => {
-  const isCheckbox = props.inputHtml.type === 'checkbox'
+  const { inputHtml } = props
+  const isCheckbox = inputHtml ? inputHtml.type === 'checkbox' : false
 
   return cx(Object.assign({
     'form-group': !isCheckbox,
