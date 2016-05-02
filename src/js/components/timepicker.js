@@ -8,6 +8,7 @@ import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx } from '../util.js'
+import defaultPropTypes from '../default_prop_types.js'
 
 @HigherOrderComponents.Focusable
 export default class TimePicker extends React.Component {
@@ -15,21 +16,11 @@ export default class TimePicker extends React.Component {
 
   static defaultProps = Object.assign(require('../default_props.js'))
 
-  // TODO: standarized proptyles accross componets
-  static propTypes = {
-    inputHtml: React.PropTypes.object,
-    valueLink: React.PropTypes.shape({
-      value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.bool,
-      ]),
-      requestChange: React.PropTypes.func,
-    }).isRequired,
-    saved: React.PropTypes.bool,
-    errors: React.PropTypes.array,
-    focused: React.PropTypes.bool.isRequired,
-  }
+  static propTypes = Object.assign({},
+    defaultPropTypes, {
+      focused: React.PropTypes.bool.isRequired,
+    }
+  )
 
   _inputCx() {
     return cx(

@@ -11,6 +11,7 @@ import Label from './label'
 import ColorMap from './color/map'
 import HueSlider from './color/hue_slider'
 import { sizeClassNames, formGroupCx } from '../util.js'
+import defaultPropTypes from '../default_prop_types.js'
 
 @HigherOrderComponents.Focusable
 export default class Color extends React.Component {
@@ -18,22 +19,11 @@ export default class Color extends React.Component {
 
   static defaultProps = Object.assign(require('../default_props.js'))
 
-  static propTypes = {
-    inputHtml: React.PropTypes.object,
-    valueLink: React.PropTypes.shape({
-      value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.bool,
-      ]),
-      requestChange: React.PropTypes.func,
-    }).isRequired,
-
-    focused: React.PropTypes.bool,
-
-    saved: React.PropTypes.bool,
-    errors: React.PropTypes.array,
-  }
+  static propTypes = Object.assign({},
+    defaultPropTypes, {
+      focused: React.PropTypes.bool,
+    }
+  )
 
   constructor() {
     super()

@@ -7,6 +7,7 @@ import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx } from '../util.js'
+import defaultPropTypes from '../default_prop_types.js'
 
 export default class Number extends React.Component {
   static displayName = 'FriggingBootstrap.Number'
@@ -15,22 +16,11 @@ export default class Number extends React.Component {
     format: '0,0[.][00]',
   })
 
-  static propTypes = {
-    inputHtml: React.PropTypes.object,
-    format: React.PropTypes.string,
-
-    valueLink: React.PropTypes.shape({
-      value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.bool,
-      ]),
-      requestChange: React.PropTypes.func,
-    }).isRequired,
-
-    saved: React.PropTypes.bool,
-    errors: React.PropTypes.array,
-  }
+  static propTypes = Object.assign({},
+    defaultPropTypes, {
+      format: React.PropTypes.string,
+    }
+  )
 
   state = {
     formattedValue: '',
