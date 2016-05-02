@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import DefaultProps from '../default_props.js'
 
 export default class Form extends React.Component {
   static displayName = 'FriggingBootstrap.Form'
 
   static defaultProps = {
-    layout: DefaultProps.layout,
+    layout: 'vertical',
   }
 
   static propTypes = {
