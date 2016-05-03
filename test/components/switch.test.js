@@ -4,6 +4,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 import Switch from '../../src/js/components/switch'
+import td from 'testdouble'
 
 describe('<Switch />', () => {
   const defaultProps = {
@@ -98,6 +99,37 @@ describe('<Switch />', () => {
       const switchComponent = renderWrapper(props, '.bootstrap-switch-handle-off')
 
       expect(switchComponent.hasClass('bootstrap-switch-offColour')).to.be.true()
+    })
+  })
+
+  describe('private functions', () => {
+    describe('_onClick()', () => {
+      it('return false when disabled', () => {
+        const props = Object.assign({}, defaultProps, { disabled: true })
+        const booleanHOC = mount(<Switch {...props} />)
+        const switchComponent = mount(booleanHOC.instance().render())
+        const instance = switchComponent.instance()
+
+        expect(instance._onClick()).to.be.false()
+      })
+
+      it('return true after updading valueLink.value', () => {
+        const requestChange = td.function.call()
+        const props = Object.assign({}, defaultProps, {
+          valueLink: {
+            value: true,
+            requestChange,
+          },
+        })
+
+        const booleanHOC = mount(<Switch {...props} />)
+        const switchComponent = mount(booleanHOC.instance().render())
+        const instance = switchComponent.instance()
+
+        instance._onClick()
+
+        td.verify(requestChange(false))
+      })
     })
   })
 })
