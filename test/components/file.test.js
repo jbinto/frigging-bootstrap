@@ -5,7 +5,7 @@ import { expect } from 'chai'
 import { mount } from 'enzyme'
 import File from '../../src/js/components/file'
 
-import { runBootstrapThemeTests } from './_common.test'
+import * as common from './_common.test'
 
 const props = {
   valueLink: {
@@ -15,18 +15,16 @@ const props = {
   inputHtml: { type: 'file' },
 }
 
-runBootstrapThemeTests(File, props)
-
 describe('<File />', () => {
-  it('renders', () => {
-    mount(<File {...props} />)
+  describe('Common Bootstrap tests', () => {
+    common.runInputErrorListTest(File, props)
+    common.runSavedTest(File, props)
+    common.runLabelTest(File, props)
+    common.runInputHtmlTest(File, props, 'input')
   })
 
-  it('renders input tag with attrs from props.inputHtml', () => {
-    const inputHtml = { autocomplete: 'off' }
-    const wrapper = mount(<File {...props} inputHtml={inputHtml} />)
-    const label = wrapper.find('input')
-    expect(label.prop('autocomplete')).to.equal('off')
+  it('renders', () => {
+    mount(<File {...props} />)
   })
 
   it('renders props.prefix and props.suffix', () => {
