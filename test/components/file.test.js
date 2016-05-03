@@ -16,34 +16,21 @@ const props = {
 }
 
 describe('<File />', () => {
-  describe('Common Bootstrap tests', () => {
+  it('renders', () => {
+    mount(<File {...props} />)
+  })
+
+  describe('common Bootstrap tests', () => {
     common.runInputErrorListTest(File, props)
     common.runSavedTest(File, props)
     common.runLabelTest(File, props)
     common.runInputHtmlTest(File, props, 'input')
   })
 
-  it('renders', () => {
-    mount(<File {...props} />)
-  })
-
-  it('renders props.prefix and props.suffix', () => {
-    const prefix = 'before'
-    const suffix = 'after'
-    const wrapper = mount(<File {...props} prefix={prefix} suffix={suffix} />)
-    expect(wrapper.text()).to.match(/^before.*after$/)
-  })
-
-  it('renders props.prefix only', () => {
-    const prefix = 'before'
-    const wrapper = mount(<File {...props} prefix={prefix} />)
-    expect(wrapper.text()).to.match(/^before$/)
-  })
-
-  it('renders props.suffix only', () => {
-    const suffix = 'after'
-    const wrapper = mount(<File {...props} suffix={suffix} />)
-    expect(wrapper.text()).to.match(/^after$/)
+  describe('prefix/suffix tests', () => {
+    common.runPrefixSuffixTest(File, props)
+    common.runPrefixOnlyTest(File, props)
+    common.runSuffixOnlyTest(File, props)
   })
 
   it('renders an <img> tag with src=valueLink.value', () => {

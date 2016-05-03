@@ -41,3 +41,28 @@ export function runInputHtmlTest(Component, props, inputTagName) {
     expect(label.prop('autocomplete')).to.equal('off')
   })
 }
+
+export function runPrefixSuffixTest(Component, props) {
+  it('renders props.prefix and props.suffix', () => {
+    const prefix = 'before'
+    const suffix = 'after'
+    const wrapper = mount(<Component {...props} prefix={prefix} suffix={suffix} />)
+    expect(wrapper.text()).to.match(/^before.*after$/)
+  })
+}
+
+export function runPrefixOnlyTest(Component, props) {
+  it('renders props.prefix only', () => {
+    const prefix = 'before'
+    const wrapper = mount(<Component {...props} prefix={prefix} />)
+    expect(wrapper.text()).to.match(/^before$/)
+  })
+}
+
+export function runSuffixOnlyTest(Component, props) {
+  it('renders props.suffix only', () => {
+    const suffix = 'after'
+    const wrapper = mount(<Component {...props} suffix={suffix} />)
+    expect(wrapper.text()).to.match(/^after$/)
+  })
+}
