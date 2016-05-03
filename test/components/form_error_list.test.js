@@ -9,7 +9,7 @@ const props = {
   errors: ['must be x', 'must be y'],
 }
 
-describe('<File />', () => {
+describe('<FormErrorList />', () => {
   it('renders with props.errors in bootstrap alert divs', () => {
     const wrapper = mount(<FormErrorList {...props} />)
     const alerts = wrapper.findWhere((c) => c.hasClass('alert'))
