@@ -1,13 +1,17 @@
 /* global describe, it, beforeEach */
 
 import React from 'react'
-// import { expect } from 'chai'
+import { expect } from 'chai'
 import { mount } from 'enzyme'
 import Input from '../../src/js/components/input'
 
 import * as common from './_common.test'
 
 const props = {
+  valueLink: {
+    value: 'Some text entered into a field',
+    requestChange: () => {},
+  },
   inputHtml: { type: 'text' },
 }
 
@@ -29,4 +33,10 @@ describe('<Input />', () => {
     common.runSuffixOnlyTest(Input, props)
   })
 
+  it('renders an <input> tag with value=props.valueLink.value', () => {
+    const wrapper = mount(<Input {...props} />)
+    const input = wrapper.find('input')
+    const node = input.get(0)
+    expect(node.value).to.equal('Some text entered into a field')
+  })
 })
