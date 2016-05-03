@@ -10,7 +10,6 @@ import * as common from './_common.test'
 
 describe('<Switch />', () => {
   const defaultProps = {
-    inputHtml: { type: 'switch' },
     valueLink: {
       value: true,
       requireChange: () => {},
@@ -21,7 +20,6 @@ describe('<Switch />', () => {
     common.runInputErrorListTest(Switch, defaultProps)
     common.runSavedTest(Switch, defaultProps)
     common.runLabelTest(Switch, defaultProps)
-    common.runInputHtmlTest(Switch, defaultProps, 'boolean')
   })
 
   const renderWrapper = (
