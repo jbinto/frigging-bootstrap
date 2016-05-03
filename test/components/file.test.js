@@ -4,9 +4,6 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 import File from '../../src/js/components/file'
-import InputErrorList from '../../src/js/components/input_error_list'
-import Saved from '../../src/js/components/saved'
-import Label from '../../src/js/components/label'
 
 import { runBootstrapThemeTests } from './_common.test'
 
