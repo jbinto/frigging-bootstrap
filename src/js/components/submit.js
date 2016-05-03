@@ -63,7 +63,9 @@ export default class Submit extends React.Component {
       <div className={cx(sizeClassNames(this.props))}>
         <div className="form-group">
           <div className={this._submitContainerCx()}>
-            <button {...this._inputHtml()}>{ this.props.title }</button>
+            <button {...this._inputHtml()}>
+              {this.props.title}
+            </button>
           </div>
         </div>
       </div>

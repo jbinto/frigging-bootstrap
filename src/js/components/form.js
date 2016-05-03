@@ -33,7 +33,7 @@ export default class Form extends React.Component {
   render() {
     return (
       <form {...this._formHtml()}>
-        { this.props.children }
+        {this.props.children}
       </form>
     )
   }

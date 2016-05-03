@@ -56,6 +56,7 @@ export default class FileInput extends React.Component {
         height="125"
         width="125"
         src={this.props.valueLink.value}
+        role="presentation"
       />
     )
   }
