@@ -6,6 +6,7 @@ import { mount } from 'enzyme'
 import File from '../../src/js/components/file'
 import InputErrorList from '../../src/js/components/input_error_list'
 import Saved from '../../src/js/components/saved'
+import Label from '../../src/js/components/label'
 
 const props = {
   valueLink: {
@@ -16,10 +17,6 @@ const props = {
 }
 
 describe('<File />', () => {
-  it('renders', () => {
-    mount(<File {...props} />)
-  })
-
   it('renders', () => {
     mount(<File {...props} />)
   })
@@ -42,6 +39,13 @@ describe('<File />', () => {
     const wrapper = mount(<File {...props} saved />)
     const saved = wrapper.find(Saved)
     expect(saved.prop('saved')).to.be.true()
+  })
+
+  it('renders Label with props.label', () => {
+    const labelText = 'Upload a file'
+    const wrapper = mount(<File {...props} label={labelText} />)
+    const label = wrapper.find(Label)
+    expect(label.prop('label')).to.equal('Upload a file')
   })
 
   it('renders props.prefix and props.suffix', () => {
