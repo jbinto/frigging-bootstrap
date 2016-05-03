@@ -8,6 +8,8 @@ import InputErrorList from '../../src/js/components/input_error_list'
 import Saved from '../../src/js/components/saved'
 import Label from '../../src/js/components/label'
 
+import { runBootstrapThemeTests } from './_common.test'
+
 const props = {
   valueLink: {
     value: '/url/to/some.jpeg',
@@ -15,6 +17,8 @@ const props = {
   },
   inputHtml: { type: 'file' },
 }
+
+runBootstrapThemeTests(File, props)
 
 describe('<File />', () => {
   it('renders', () => {
@@ -26,26 +30,6 @@ describe('<File />', () => {
     const wrapper = mount(<File {...props} inputHtml={inputHtml} />)
     const label = wrapper.find('input')
     expect(label.prop('autocomplete')).to.equal('off')
-  })
-
-  it('renders InputErrorList with props.errors', () => {
-    const errors = ['should be something', 'should be something else']
-    const wrapper = mount(<File {...props} errors={errors} />)
-    const inputErrorList = wrapper.find(InputErrorList)
-    expect(inputErrorList.prop('errors')).to.equal(errors)
-  })
-
-  it('renders Saved with props.saved', () => {
-    const wrapper = mount(<File {...props} saved />)
-    const saved = wrapper.find(Saved)
-    expect(saved.prop('saved')).to.be.true()
-  })
-
-  it('renders Label with props.label', () => {
-    const labelText = 'Upload a file'
-    const wrapper = mount(<File {...props} label={labelText} />)
-    const label = wrapper.find(Label)
-    expect(label.prop('label')).to.equal('Upload a file')
   })
 
   it('renders props.prefix and props.suffix', () => {
