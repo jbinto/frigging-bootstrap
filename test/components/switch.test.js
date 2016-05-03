@@ -6,6 +6,8 @@ import { mount } from 'enzyme'
 import Switch from '../../src/js/components/switch'
 import td from 'testdouble'
 
+import * as common from './_common.test'
+
 describe('<Switch />', () => {
   const defaultProps = {
     inputHtml: { type: 'switch' },
@@ -14,6 +16,13 @@ describe('<Switch />', () => {
       requireChange: () => {},
     },
   }
+
+  describe('common Bootstrap tests', () => {
+    common.runInputErrorListTest(Switch, defaultProps)
+    common.runSavedTest(Switch, defaultProps)
+    common.runLabelTest(Switch, defaultProps)
+    common.runInputHtmlTest(Switch, defaultProps, 'boolean')
+  })
 
   const renderWrapper = (
     props = defaultProps,
