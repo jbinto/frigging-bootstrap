@@ -1,9 +1,10 @@
 import React from 'react'
+import defaultProps from '../default_props.js'
 
 export default class FormErrorList extends React.Component {
   static displayName = 'FriggingBootstrap.Errors'
 
-  static defaultProps = require('../default_props.js')
+  static defaultProps = defaultProps
 
   static propTypes = {
     errors: React.PropTypes.array.isRequired,

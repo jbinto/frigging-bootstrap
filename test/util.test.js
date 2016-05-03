@@ -84,6 +84,17 @@ describe('Util', () => {
         const result = formGroupCx(props)
         expect(result).to.equal('form-group')
       })
+      it('should return form-goup if inputHtml is has no type', () => {
+        const props = {
+          inputHtml: {},
+        }
+        const result = formGroupCx(props)
+        expect(result).to.equal('form-group')
+      })
+      it('should return form-goup if no inputHtml', () => {
+        const result = formGroupCx({})
+        expect(result).to.equal('form-group')
+      })
       it('should set has-error if props.errors is not undefined', () => {
         const props = {
           inputHtml: {

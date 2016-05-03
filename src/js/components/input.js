@@ -9,34 +9,21 @@ import {
   formGroupCx,
   inputContainerCx,
 } from '../util.js'
+import defaultProps from '../default_props.js'
+import defaultPropTypes from '../default_prop_types.js'
 
 export default class Input extends React.Component {
   static displayName = 'FriggingBootstrap.Input'
 
-  static propTypes = {
-    inputHtml: React.PropTypes.shape({
-      type: React.PropTypes.string.isRequired,
-    }).isRequired,
-    inputWrapper: React.PropTypes.func.isRequired,
+  static propTypes = Object.assign({},
+    defaultPropTypes, {
+      inputWrapper: React.PropTypes.func.isRequired,
+      prefix: React.PropTypes.string,
+      suffix: React.PropTypes.string,
+    }
+  )
 
-    valueLink: React.PropTypes.shape({
-      value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.bool,
-      ]),
-      requestChange: React.PropTypes.func,
-    }).isRequired,
-
-    className: React.PropTypes.string,
-    prefix: React.PropTypes.string,
-    suffix: React.PropTypes.string,
-
-    saved: React.PropTypes.bool,
-    errors: React.PropTypes.array,
-  }
-
-  static defaultProps = Object.assign(require('../default_props.js'), {
+  static defaultProps = Object.assign(defaultProps, {
     // Bootstrap input addon texts
     prefix: undefined,
     suffix: undefined,

@@ -7,33 +7,25 @@ import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx } from '../util.js'
+import defaultProps from '../default_props.js'
+import defaultPropTypes from '../default_prop_types.js'
 
 export default class Select extends React.Component {
   static displayName = 'FriggingBootstrap.Select'
 
-  static defaultProps = Object.assign({}, require('../default_props.js'), {
+  static defaultProps = Object.assign({}, defaultProps, {
     options: {},
   })
 
-  static propTypes = {
-    inputHtml: React.PropTypes.object,
-    options: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object,
-      React.PropTypes.string,
-    ]),
-    valueLink: React.PropTypes.shape({
-      value: React.PropTypes.oneOfType([
+  static propTypes = Object.assign({},
+    defaultPropTypes, {
+      options: React.PropTypes.oneOfType([
+        React.PropTypes.array,
+        React.PropTypes.object,
         React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.bool,
       ]),
-      requestChange: React.PropTypes.func,
-    }).isRequired,
-
-    saved: React.PropTypes.bool,
-    errors: React.PropTypes.array,
-  }
+    }
+  )
 
   _inputHtml() {
     return Object.assign({}, this.props.inputHtml, {

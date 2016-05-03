@@ -1,11 +1,12 @@
 import React from 'react'
 import { sizeClassNames } from '../util.js'
 import cx from 'classnames'
+import defaultProps from '../default_props.js'
 
 export default class Submit extends React.Component {
   static displayName = 'FriggingBootstrap.Submit'
 
-  static defaultProps = Object.assign({}, require('../default_props.js'), {
+  static defaultProps = Object.assign({}, defaultProps, {
     bsStyle: 'default',
     bsSize: undefined,
     block: false,

@@ -1,21 +1,14 @@
 import React from 'react'
 import { UnboundInput } from 'frig'
+import defaultProps from '../default_props.js'
+import defaultPropTypes from '../default_prop_types.js'
 
 export default class TimePickerPopup extends React.Component {
   static displayName = 'FriggingBootstrap.TimePickerPopup'
 
-  static defaultProps = Object.assign(require('../default_props.js'))
+  static defaultProps = defaultProps
 
-  static propTypes = {
-    valueLink: React.PropTypes.shape({
-      value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.bool,
-      ]),
-      requestChange: React.PropTypes.func,
-    }).isRequired,
-  }
+  static propTypes = defaultPropTypes
 
   // Returns the number of hours from 12 to 1 to 11
   _getHour(minutesSinceMidnight = this._minutesSinceMidnight()) {

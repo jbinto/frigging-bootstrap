@@ -7,12 +7,14 @@ import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx, inputContainerCx } from '../util.js'
+import defaultProps from '../default_props.js'
+import defaultPropTypes from '../default_prop_types.js'
 
 @HigherOrderComponents.Boolean
 export default class Switch extends React.Component {
   static displayName = 'FriggingBootstrap.Switch'
 
-  static defaultProps = Object.assign(require('../default_props.js'), {
+  static defaultProps = Object.assign(defaultProps, {
     onColor: 'primary',
     onText: 'ON',
     offColor: 'default',
@@ -22,28 +24,18 @@ export default class Switch extends React.Component {
     handleWidth: undefined,
   })
 
-  static propTypes = {
-    align: React.PropTypes.string,
-    onColor: React.PropTypes.string,
-    onText: React.PropTypes.string,
-    offColor: React.PropTypes.string,
-    offText: React.PropTypes.string,
-    bsSize: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    handleWidth: React.PropTypes.number,
-
-    valueLink: React.PropTypes.shape({
-      value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.bool,
-      ]),
-      requestChange: React.PropTypes.func,
-    }).isRequired,
-
-    saved: React.PropTypes.bool,
-    errors: React.PropTypes.array,
-  }
+  static propTypes = Object.assign({},
+    defaultPropTypes, {
+      align: React.PropTypes.string,
+      onColor: React.PropTypes.string,
+      onText: React.PropTypes.string,
+      offColor: React.PropTypes.string,
+      offText: React.PropTypes.string,
+      bsSize: React.PropTypes.string,
+      disabled: React.PropTypes.bool,
+      handleWidth: React.PropTypes.number,
+    }
+  )
 
   constructor() {
     super()

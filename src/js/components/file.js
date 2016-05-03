@@ -6,33 +6,23 @@ import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
 import { sizeClassNames, formGroupCx } from '../util.js'
+import defaultProps from '../default_props.js'
+import defaultPropTypes from '../default_prop_types.js'
 
 export default class FileInput extends React.Component {
   static displayName = 'FriggingBootstrap.FileInput'
 
-  static defaultProps = Object.assign(require('../default_props.js'), {
+  static defaultProps = Object.assign(defaultProps, {
     prefix: undefined,
     suffix: undefined,
   })
 
-  static propTypes = {
-    inputHtml: React.PropTypes.object,
-    valueLink: React.PropTypes.shape({
-      value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-        React.PropTypes.bool,
-      ]),
-      requestChange: React.PropTypes.func,
-    }).isRequired,
-
-    className: React.PropTypes.string,
-    prefix: React.PropTypes.string,
-    suffix: React.PropTypes.string,
-
-    saved: React.PropTypes.bool,
-    errors: React.PropTypes.array,
-  }
+  static propTypes = Object.assign({},
+    defaultPropTypes, {
+      prefix: React.PropTypes.string,
+      suffix: React.PropTypes.string,
+    }
+  )
 
   _input() {
     const inputProps = Object.assign({}, this.props.inputHtml, {
