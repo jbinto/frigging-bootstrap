@@ -28,8 +28,6 @@ export default class Number extends React.Component {
   }
 
   _formatNumber(currentNumber) {
-    if (!this.props.format) return currentNumber
-
     return currentNumber ? currentNumber.format(this.props.format) : ''
   }
 
@@ -68,11 +66,6 @@ export default class Number extends React.Component {
     })
 
     return <input {...inputProps} />
-  }
-
-  _isNumber(value) {
-    const number = parseFloat(value)
-    return !Number.isNaN(parseFloat(number)) && Number.isFinite(number)
   }
 
   _toNumeral(value) {
