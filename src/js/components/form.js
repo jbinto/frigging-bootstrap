@@ -1,12 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import DefaultProps from '../default_props.js'
 
 export default class Form extends React.Component {
   static displayName = 'FriggingBootstrap.Form'
 
   static defaultProps = {
-    layout: DefaultProps.layout,
+    layout: 'vertical',
   }
 
   static propTypes = {
@@ -18,16 +16,12 @@ export default class Form extends React.Component {
   }
 
   _formHtml() {
-    const className = this.props.layout ? `form-${this.props.layout}` : ''
+    const layoutClassName = `form-${this.props.layout}`
+    const className = this.props.formHtml ? this.props.formHtml.className : ''
     return Object.assign({}, this.props.formHtml, {
       ref: 'form',
-      className: `${this.props.formHtml.className || ''} ${className}`.trim(),
+      className: `${className} ${layoutClassName}`.trim(),
     })
-  }
-
-  formData() {
-    const formElement = ReactDOM.findDOMNode(this.refs.form)
-    return new FormData(formElement)
   }
 
   render() {

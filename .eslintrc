@@ -4,6 +4,7 @@
   "rules": {
     "semi": [2, "never"],
     "eqeqeq": [2, "allow-null"],
-    "no-underscore-dangle": ["off"]
+    "no-underscore-dangle": ["off"],
+    "space-before-function-paren": ["off"]
   }
 }

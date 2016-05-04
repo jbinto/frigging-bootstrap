@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Draggable({ updateClientCoords }) {
+export default function({ updateClientCoords }) {
   return (ComponentClass) => { // eslint-disable-line arrow-body-style
-    return class extends React.Component {
+    return class Draggable extends React.Component {
       static displayName = 'Draggable'
 
       static propTypes = {

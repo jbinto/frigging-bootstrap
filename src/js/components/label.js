@@ -3,6 +3,8 @@ import { sizeClassNames } from '../util.js'
 import cx from 'classnames'
 
 export default class Label extends React.Component {
+  static displayName = 'FriggingBootstrap.Label'
+
   static propTypes = {
     labelWidth: React.PropTypes.object.isRequired,
     layout: React.PropTypes.string.isRequired,

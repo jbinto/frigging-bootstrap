@@ -18,7 +18,7 @@ export default class Submit extends React.Component {
     bsSize: React.PropTypes.string,
     bsStyle: React.PropTypes.string,
     className: React.PropTypes.string,
-    title: React.PropTypes.string,
+    title: React.PropTypes.string.isRequired,
     block: React.PropTypes.bool,
   }
 

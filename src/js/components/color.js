@@ -50,12 +50,12 @@ export default class Color extends React.Component {
   }
 
   _updateColrCache(nextProps) {
-    const nextColr = this._generateColr(nextProps.valueLink.value)
+    const nextColr = this._normalizeColr(nextProps.valueLink.value)
     if (this.state.colr.toHex() === nextColr.toHex()) return
     this.setState({ colr: nextColr })
   }
 
-  _generateColr(hex) {
+  _normalizeColr(hex) {
     let colour = hex || '#fff'
     if (!colour.match(/^#?([a-f0-9]{3}|[a-f0-9]{6})$/i)) colour = '#fff'
     return Colr.fromHex(colour)
