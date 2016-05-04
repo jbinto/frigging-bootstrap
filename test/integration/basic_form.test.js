@@ -77,4 +77,16 @@ describe('Basic form', () => {
     }))
   })
 
+  it('should call form onSubmit when submit is clicked', () => {
+    const submit = wrapper.find(Submit)
+    submit.simulate('click')
+
+    td.verify(onSubmit())
+
+    // Fails
+
+    // Looks like Submit doesn't work, should be an <input> not a <button>
+    // (it doesn't explicitly call onSubmit, probably relying on form behavior)
+  })
+
 })
