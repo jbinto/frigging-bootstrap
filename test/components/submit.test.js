@@ -17,4 +17,11 @@ describe('<Submit />', () => {
     const button = wrapper.find('button')
     expect(button.text()).to.equal('Save')
   })
+
+  it('renders HTML button on vertical layout', () => {
+    context.frigForm.layout = 'vertical'
+    const wrapper = mount(<Submit title="Save" />, { context })
+    const submitContainer = wrapper.findWhere((c) => c.hasClass(''))
+    expect(submitContainer).to.have.length(1)
+  })
 })
