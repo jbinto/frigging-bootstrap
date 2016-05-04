@@ -14,7 +14,7 @@ import Timepicker from './components/timepicker.js'
 import InputErrorList from './components/input_error_list.js'
 import Saved from './components/saved.js'
 
-module.exports = {
+export default {
   Checkbox,
   Color,
   FormErrorList,
