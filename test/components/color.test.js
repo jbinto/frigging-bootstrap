@@ -9,7 +9,7 @@ import ColorMap from '../../src/js/components/color/map'
 import td from 'testdouble'
 import Colr from 'colr'
 
-// import * as common from './_common.test'
+import * as common from './_common.test'
 
 const props = {
   valueLink: {
@@ -20,6 +20,13 @@ const props = {
 }
 
 describe('<Color />', () => {
+  describe('common Bootstrap tests', () => {
+    common.runInputErrorListTest(Color, props)
+    common.runSavedTest(Color, props)
+    common.runLabelTest(Color, props)
+    common.runInputHtmlTest(Color, props, 'input')
+  })
+
   describe('_colorPopup', () => {
     it('executes when props.focused=true', () => {
       const hocWrapper = mount(<Color {...props} />)
