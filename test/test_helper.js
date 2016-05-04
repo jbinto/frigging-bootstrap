@@ -1,3 +1,5 @@
+import 'ignore-styles'
+
 import { jsdom } from 'jsdom'
 import chai from 'chai'
 import dirtyChai from 'dirty-chai'
