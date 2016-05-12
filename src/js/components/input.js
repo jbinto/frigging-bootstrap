@@ -17,13 +17,12 @@ export default class Input extends React.Component {
 
   static propTypes = Object.assign({},
     defaultPropTypes, {
-      inputWrapper: React.PropTypes.func.isRequired,
       prefix: React.PropTypes.string,
       suffix: React.PropTypes.string,
     }
   )
 
-  static defaultProps = Object.assign(defaultProps, {
+  static defaultProps = Object.assign({}, defaultProps, {
     // Bootstrap input addon texts
     prefix: undefined,
     suffix: undefined,

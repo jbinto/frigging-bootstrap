@@ -6,6 +6,7 @@ import {
   formGroupCx,
   inputContainerCx,
 } from '../src/js/util'
+import cloner from 'cloner'
 
 describe('Util', () => {
   describe('sizeClassNames', () => {
@@ -132,7 +133,7 @@ describe('Util', () => {
 
       describe('block', () => {
         it('should have block=false return empty string', () => {
-          const inputProps = Object.assign({}, props, {
+          const inputProps = cloner.deep.merge({}, props, {
             block: false,
           })
 
@@ -140,7 +141,7 @@ describe('Util', () => {
           expect(result).to.equal('')
         })
         it('should have block=true return col-xs-12', () => {
-          const inputProps = Object.assign({}, props, {
+          const inputProps = cloner.deep.merge({}, props, {
             block: true,
           })
 
@@ -151,7 +152,7 @@ describe('Util', () => {
 
       describe('labelWidth with block', () => {
         it('ignores labelWidth when block=true (always returns xs-12)', () => {
-          const inputProps = Object.assign({}, props, {
+          const inputProps = cloner.deep.merge({}, props, {
             labelWidth: { md: 8 },
             block: true,
           })
@@ -162,7 +163,7 @@ describe('Util', () => {
 
       describe('labelWidth', () => {
         it('when labelWidth={xs:9}, should return col-xs-3 (12-9=3)', () => {
-          const inputProps = Object.assign({}, props, {
+          const inputProps = cloner.deep.merge({}, props, {
             labelWidth: { xs: 9 },
             block: false,
           })
@@ -172,7 +173,7 @@ describe('Util', () => {
         })
 
         it('when labelWidth={xs:12}, should return col-xs-12 (12-12=0)', () => {
-          const inputProps = Object.assign({}, props, {
+          const inputProps = cloner.deep.merge({}, props, {
             labelWidth: { xs: 12 },
             block: false,
           })
@@ -183,12 +184,12 @@ describe('Util', () => {
       })
 
       describe('when layout is vertical', () => {
-        const badProps = Object.assign({}, props, {
+        const badProps = cloner.deep.merge({}, props, {
           layout: 'vertical',
         })
 
         it('should return blank always', () => {
-          const inputProps = Object.assign({}, badProps, {
+          const inputProps = cloner.deep.merge({}, badProps, {
             labelWidth: { xs: 12 },
             block: false,
           })

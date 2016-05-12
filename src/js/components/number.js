@@ -13,7 +13,7 @@ import defaultPropTypes from '../default_prop_types.js'
 export default class Number extends React.Component {
   static displayName = 'FriggingBootstrap.Number'
 
-  static defaultProps = Object.assign(defaultProps, {
+  static defaultProps = Object.assign({}, defaultProps, {
     format: '0,0[.][00]',
   })
 

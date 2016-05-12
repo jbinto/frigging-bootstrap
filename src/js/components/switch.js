@@ -14,7 +14,7 @@ import defaultPropTypes from '../default_prop_types.js'
 export default class Switch extends React.Component {
   static displayName = 'FriggingBootstrap.Switch'
 
-  static defaultProps = Object.assign(defaultProps, {
+  static defaultProps = Object.assign({}, defaultProps, {
     onColor: 'primary',
     onText: 'ON',
     offColor: 'default',

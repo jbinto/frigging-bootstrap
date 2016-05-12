@@ -1,14 +1,6 @@
-module.exports = {
+const defaultProps = {
   // Sizes
   xs: 12,
-  sm: undefined,
-  md: undefined,
-  lg: undefined,
-  // Offsets
-  xsOffset: undefined,
-  smOffset: undefined,
-  mdOffset: undefined,
-  lgOffset: undefined,
   // Block changes inputs with layout: "horizontal" to use the full width of
   // their container and disables the label.
   block: false,
@@ -17,4 +9,9 @@ module.exports = {
     xs: 12,
     sm: 2,
   },
+  inputHtml: {},
 }
+
+Object.freeze(defaultProps)
+
+module.exports = defaultProps

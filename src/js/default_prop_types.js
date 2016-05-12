@@ -15,4 +15,6 @@ const propTypes = {
   errors: React.PropTypes.array,
 }
 
+Object.freeze(propTypes)
+
 export default propTypes

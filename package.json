@@ -36,6 +36,7 @@
     "bootstrap": "3.3.6",
     "chai": "3.5.0",
     "classnames": "2.2.3",
+    "cloner": "^0.4.0",
     "colr": "1.2.2",
     "coveralls": "2.11.9",
     "css-loader": "0.17.0",

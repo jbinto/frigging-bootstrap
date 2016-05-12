@@ -3,7 +3,8 @@ import cx from 'classnames'
 
 import { HigherOrderComponents } from 'frig'
 
-import TimepickerPopup from './timepicker_popup'
+import TimeFormatter from './time/time_formatter'
+import TimepickerPopup from './time/timepicker_popup'
 import InputErrorList from './input_error_list'
 import Saved from './saved'
 import Label from './label'
@@ -20,9 +21,13 @@ export default class TimePicker extends React.Component {
   static propTypes = Object.assign({},
     defaultPropTypes, {
       focused: React.PropTypes.bool.isRequired,
-      inputHtml: React.PropTypes.object,
     }
   )
+
+  constructor() {
+    super()
+    this._onTimeChange = this._onTimeChange.bind(this)
+  }
 
   _inputCx() {
     return cx(
@@ -38,7 +43,7 @@ export default class TimePicker extends React.Component {
       className: this._inputCx(),
       onFocus: () => {
         if (this.props.valueLink.value == null) {
-          this.props.valueLink.requestChange('12:00pm')
+          this.props.valueLink.requestChange('12:00 AM')
           return true
         }
 
@@ -48,10 +53,37 @@ export default class TimePicker extends React.Component {
     return <input {...inputProps} />
   }
 
+  _onTimeChange(newTime) {
+    const time = new TimeFormatter(newTime)
+    this.props.valueLink.requestChange(time.toString())
+  }
+
   _timePopup() {
     if (this.props.focused === false) return false
+    const value = this.props.valueLink.value
+    let props = {}
 
-    return <TimepickerPopup valueLink={this.props.valueLink} />
+    try {
+      const time = new TimeFormatter(value)
+      props = {
+        hours: time.hours,
+        minutes: time.minutes,
+        amPm: time.amPm,
+      }
+    } catch (ex) {
+      props = {
+        hours: '12',
+        minutes: '00',
+        amPm: 'AM',
+      }
+    }
+
+    return (
+      <TimepickerPopup
+        {...props}
+        onTimeChange={this._onTimeChange}
+      />
+    )
   }
 
   render() {

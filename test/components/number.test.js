@@ -5,6 +5,7 @@ import { expect } from 'chai'
 import { mount } from 'enzyme'
 import NumberComponent from '../../src/js/components/number'
 import td from 'testdouble'
+import cloner from 'cloner'
 
 import * as common from './_common.test'
 
@@ -39,7 +40,7 @@ describe('<NumberComponent />', () => {
     })
 
     it('valueLink.value=undefined state formattedValue is empty', () => {
-      const nextProps = Object.assign({}, props)
+      const nextProps = cloner.deep.copy(props)
       nextProps.valueLink.value = ''
 
       const wrapper = mount(<NumberComponent {...nextProps} />)
