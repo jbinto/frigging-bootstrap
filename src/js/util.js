@@ -30,7 +30,7 @@ const inputContainerCx = (props) => {
 
   const horizontalClasses = sizeClassNames(inputWidth, { offsets: false })
   return cx({
-    ['col-xs-12']: props.layout === 'horizontal' && props.block,
+    'col-xs-12': props.layout === 'horizontal' && props.block,
     [horizontalClasses]: props.layout === 'horizontal' && !props.block,
   })
 }
