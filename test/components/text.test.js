@@ -8,10 +8,8 @@ import Text from '../../src/js/components/text'
 describe('<Text />', () => {
   const defaultProps = {
     inputHtml: { type: 'text' },
-    valueLink: {
-      value: '',
-      requireChange: () => {},
-    },
+    value: '',
+    onChange: () => {},
   }
 
   describe('when no prop is entered', () => {

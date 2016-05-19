@@ -48,7 +48,7 @@ describe('Basic form', () => {
   const getFrigInput = (name) => wrapper.findWhere((input) => input.prop('name') === name)
   const getInput = (frigInput) => frigInput.find('input')
   const getInputByName = (name) => getInput(getFrigInput(name))
-  const getValue = (input) => input.prop('valueLink').value
+  const getValue = (input) => input.prop('value')
   const getDOMNode = (c) => ReactDOM.findDOMNode(c.get(0))
 
   it('should set the inputs values from data', () => {

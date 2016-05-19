@@ -56,7 +56,7 @@ describe('<TimePickerPopup />', () => {
     it('renders <Switch> component with props.amPm', () => {
       const wrapper = getWrapper()
       const theSwitch = wrapper.find(Switch)
-      const isAm = theSwitch.prop('valueLink').value
+      const isAm = theSwitch.prop('value')
       expect(isAm).to.be.false()
     })
   })

@@ -10,10 +10,8 @@ import cloner from 'cloner'
 import * as common from './_common.test'
 
 const props = {
-  valueLink: {
-    value: 0,
-    requestChange: () => {},
-  },
+  value: 0,
+  onChange: () => {},
   inputHtml: {},
 }
 
@@ -39,9 +37,9 @@ describe('<NumberComponent />', () => {
       expect(wrapper.state('formattedValue')).to.equal('0')
     })
 
-    it('valueLink.value=undefined state formattedValue is empty', () => {
+    it('props.value=undefined state formattedValue is empty', () => {
       const nextProps = cloner.deep.copy(props)
-      nextProps.valueLink.value = ''
+      nextProps.value = ''
 
       const wrapper = mount(<NumberComponent {...nextProps} />)
       const input = wrapper.find('input')
@@ -55,12 +53,14 @@ describe('<NumberComponent />', () => {
   describe('_onChange', () => {
     const wrapper = mount(<NumberComponent {...props} />)
     const input = wrapper.find('input')
-    const requestChange = td.function()
-    const value = '5'
-    const newValueLink = Object.assign({}, props.valueLink)
-    newValueLink.requestChange = requestChange
 
-    wrapper.setProps({ valueLink: newValueLink })
+    const onChange = td.function()
+    const value = '5'
+
+    wrapper.setProps({ onChange, value })
+
+    console.log("************************************** number.test")
+    console.log("value=", value)
 
     input.get(0).value = value
     input.simulate('change')
@@ -69,8 +69,8 @@ describe('<NumberComponent />', () => {
       expect(wrapper.state('formattedValue')).to.equal(value)
     })
 
-    it('calls props.valueLink.requestChange()', () => {
-      td.verify(requestChange(value))
+    it('calls props.onChange()', () => {
+      td.verify(onChange(value))
     })
   })
 })

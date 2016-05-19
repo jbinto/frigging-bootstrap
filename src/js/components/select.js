@@ -31,7 +31,8 @@ export default class Select extends React.Component {
     return Object.assign({}, this.props.inputHtml, {
       key: 'input',
       className: 'form-control',
-      valueLink: this.props.valueLink,
+      value: this.props.value,
+      onChange: this.props.onChange,
       options: this.props.options,
     })
   }

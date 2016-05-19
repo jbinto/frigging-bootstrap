@@ -87,23 +87,21 @@ export default class TimePickerPopup extends React.Component {
   }
 
   _getMinutesFromProps() {
-    return this.refs.minutes.props.valueLink.value
+    return this.refs.minutes.props.value
   }
 
   _getHoursFromProps() {
-    return this.refs.hours.props.valueLink.value
+    return this.refs.hours.props.value
   }
 
   _getAmPmFromProps() {
-    return this.refs.amPm.props.valueLink.value ? 'AM' : 'PM'
+    return this.refs.amPm.props.value ? 'AM' : 'PM'
   }
 
   _hourProps() {
     return {
-      valueLink: {
-        value: this.props.hours,
-        requestChange: this.onHourChange,
-      },
+      value: this.props.hours,
+      onChange: this.onHourChange,
       name: 'hours',
       label: 'Hours',
       required: false,
@@ -117,10 +115,8 @@ export default class TimePickerPopup extends React.Component {
 
   _minuteProps() {
     return {
-      valueLink: {
-        value: this.props.minutes,
-        requestChange: this.onMinuteChange,
-      },
+      value: this.props.minutes,
+      onChange: this.onMinuteChange,
       name: 'minutes',
       label: 'Minutes',
       required: false,
@@ -134,10 +130,8 @@ export default class TimePickerPopup extends React.Component {
 
   _meridiemProps() {
     return {
-      valueLink: {
-        value: this.props.amPm === 'AM',
-        requestChange: this.onAmPmChange,
-      },
+      value: this.props.amPm === 'AM',
+      onChange: this.onAmPmChange,
       label: 'AM/PM',
       required: false,
       xs: 4,

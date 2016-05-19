@@ -50,7 +50,7 @@ export default class Color extends React.Component {
   }
 
   _updateColrCache(nextProps) {
-    const nextColr = this._normalizeColr(nextProps.valueLink.value)
+    const nextColr = this._normalizeColr(nextProps.value)
     if (this.state.colr.toHex() === nextColr.toHex()) return
     this.setState({ colr: nextColr })
   }
@@ -64,7 +64,7 @@ export default class Color extends React.Component {
   _requestColrChange(colr) {
     // Update state and then props so that the cache invalidation for incomming
     // props (_updateColrCache) always sees the latest state.
-    const updateProps = () => this.props.valueLink.requestChange(colr.toHex())
+    const updateProps = () => this.props.onChange(colr.toHex())
     this.setState({ colr }, updateProps)
   }
 
@@ -105,7 +105,8 @@ export default class Color extends React.Component {
 
   render() {
     const inputProps = Object.assign({}, this.props.inputHtml, {
-      valueLink: this.props.valueLink,
+      value: this.props.value,
+      onChange: this.props.onChange,
       ref: 'frigColorInput',
       className: cx(
         this.props.inputHtml.className,

@@ -44,13 +44,13 @@ export default class Switch extends React.Component {
 
 
   _isChecked() {
-    return this.props.valueLink.value
+    return this.props.value
   }
 
   _onClick() {
     if (this.props.disabled === true) return false
 
-    return this.props.valueLink.requestChange(!this.props.valueLink.value)
+    return this.props.onChange(!this.props.value)
   }
 
   _switchCx() {

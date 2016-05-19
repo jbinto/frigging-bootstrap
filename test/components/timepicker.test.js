@@ -9,10 +9,8 @@ import td from 'testdouble'
 import cloner from 'cloner'
 
 const defaultProps = {
-  valueLink: {
-    value: '5:30 PM',
-    requestChange: () => {},
-  },
+  value: '5:30 PM',
+  onChange: () => {},
 }
 
 describe('<TimePicker />', () => {
@@ -37,48 +35,48 @@ describe('<TimePicker />', () => {
 
   describe('focus', () => {
     it('should set an initial time on first focus', () => {
-      const requestChange = td.function()
+      const onChange = td.function()
       const newProps = cloner.deep.copy(defaultProps)
-      newProps.valueLink.value = null
-      newProps.valueLink.requestChange = requestChange
+      newProps.value = null
+      newProps.onChange = onChange
 
       const wrapper = getWrapper(newProps)
       const input = wrapper.find('input')
       input.simulate('focus')
 
-      td.verify(requestChange('12:00 AM'))
+      td.verify(onChange('12:00 AM'))
     })
 
     it('should not set a time on focus if time is already populated', () => {
-      const requestChange = td.function()
+      const onChange = td.function()
       const newProps = cloner.deep.copy(defaultProps)
-      newProps.valueLink.requestChange = requestChange
+      newProps.onChange = onChange
 
       const wrapper = getWrapper(newProps)
       const input = wrapper.find('input')
       input.simulate('focus')
 
-      td.verify(requestChange('12:00 AM'), { times: 0 })
+      td.verify(onChange('12:00 AM'), { times: 0 })
     })
   })
 
   describe('onTimeChange', () => {
     it('calls Frig Input requestChange', () => {
-      const requestChange = td.function()
+      const onChange = td.function()
       const newProps = cloner.deep.copy(defaultProps)
-      newProps.valueLink.requestChange = requestChange
+      newProps.onChange = onChange
       const wrapper = getWrapper(newProps)
       const instance = wrapper.instance()
 
       instance._onTimeChange('5:55 AM')
-      td.verify(requestChange('5:55 AM'))
+      td.verify(onChange('5:55 AM'))
     })
   })
 
   describe('errors', () => {
     it('when TimePicker has invalid entry, sends 12:00 AM to TimePickerPopup', () => {
       const newProps = cloner.deep.copy(defaultProps)
-      newProps.valueLink.value = '1:'
+      newProps.value = '1:'
 
       const wrapper = getWrapper(newProps)
       wrapper.setProps({ focused: true })

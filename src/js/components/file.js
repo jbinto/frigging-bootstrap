@@ -27,9 +27,7 @@ export default class FileInput extends React.Component {
       type: 'file',
       accept: 'image/png,image/gif,image/jpeg',
       ref: 'frigFile',
-      valueLink: {
-        requestChange: this._loadFile.bind(this),
-      },
+      onChange: this._loadFile.bind(this),
     })
     return <input {...inputProps} />
   }
@@ -42,17 +40,17 @@ export default class FileInput extends React.Component {
   }
 
   _onFileLoad() {
-    this.props.valueLink.requestChange(this.fReader.result.slice(0))
+    this.props.requestChange(this.fReader.result.slice(0))
   }
 
   _image() {
-    if (this.props.valueLink.value == null) return ''
+    if (this.props.value == null) return ''
     return (
       <img
         className="thumbnail"
         height="125"
         width="125"
-        src={this.props.valueLink.value}
+        src={this.props.value}
         role="presentation"
       />
     )

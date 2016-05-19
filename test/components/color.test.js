@@ -12,10 +12,8 @@ import Colr from 'colr'
 import * as common from './_common.test'
 
 const props = {
-  valueLink: {
-    value: '#bb00bb',
-    requestChange: () => {},
-  },
+  value: '#bb00bb',
+  onChange: () => {},
   inputHtml: {},
 }
 
@@ -70,18 +68,18 @@ describe('<Color />', () => {
   })
 
   describe('componentWillReceiveProps', () => {
-    it('sets state.colr as a Colr object from the hex valueLink.value', () => {
+    it('sets state.colr as a Colr object from the hex props.value', () => {
       const wrapper = getWrapper()
-      const newValueLink = Object.assign({}, props.valueLink)
-      newValueLink.value = '#00ff00'
+      // const newValueLink = Object.assign({}, props.valueLink)
+      const newValue = '#00ff00'
 
       // state should change
-      wrapper.setProps({ valueLink: newValueLink })
+      wrapper.setProps({ value: newValue })
       let nextHex = wrapper.state('colr').toHex()
       expect(nextHex).to.equal('#00ff00')
 
       // state should remain the same
-      wrapper.setProps({ valueLink: newValueLink })
+      wrapper.setProps({ value: newValue })
       nextHex = wrapper.state('colr').toHex()
       expect(nextHex).to.equal('#00ff00')
     })
@@ -90,12 +88,12 @@ describe('<Color />', () => {
   describe('_requestColrChange', () => {
     const wrapper = getWrapper()
     const instance = wrapper.instance()
-    const requestChange = td.function()
+    const onChange = td.function()
 
-    const newValueLink = Object.assign({}, props.valueLink)
-    newValueLink.requestChange = requestChange
+    // const newValueLink = Object.assign({}, props.valueLink)
+    // newValueLink.onChange = onChange
 
-    wrapper.setProps({ valueLink: newValueLink })
+    wrapper.setProps({ onChange })
 
     const colr = Colr.fromHex('#abc123')
     instance._requestColrChange(colr)
@@ -104,8 +102,8 @@ describe('<Color />', () => {
       expect(wrapper.state('colr')).to.equal(colr)
     })
 
-    it('calls props.valueLink.requestChange()', () => {
-      td.verify(requestChange('#abc123'))
+    it('calls props.valueLink.onChange()', () => {
+      td.verify(onChange('#abc123'))
     })
   })
 

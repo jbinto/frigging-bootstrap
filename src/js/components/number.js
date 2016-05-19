@@ -32,7 +32,7 @@ export default class Number extends React.Component {
   }
 
   _onBlur() {
-    let value = this.props.valueLink.value
+    let value = this.props.value
     value = value.toString().replace(/,/g, '')
     value = this._toNumeral(value) || ''
     value = this._formatNumber(value)
@@ -40,10 +40,11 @@ export default class Number extends React.Component {
     this.setState({ formattedValue: value })
   }
 
-  _onChange(value) {
+  _onChange(e) {
+    const value = e.target.value
     this.setState({ formattedValue: value })
 
-    this.props.valueLink.requestChange(value.replace(/,/g, ''))
+    this.props.onChange(value.replace(/,/g, ''))
   }
 
   _inputCx() {
@@ -57,12 +58,10 @@ export default class Number extends React.Component {
     const inputProps = Object.assign({}, this.props.inputHtml, {
       className: this._inputCx(),
       onBlur: this._onBlur.bind(this),
-      valueLink: {
-        value: (this.state.formattedValue || this._formatNumber(
-          this._toNumeral(this.props.valueLink.value) || '')
-        ),
-        requestChange: this._onChange.bind(this),
-      },
+      value: (this.state.formattedValue || this._formatNumber(
+        this._toNumeral(this.props.value) || '')
+      ),
+      onChange: this._onChange.bind(this),
     })
 
     return <input {...inputProps} />

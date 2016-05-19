@@ -8,10 +8,8 @@ import File from '../../src/js/components/file'
 import * as common from './_common.test'
 
 const props = {
-  valueLink: {
-    value: '/url/to/some.jpeg',
-    requestChange: () => {},
-  },
+  value: '/url/to/some.jpeg',
+  onChange: () => {},
   inputHtml: { type: 'file' },
 }
 
@@ -33,7 +31,7 @@ describe('<File />', () => {
     common.runSuffixOnlyTest(File, props)
   })
 
-  it('renders an <img> tag with src=valueLink.value', () => {
+  it('renders an <img> tag with src=props.value', () => {
     const wrapper = mount(<File {...props} />)
     const img = wrapper.find('img')
     expect(img.prop('src')).to.equal('/url/to/some.jpeg')

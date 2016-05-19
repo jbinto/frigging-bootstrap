@@ -13,10 +13,8 @@ import Label from '../../src/js/components/label'
 
 
 const props = {
-  valueLink: {
-    value: 'red',
-    requestChange: () => {},
-  },
+  value: 'red',
+  onChange: () => {},
   inputHtml: {},
   options: [
     { label: 'blue', value: 'blue' },
@@ -37,7 +35,7 @@ describe('<Select />', () => {
     expect(select.prop('disabled')).to.be.true()
   })
 
-  it('renders select tag with valueLink.value as selected value', () => {
+  it('renders select tag with props.value as selected value', () => {
     const wrapper = mount(<Select {...props} />)
     const select = wrapper.find('select')
     const node = ReactDOM.findDOMNode(select.get(0))

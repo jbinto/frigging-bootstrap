@@ -39,11 +39,12 @@ export default class TimePicker extends React.Component {
 
   _input() {
     const inputProps = Object.assign({}, this.props.inputHtml, {
-      valueLink: this.props.valueLink,
+      value: this.props.value,
+      onChange: this.props.onChange,
       className: this._inputCx(),
       onFocus: () => {
-        if (this.props.valueLink.value == null) {
-          this.props.valueLink.requestChange('12:00 AM')
+        if (this.props.value == null) {
+          this.props.onChange('12:00 AM')
           return true
         }
 
@@ -55,12 +56,12 @@ export default class TimePicker extends React.Component {
 
   _onTimeChange(newTime) {
     const time = new TimeFormatter(newTime)
-    this.props.valueLink.requestChange(time.toString())
+    this.props.onChange(time.toString())
   }
 
   _timePopup() {
     if (this.props.focused === false) return false
-    const value = this.props.valueLink.value
+    const value = this.props.value
     let props = {}
 
     try {

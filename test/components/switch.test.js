@@ -11,10 +11,8 @@ import * as common from './_common.test'
 
 describe('<Switch />', () => {
   const defaultProps = {
-    valueLink: {
-      value: true,
-      requireChange: () => {},
-    },
+    value: true,
+    onChange: () => {},
   }
 
   describe('common Bootstrap tests', () => {
@@ -71,12 +69,10 @@ describe('<Switch />', () => {
     })
 
     describe('inner switch container', () => {
-      it('offset marginLeft becomes 50 on valueLink.value=false', () => {
+      it('offset marginLeft becomes 50 on value=false', () => {
         const props = Object.assign({}, defaultProps, {
           handleWidth,
-          valueLink: {
-            value: false,
-          },
+          value: false,
         })
         const switchComponent = renderWrapper(props, '.bootstrap-switch-container')
         const switchComponentStyle = switchComponent.prop('style')
@@ -121,13 +117,11 @@ describe('<Switch />', () => {
         expect(instance._onClick()).to.be.false()
       })
 
-      it('return true after updating valueLink.value', () => {
-        const requestChange = td.function.call()
+      it('return true after updating value', () => {
+        const onChange = td.function.call()
         const props = Object.assign({}, defaultProps, {
-          valueLink: {
-            value: true,
-            requestChange,
-          },
+          value: true,
+          onChange,
         })
 
         const booleanHOC = mount(<Switch {...props} />)
@@ -136,7 +130,7 @@ describe('<Switch />', () => {
 
         instance._onClick()
 
-        td.verify(requestChange(false))
+        td.verify(onChange(false))
       })
     })
   })
